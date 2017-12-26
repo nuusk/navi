@@ -1,1 +1,36 @@
+@import '../../utilities/sizes'
+@import '../../utilities/palette'
 
+$navi-size: 80px
+
+.main-view
+  .Navi
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    .navi-blue-bell
+      height: $navi-size
+      width: $navi-size
+      border-radius: 50%
+      background-color: #2b72e5
+      position: absolute
+      animation: spin 2s linear infinite
+      transform-origin: 48% 53%
+    .navi-small-dust
+      height: $navi-size/4
+      width: $navi-size/4
+      border-radius: 50%
+      position: absolute
+      &--red
+        // background-color: #f74a6c
+        background-color: rgba(0.7, 0.5, 0.1, 0.5)
+        transform: translate(-50%, -50%)
+      &--yellow
+        background-color: #f7f13d
+
+@keyframes spin
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)

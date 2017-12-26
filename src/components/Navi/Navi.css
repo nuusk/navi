@@ -1,0 +1,33 @@
+.main-view .Navi {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+
+.main-view .Navi .navi-blue-bell {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  background-color: #2b72e5;
+  position: absolute;
+  animation: spin 2s linear infinite;
+  transform-origin: 48% 53%; }
+
+.main-view .Navi .navi-small-dust {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  position: absolute; }
+
+.main-view .Navi .navi-small-dust--red {
+  background-color: rgba(1, 1, 0, 0.5);
+  transform: translate(-50%, -50%); }
+
+.main-view .Navi .navi-small-dust--yellow {
+  background-color: #f7f13d; }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }

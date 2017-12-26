@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 
+import Navi from '../components/Navi/Navi'
+
 class Main extends Component {
   render() {
     return (
-      <div className="Main">
-        <p>lorem srolem pierdziolem</p>
+      <div className="main-view">
+        <Navi />
       </div>
     );
   }
