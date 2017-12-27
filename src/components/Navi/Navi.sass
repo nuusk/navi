@@ -5,22 +5,21 @@ $navi-size: 80px
 
 .main-view
   .Navi
-    position: absolute
-    top: 30%
-    left: 50%
-    // transform: translate(-50%, -50%)
+    text-align: center
     transition: .7s
+    width: $navi-size
+    margin: 20vh auto 0 auto
     .navi-blue-bell
       height: $navi-size
       width: $navi-size
       border-radius: 50%
       background-color: rgba(40, 100, 240, 0.76)
-      position: absolute
+      position: relative
       animation: float-body 3s linear infinite
       transform-origin: 48% 51%
     .navi-small-dust
       border-radius: 50%
-      position: absolute
+      position: relative
       &--red
         // background-color: #f74a6c
         height: $navi-size*0.4
@@ -39,24 +38,24 @@ $navi-size: 80px
 
 @keyframes float-red
   0%
-    transform: translate(-50%, -50%) translate(-10px, 40px) rotate(0deg)
+    transform: translate(20px, -60px) translate(-10px, 40px) rotate(0deg)
   100%
-    transform: translate(-50%, -50%) translate(-10px, 40px) rotate(360deg)
+    transform: translate(20px, -60px) translate(-10px, 40px) rotate(360deg)
 
 @keyframes float-yellow
   0%
-    transform: translate(-50%, -50%) translate(30px, 20px) rotate(0deg)
+    transform: translate(70%, -550%) translate(30px, 20px) rotate(0deg)
   100%
-    transform: translate(-50%, -50%) translate(30px, 20px) rotate(360deg)
+    transform: translate(70%, -550%) translate(30px, 20px) rotate(360deg)
 
 
 @keyframes float-body
   0%
-    transform: translate(-50%, -50%) scale(1) rotate(0deg)
+    transform: scale(1) rotate(0deg)
   50%
-    transform: translate(-50%, -50%) scale(1.05) rotate(180deg)
+    transform: scale(1.05) rotate(180deg)
   100%
-    transform: translate(-50%, -50%) scale(1) rotate(360deg)
+    transform: scale(1) rotate(360deg)
 
 @keyframes morph
   0%
