@@ -1,0 +1,11 @@
+.main-view {
+  text-align: center; }
+  .main-view .BorderLine {
+    border: 2px solid white;
+    border-radius: 2px;
+    position: absolute;
+    left: 50%;
+    top: 44%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    box-shadow: 0px 10px 20px rgba(100, 100, 100, 0.7); }
