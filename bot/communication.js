@@ -1,5 +1,5 @@
 const fs = require('fs');
-const {Wit, log} = require('node-wit');
+const {Wit, log, interactive} = require('node-wit');
 const _witAccessToken = fs.readFileSync('../keys/wit-access-token.txt', 'utf8').split('\n')[0];
 
 const client = new Wit({
@@ -7,4 +7,8 @@ const client = new Wit({
   logger: new log.Logger(log.DEBUG)
 });
 
-console.log(client.message('jak masz na imię?'));
+client.message('elo', {})
+  .then(data => {
+    console.log('~ response: ' + JSON.stringify(data));
+  })
+  .catch(console.error);
