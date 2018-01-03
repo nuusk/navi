@@ -16,14 +16,14 @@ class QueryField extends Component {
 
   handleInput(event) {
     this.setState({
-      [event.target.name]: event.target.value
+      query: event.target.value
     });
   }
 
   handleKeyPress(event) {
-    if (event.key === 'Enter' && this.state.question !== '') {
-      this.props.setQuery(this.state.query);
-      this.props.getData();
+    if (event.key === 'Enter' && this.state.query !== '') {
+      this.props.setQuery(this.state.query)
+      this.props.getData(this.state.query);
     }
   }
 

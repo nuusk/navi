@@ -29,12 +29,13 @@ class Main extends Component {
     });
   }
 
-  getData() {
+  getData(query) {
+    console.log(query);
     fetch('http://localhost:9004/api/query', {
       method: 'POST',
       body: JSON.stringify({
         id: 1,
-        text: this.state.query
+        text: query
       })
     })
     .then(res => {
