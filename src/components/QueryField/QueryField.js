@@ -6,7 +6,7 @@ class QueryField extends Component {
     super(props);
 
     this.state = {
-      question: this.props.question
+      query: this.props.query
     };
 
     this.handleInput = this.handleInput.bind(this);
@@ -22,10 +22,8 @@ class QueryField extends Component {
 
   handleKeyPress(event) {
     if (event.key === 'Enter' && this.state.question !== '') {
-      this.props.setSearching(true);
-      this.props.setQuestion(this.state.question);
+      this.props.setQuery(this.state.query);
       this.props.getData();
-      this.refs.input.blur();
     }
   }
 
@@ -39,7 +37,7 @@ class QueryField extends Component {
         <input placeholder="What's up?"
                type="text"
                name="query"
-               value={this.state.question}
+               value={this.state.query}
                onChange={this.handleInput}
                onKeyPress={this.handleKeyPress}
                onFocus={this.handleFocus}
