@@ -33,9 +33,11 @@ class Main extends Component {
     console.log(query);
     fetch('http://localhost:9004/api/query', {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
-        id: 1,
-        text: query
+        query: query
       })
     })
     .then(res => {

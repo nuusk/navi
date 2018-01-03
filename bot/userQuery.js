@@ -4,13 +4,14 @@ const bodyParser = require('body-parser');
 const serverAddress = require('../resources/serverAddress.json');
 const app = express();
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 //add headers
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    next();
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
 });
 
 app.get('/', (req, res) => {
@@ -18,7 +19,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/api/query', (req, res) => {
-  console.log(req);
+  console.log(`User asked: "${req.body.query}".`);
 })
 
 app.listen(serverAddress.port, () => {
