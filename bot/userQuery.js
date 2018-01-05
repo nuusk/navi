@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 
 app.post('/api/query', (req, res) => {
   console.log(`User asked: "${req.body.query}".`);
-})
+});
 
 app.listen(serverAddress.port, () => {
   console.log('Server started running on port ' + serverAddress.port + '...');
