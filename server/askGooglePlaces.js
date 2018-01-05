@@ -1,8 +1,7 @@
-const request = require("request")
-const fetch = require("node-fetch")
+const fetch = require("node-fetch");
 const _googlePlacesKey = fs.readFileSync('../resources/keys/google-web-places-key.txt', 'utf8').split('\n')[0];
 
-//area in meters
+//calculate radius of the circle from given area
 function getRadius(area) {
   return Math.sqrt(area/Math.PI).toString();
 }
@@ -34,7 +33,6 @@ function createUrl(parameters, nextPage) {
   }
   return url;
 };
-
 
 async function askGooglePlaces(cityLocations, nextPageToken = '') {
   const parameters = {

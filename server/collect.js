@@ -1,4 +1,4 @@
-const placeExplorer = require('./placeSearch');
+const askGooglePlaces = require('./askGooglePlaces');
 const createDivisions = require('./createDivisions');
 
 const explorer = async (cityLocations) => {
