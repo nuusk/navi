@@ -1,3 +1,4 @@
+const fs = require('fs');
 const fetch = require("node-fetch");
 const _googlePlacesKey = fs.readFileSync('../resources/keys/google-web-places-key.txt', 'utf8').split('\n')[0];
 
