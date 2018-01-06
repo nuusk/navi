@@ -65,7 +65,7 @@ class Database {
   }
 }
 
-module.export = Database;
+module.export = database;
 
 
 
