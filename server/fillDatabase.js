@@ -1,5 +1,7 @@
 const askGooglePlaces = require('./askGooglePlaces');
 const createDivisions = require('./createDivisions');
+const Database = require('./db');
+const db = new Database();
 
 const fillDatabase = async (cityLocations) => {
   //next page token will determine whether we have to process the next page with a given token to see more of the results from the same request
@@ -14,14 +16,36 @@ const fillDatabase = async (cityLocations) => {
     }
     nextPageToken = data.nextPageToken;
 
-    results.forEach( (e) => {
-      console.log(e);
+    results.forEach( (place) => {
+      // console.log(place);
       for(let i =0; i < 10000000000/20; i++){}; //wait for Google Api
 
       //insert data into mongo
-    });
+      db.addPlace(place);///(`places/${e.id}`, e);
 
+      // const address = e.vicinity.split(',');
+      // const city = address[address.length - 1].trim();
+      //
+      // if (e.name.toLowerCase().includes('hostel')) {
+      //   e.types.length = 0;
+      //   e.types.push('hostel');
+      // }
+      // if (e.name.toLowerCase().includes('hotel')) {
+      //   e.types.length = 0;
+      //   e.types.push('hotel');
+      // }
+      // if (e.name.toLowerCase().includes('pizza')) {
+      //   e.types.length = 0;
+      //   e.types.push('pizzeria');
+      // }
+      //
+      // e.types.forEach( (category) => {
+      //   db.insert(`cities/${city}/categories/${category}/${e.id}`, e.name);
+      // })
+    });
+    
   } while( pageCounter++ < 2 );
+  db.store();
 };
 
 let fillingCounter = 0;
@@ -31,15 +55,15 @@ createDivisions.getCenterOfDivisions(52.40692, 16.92993, 20, 20, 7000)
   .forEach( (array) => {
     array.forEach( (position) => {
       // for(let i = 0; i < 10000000000/10; i++) {}; //wait for Google Api
-      if(fillerIteration >= fillingCounter && fillerIteration < fillingCounter+3) {
+      if(fillerIteration >= 0 && fillerIteration < 3) {
         console.log(position);
         fillDatabase(position);
       }
       fillerIteration++;
-      tmpFill++;
-      if (tmpFill === 3) {
-        tmpFill = 0;
-        fillingCounter += 3;
-      }
+      // tmpFill++;
+      // if (tmpFill === 3) {
+      //   tmpFill = 0;
+      //   fillingCounter += 3;
+      // }
     });
   });
