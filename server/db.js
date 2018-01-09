@@ -33,7 +33,7 @@ class Database {
   async addPlace(place) {
     console.log(place);
 
-    const place = new Place({
+    const googlePlace = new Place({
       _id: new mongoose.Types.ObjectId(),
       googleId: place.id,
       name: place.name,
@@ -49,7 +49,7 @@ class Database {
       address: place.vicinity
     })
 
-    await place.save(err => {
+    await googlePlace.save(err => {
       if (err) {
         console.error(err);
       }

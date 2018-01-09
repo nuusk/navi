@@ -22,7 +22,7 @@ const fillDatabase = async (cityLocations) => {
     nextPageToken = data.nextPageToken;
     for(let i =0; i < 10000000000/5; i++){}; //wait for Google Api
     results.forEach( (place) => {
-      console.log(place);
+      //console.log(place);
 
 
       //insert data into mongo
