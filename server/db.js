@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://maciejkrol:password@ds135817.mlab.com:35817/kruche_krolestwo');
 const Schema = mongoose.Schema;
+
+
 const categorySchema = Schema({
   _id: Schema.Types.ObjectId,
   name: String,
@@ -28,8 +30,10 @@ Place = mongoose.model('Place', placeSchema);
 Category = mongoose.model('Category', categorySchema);
 class Database {
 
-  addPlace(place) {
-    new Place({
+  async addPlace(place) {
+    console.log(place);
+
+    const place = new Place({
       _id: new mongoose.Types.ObjectId(),
       googleId: place.id,
       name: place.name,
@@ -43,13 +47,16 @@ class Database {
       rating: place.rating,
       types: place.types,
       address: place.vicinity
-    }).save(err => {
-      // if (err) return handleError(err);
+    })
+
+    await place.save(err => {
       if (err) {
         console.error(err);
       }
     });
   }
+
+
   findByType(typ) {
     Place.find({}).
     where('types').equals(typ).
