@@ -36,7 +36,7 @@ const UserSchema = Schema({
   ratingImportance: Number,
   priceImportance: Number,
   wantsToBeQuestioned: Boolean
-})
+});
 
 const User = monboose.model('user', UserSchema);
 const Entity = mongoose.model('entity', EntitySchema);
