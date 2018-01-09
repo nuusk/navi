@@ -65,8 +65,6 @@ class Database {
       console.log(res);
     })
   }
-
 }
-
 
 module.exports = Database;

@@ -45,8 +45,10 @@ async function askGooglePlaces(cityLocations, nextPageToken = '') {
 
   const newData = await fetch(createUrl(parameters, nextPageToken))
    .then( data => data.json() )
-   .then( data => data );
-
+   .then( data => data )
+   .catch( err => {
+     return err;
+   });
   return { results: newData.results, nextPageToken: newData.next_page_token };
 };
 

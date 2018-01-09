@@ -10,15 +10,20 @@ const fillDatabase = async (cityLocations) => {
   let pageCounter = 0;
   do {
     const data = await askGooglePlaces(cityLocations, nextPageToken);
+    if (data) {
     const results = data.results;
+    if (results.length == null) {
+      console.log('DATA:' + data);
+      console.log('DATA:' + data.json());
+    }
     if(results.length==0) {
       console.log(data);
     }
     nextPageToken = data.nextPageToken;
-
+    for(let i =0; i < 10000000000/5; i++){}; //wait for Google Api
     results.forEach( (place) => {
-      // console.log(place);
-      for(let i =0; i < 10000000000/20; i++){}; //wait for Google Api
+      console.log(place);
+
 
       //insert data into mongo
       db.addPlace(place);///(`places/${e.id}`, e);
@@ -43,15 +48,15 @@ const fillDatabase = async (cityLocations) => {
       //   db.insert(`cities/${city}/categories/${category}/${e.id}`, e.name);
       // })
     });
-    
+}
   } while( pageCounter++ < 2 );
-  db.store();
+  // db.store();
 };
 
-let fillingCounter = 0;
+// let fillingCounter = 0;
 let fillerIteration = 0;
-let tmpFill = 0;
-createDivisions.getCenterOfDivisions(52.40692, 16.92993, 20, 20, 7000)
+// let tmpFill = 0;
+createDivisions.getCenterOfDivisions(52.40692, 16.92993, 20, 20, 50)
   .forEach( (array) => {
     array.forEach( (position) => {
       // for(let i = 0; i < 10000000000/10; i++) {}; //wait for Google Api

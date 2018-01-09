@@ -50,7 +50,6 @@ function getCenterOfDivisions(cityCenterLatitude, cityCenterLongitude, divisions
   return centerOfDivisions;
 };
 
-
 module.exports = {
     getCenterOfDivisions: getCenterOfDivisions,
     getDivisionRadius: getDivisionRadius
