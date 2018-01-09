@@ -7,7 +7,7 @@ class Database {
   async addPlace(place) {
     console.log(place);
 
-    const googlePlace = new schemas.Place({
+    const insertedPlace = new schemas.Place({
       _id: new mongoose.Types.ObjectId(),
       googleId: place.id,
       name: place.name,
@@ -23,7 +23,23 @@ class Database {
       address: place.vicinity
     })
 
-    await googlePlace.save(err => {
+    await insertedPlace.save(err => {
+      if (err) {
+        console.error(err);
+      }
+    });
+  }
+
+  async addEntity(entity) {
+    console.log('~~~~~~ Added entity: \n' + entity);
+
+    const insertedEtity = new schemas.Entity({
+      _id: new mongoose.Types.ObjectId(),
+      name: entity.name,
+      intents: entity.intents
+    });
+
+    await insertedEtity.save(err => {
       if (err) {
         console.error(err);
       }

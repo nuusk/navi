@@ -3,8 +3,11 @@ const Schema = mongoose.Schema;
 
 const EntitySchema = Schema({
   _id: Schema.Types.ObjectId,
-  name: String,
-  keyword: [String]
+  name: String,         //smalltalk
+  intents: []       //greet
+    // intent: { type: Array, lowercase: true, trim: true }
+  // }
+
 });
 
 const PlaceSchema = Schema({
