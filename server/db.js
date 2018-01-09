@@ -1,32 +1,13 @@
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://maciejkrol:password@ds135817.mlab.com:35817/kruche_krolestwo');
-const Schema = mongoose.Schema;
-
-const placeSchema = Schema({
-  _id: Schema.Types.ObjectId,
-  googleId: String,
-  name: String,
-  location: {
-    lat: Number,
-    lng: Number
-  },
-  icon: String,
-  //parametr do zapytania google photo api
-  photoReference: String,
-  rating: Number,
-  types: [String],
-  address: String,
-  category: { type: Schema.Types.ObjectId, ref: 'Category' }
-});
-
-Place = mongoose.model('Place', placeSchema);
+const schemas = require('./schemas');
 
 class Database {
 
   async addPlace(place) {
     console.log(place);
 
-    const googlePlace = new Place({
+    const googlePlace = new schemas.Place({
       _id: new mongoose.Types.ObjectId(),
       googleId: place.id,
       name: place.name,
@@ -48,7 +29,6 @@ class Database {
       }
     });
   }
-
 
   findByType(typ) {
     Place.find({}).
