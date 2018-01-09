@@ -2,13 +2,6 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://maciejkrol:password@ds135817.mlab.com:35817/kruche_krolestwo');
 const Schema = mongoose.Schema;
 
-
-const categorySchema = Schema({
-  _id: Schema.Types.ObjectId,
-  name: String,
-  places: [{ type: Schema.Types.ObjectId, ref: 'Place' }]
-});
-
 const placeSchema = Schema({
   _id: Schema.Types.ObjectId,
   googleId: String,
@@ -27,7 +20,7 @@ const placeSchema = Schema({
 });
 
 Place = mongoose.model('Place', placeSchema);
-Category = mongoose.model('Category', categorySchema);
+
 class Database {
 
   async addPlace(place) {
