@@ -1,14 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const EntitySchema = Schema({
-  _id: Schema.Types.ObjectId,
-  name: String,         //smalltalk
-  intents: []           //greet
-    // intent: { type: Array, lowercase: true, trim: true }
-  // }
-
-});
 
 const PlaceSchema = Schema({
   _id: Schema.Types.ObjectId,
@@ -38,11 +30,9 @@ const UserSchema = Schema({
   wantsToBeQuestioned: Boolean
 });
 
-const User = monboose.model('user', UserSchema);
-const Entity = mongoose.model('entity', EntitySchema);
+const User = mongoose.model('user', UserSchema);
 const Place = mongoose.model('place', PlaceSchema);
 
 module.exports = {
-    Entity: Entity,
     Place: Place,
 }
