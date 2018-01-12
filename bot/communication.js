@@ -25,17 +25,19 @@ router.get('/message', function (req, res) {
 function getJSON(keyword, res) {
   client.message(keyword, {})
     .then(data => {
-      findEntityByType(data.entities.smalltalk[0].value, res);
-      //console.log('~ response: ' + JSON.stringify(data));
-      //res.send(JSON.stringify(findEntityByType(data.entities.smalltalk[0].value)));
+      if (data.entities.smalltalk) {
+        findEntityByType(data.entities.smalltalk[0].value, res);
+      }
+      // if ()
     })
     .catch(console.error);
 }
 
 function findEntityByType(type, response) {
   Entity.findOne({ name: type }, (err, res) => {
-    console.log(res);
-    response.status(200).send(res);
+    let intent = res.intents[Math.floor(Math.random()*res.intents.length)];
+    console.log(intent);
+    response.status(200).send(JSON.stringify(intent));
   });
 }
 
@@ -52,12 +54,6 @@ function insertEntity(name, intents) {
   console.log(entity);
 }
 
-// insertEntity("introduce", 
-// [
-//   "jestem navi... jestem by pomoc ci odnalezc swoje miejsce",
-//   "yo yo tu navi, co chcesz?",
-//   "tu navi odbior, czego chcesz?"
-// ]);
+//insertEntity("beauty_salon", ["do widzenia", "na razie", "nara"]);
 
-//findEntityByType("greet");
 module.exports = router;
