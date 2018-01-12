@@ -23,43 +23,32 @@ router.get('/message', function (req, res) {
   getJSON(req.query.name, res);
 });
 
-function getJSON(keyword, res) {
+function getJSON(keyword, response) {
   client.message(keyword, {})
-    .then(data => {
-      if (data.entities.smalltalk) {
-        findEntityByType(data.entities.smalltalk[0].value, res);
-      }
-      // if ()
+    .then((data) => {
+      findEntityByType(data.entities.smalltalk[0].value)
+        .then((res) => {
+          console.log(res);
+          response.status(200).send(JSON.stringify(res));
+        })
+        .catch(console.error);;
     })
     .catch(console.error);
 }
 
-function findEntityByType(type, response) {
-  Entity.findOne({ name: type }, (err, res) => {
-    let intent = res.intents[Math.floor(Math.random()*res.intents.length)];
-    console.log(intent);
-    response.status(200).send(JSON.stringify(intent));
-  });
+function findPlace() {
+
+  // to do preferenceModel() 
 }
 
-function insertEntity(name, intents) {
-  const entity = new Entity({
-    name: name,
-    intents: intents
-  });
-  entity.save()
-    .then(() => {
-      console.log("entity saved");
-    })
-    .catch((err) => console.log(err));
-  console.log(entity);
+function findEntityByType(type) {
+  return new Promise(function (resolve, reject) {
+    Entity.findOne({ name: type })
+      .then((res) => {
+        let intent = res.intents[Math.floor(Math.random() * res.intents.length)];
+        resolve(intent);
+      })
+  })
 }
-
-// insertEntity("introduce",
-// [
-//   "jestem navi... jestem by pomoc ci odnalezc swoje miejsce",
-//   "yo yo tu navi, co chcesz?",
-//   "tu navi odbior, czego chcesz?"
-// ]);
 
 module.exports = router;
