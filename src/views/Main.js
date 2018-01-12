@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Navi from '../components/Navi/Navi';
 import BorderLine from '../components/BorderLine/BorderLine';
 import QueryField from '../components/QueryField/QueryField';
+import Logo from '../components/Logo/Logo';
 
 class Main extends Component {
   constructor(props) {
@@ -54,6 +55,7 @@ class Main extends Component {
   render() {
     return (
       <div className="main-view">
+        <Logo />
         <Navi />
         <BorderLine />
         <QueryField query={this.state.query}
