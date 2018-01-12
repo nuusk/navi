@@ -31,8 +31,8 @@ class Main extends Component {
 
   getData(query) {
     console.log(query);
-    fetch('http://localhost:9004/api/query', {
-      method: 'POST',
+    fetch('http://localhost:3000/message', {
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json'
       },
