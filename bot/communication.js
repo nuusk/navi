@@ -16,6 +16,7 @@ const client = new Wit({
   logger: new log.Logger(log.DEBUG)
 });
 
+
 router.get('/message', function (req, res) {
   //console.log(req.query.name);
   getJSON(req.query.name, res);
@@ -24,18 +25,18 @@ router.get('/message', function (req, res) {
 function getJSON(keyword, res) {
   client.message(keyword, {})
     .then(data => {
-      findEntityByType(data.entities.smalltalk[0].value);
+      findEntityByType(data.entities.smalltalk[0].value, res);
       //console.log('~ response: ' + JSON.stringify(data));
-      //res.send(JSON.stringify(data));
+      //res.send(JSON.stringify(findEntityByType(data.entities.smalltalk[0].value)));
     })
     .catch(console.error);
 }
 
-function findEntityByType(type) {
-  console.log(type)
+function findEntityByType(type, response) {
   Entity.findOne({ name: type }, (err, res) => {
-    console.log(res.intents);
-  })
+    console.log(res);
+    response.status(200).send(res);
+  });
 }
 
 function insertEntity(name, intents) {
@@ -58,5 +59,5 @@ function insertEntity(name, intents) {
 //   "tu navi odbior, czego chcesz?"
 // ]);
 
-findEntityByType("greet");
+//findEntityByType("greet");
 module.exports = router;
