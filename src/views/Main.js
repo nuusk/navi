@@ -30,15 +30,13 @@ class Main extends Component {
   }
 
   getData(query) {
+
     console.log(query);
-    fetch('http://localhost:3000/message', {
+    fetch('http://localhost:9004/api/message?name='+encodeURIComponent(query), {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        query: query
-      })
+      }
     })
     .then(res => {
       return res.json();
@@ -47,7 +45,7 @@ class Main extends Component {
       console.log('~ results: ' + result);
     })
     .catch(err => {
-      console.log('!Request failed! ~ ', err);
+      console.error('!Request failed! ~ ', err);
     });
 
 

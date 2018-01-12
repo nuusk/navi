@@ -19,6 +19,7 @@ const client = new Wit({
 
 router.get('/message', function (req, res) {
   //console.log(req.query.name);
+  // res.header('Access-Control-Allow-Origin', "*");
   getJSON(req.query.name, res);
 });
 
@@ -52,7 +53,7 @@ function insertEntity(name, intents) {
   console.log(entity);
 }
 
-// insertEntity("introduce", 
+// insertEntity("introduce",
 // [
 //   "jestem navi... jestem by pomoc ci odnalezc swoje miejsce",
 //   "yo yo tu navi, co chcesz?",
