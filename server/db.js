@@ -45,6 +45,21 @@ class Database {
     console.log(entity);
   }
 
+  findPlace() {
+
+    // to do preferenceModel() 
+  }
+  
+  findEntityByType(type) {
+    return new Promise(function (resolve, reject) {
+      Entity.findOne({ name: type })
+        .then((res) => {
+          let intent = res.intents[Math.floor(Math.random() * res.intents.length)];
+          resolve(intent);
+        })
+    })
+  }
+
 }
 
 module.exports = Database;

@@ -2,7 +2,8 @@
 var express = require('express');
 var app = express();
 
-var CommunicationController = require('../bot/communication');
+var CommunicationController = require('./controllers/CommunicationController');
+var UserController = require('./controllers/UserController');
 
 //cors middleware
 const allowCrossDomain = (req, res, next) => {
@@ -15,5 +16,6 @@ const allowCrossDomain = (req, res, next) => {
 app.use(allowCrossDomain);
 
 app.use('/api', CommunicationController);
+app.use('/users', UserController);
 
 module.exports = app;
