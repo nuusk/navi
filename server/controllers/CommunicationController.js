@@ -1,6 +1,6 @@
 const fs = require('fs');
 const { Wit, log, interactive } = require('node-wit');
-const _witAccessToken = fs.readFileSync('/home/ech/Desktop/navi/resources/keys/wit-access-token.txt', 'utf8').split('\n')[0];
+const _witAccessToken = fs.readFileSync(__dirname + '/../../resources/keys/wit-access-token.txt', 'utf8').split('\n')[0];
 
 //db requirements
 const mongoose = require('mongoose');
