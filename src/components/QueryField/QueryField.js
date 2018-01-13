@@ -9,17 +9,16 @@ const propTypes = {
   // Props injected by SpeechRecognition
   transcript: PropTypes.string,
   resetTranscript: PropTypes.func,
-  browserSupportsSpeechRecognition: PropTypes.bool
+  browserSupportsSpeechRecognition: PropTypes.bool,
+  recognition: PropTypes.Object
 }
 
 class QueryField extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       query: this.props.query
     };
-
 
     this.handleInput = this.handleInput.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -44,7 +43,12 @@ class QueryField extends Component {
   }
 
   render() {
+<<<<<<< HEAD
     const { transcript, resetTranscript, browserSupportsSpeechRecognition } = this.props;
+=======
+    const { transcript, resetTranscript, browserSupportsSpeechRecognition, recognition } = this.props;
+    recognition.lang = 'pl-PL';
+>>>>>>> ccceeece02c90ed46da55802b290a42c1942ee62
     if (!browserSupportsSpeechRecognition) {
       return null
     }
