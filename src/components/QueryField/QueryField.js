@@ -43,12 +43,8 @@ class QueryField extends Component {
   }
 
   render() {
-<<<<<<< HEAD
-    const { transcript, resetTranscript, browserSupportsSpeechRecognition } = this.props;
-=======
     const { transcript, resetTranscript, browserSupportsSpeechRecognition, recognition } = this.props;
     recognition.lang = 'pl-PL';
->>>>>>> ccceeece02c90ed46da55802b290a42c1942ee62
     if (!browserSupportsSpeechRecognition) {
       return null
     }
