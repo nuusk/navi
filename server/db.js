@@ -1,13 +1,15 @@
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://maciejkrol:password@ds135817.mlab.com:35817/kruche_krolestwo');
-const schemas = require('./schemas');
+
+const Place = require('./models/place');
+const Entity = require('./models/entity');
 
 class Database {
 
   async addPlace(place) {
     console.log(place);
 
-    const insertedPlace = new schemas.Place({
+    const insertedPlace = new Place({
       _id: new mongoose.Types.ObjectId(),
       googleId: place.id,
       name: place.name,
@@ -30,30 +32,19 @@ class Database {
     });
   }
 
-  async addEntity(entity) {
-    console.log('~~~~~~ Added entity: \n' + entity);
-
-    const insertedEtity = new schemas.Entity({
-      _id: new mongoose.Types.ObjectId(),
-      name: entity.name,
-      intents: entity.intents
+  async insertEntity(name, intents) {
+    const entity = new Entity({
+      name: name,
+      intents: intents
     });
-
-    await insertedEtity.save(err => {
-      if (err) {
-        console.error(err);
-      }
-    });
+    await entity.save()
+      .then(() => {
+        console.log("entity saved");
+      })
+      .catch((err) => console.log(err));
+    console.log(entity);
   }
 
-  findByType(typ) {
-    Place.find({}).
-    where('types').equals(typ).
-    limit(10).
-    exec((err, res) => {
-      console.log(res);
-    })
-  }
 }
 
 module.exports = Database;

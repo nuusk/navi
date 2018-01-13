@@ -22,31 +22,8 @@ const fillDatabase = async (cityLocations) => {
     nextPageToken = data.nextPageToken;
     for(let i =0; i < 10000000000/5; i++){}; //wait for Google Api
     results.forEach( (place) => {
-      //console.log(place);
-
-
       //insert data into mongo
-      db.addPlace(place);///(`places/${e.id}`, e);
-
-      // const address = e.vicinity.split(',');
-      // const city = address[address.length - 1].trim();
-      //
-      // if (e.name.toLowerCase().includes('hostel')) {
-      //   e.types.length = 0;
-      //   e.types.push('hostel');
-      // }
-      // if (e.name.toLowerCase().includes('hotel')) {
-      //   e.types.length = 0;
-      //   e.types.push('hotel');
-      // }
-      // if (e.name.toLowerCase().includes('pizza')) {
-      //   e.types.length = 0;
-      //   e.types.push('pizzeria');
-      // }
-      //
-      // e.types.forEach( (category) => {
-      //   db.insert(`cities/${city}/categories/${category}/${e.id}`, e.name);
-      // })
+      db.addPlace(place);
     });
 }
   } while( pageCounter++ < 2 );
