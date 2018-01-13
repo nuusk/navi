@@ -45,7 +45,7 @@ class QueryField extends Component {
 
   render() {
     const { transcript, resetTranscript, browserSupportsSpeechRecognition } = this.props;
-    of (!browserSupportsSpeechRecognition) {
+    if (!browserSupportsSpeechRecognition) {
       return null
     }
 

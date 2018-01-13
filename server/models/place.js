@@ -15,7 +15,6 @@ const PlaceSchema = Schema({
   rating: Number,
   types: [String],
   address: String,
-  category: { type: Schema.Types.ObjectId, ref: 'Category' }
 });
 
 const Place = mongoose.model('place', PlaceSchema);

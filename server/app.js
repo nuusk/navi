@@ -16,6 +16,6 @@ const allowCrossDomain = (req, res, next) => {
 app.use(allowCrossDomain);
 
 app.use('/api', CommunicationController);
-app.use('/users', UserController);
+app.use('/api/users', UserController);
 
 module.exports = app;
