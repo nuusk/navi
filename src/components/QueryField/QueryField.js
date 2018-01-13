@@ -1,5 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types';
+
+import SpeechRecognition from 'react-speech-recognition'
+
 import './QueryField.css';
+
+const propTypes = {
+  // Props injected by SpeechRecognition
+  transcript: PropTypes.string,
+  resetTranscript: PropTypes.func,
+  browserSupportsSpeechRecognition: PropTypes.bool
+}
 
 class QueryField extends Component {
   constructor(props) {
@@ -8,6 +19,7 @@ class QueryField extends Component {
     this.state = {
       query: this.props.query
     };
+
 
     this.handleInput = this.handleInput.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -32,9 +44,15 @@ class QueryField extends Component {
   }
 
   render() {
+    const { transcript, resetTranscript, browserSupportsSpeechRecognition } = this.props;
+    if (!browserSupportsSpeechRecognition) {
+      return null
+    }
+
     return (
       <div className="QueryField">
-        <input placeholder="What's up?"
+        <input id="query-field"
+               placeholder="What's up?"
                type="text"
                name="query"
                value={this.state.query}
@@ -42,10 +60,12 @@ class QueryField extends Component {
                onKeyPress={this.handleKeyPress}
                onFocus={this.handleFocus}
                ref='input' />
+        <button onClick={resetTranscript}>Reset</button>
+        <span>{transcript}</span>
       </div>
     );
   }
 
 }
-
-export default QueryField;
+QueryField.propTypes = propTypes;
+export default SpeechRecognition(QueryField);
