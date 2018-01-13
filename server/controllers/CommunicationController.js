@@ -22,20 +22,34 @@ const client = new Wit({
 
 
 router.get('/message', function (req, res) {
-  //console.log(req.query.name);
+  // cors filter
   // res.header('Access-Control-Allow-Origin', "*");
   getJSON(req.query.name, res);
 });
 
+// metoda do zwracania JSONa encji lub miejsca na podstawie keyworda i wysyla na front res
 function getJSON(keyword, response) {
   client.message(keyword, {})
     .then((data) => {
-      db.findEntityByType(data.entities.smalltalk[0].value)
-        .then((res) => {
-          console.log(res);
-          response.status(200).send(JSON.stringify(res));
-        })
-        .catch(console.error);;
+      console.log(data); //log dla odpowiedzi 
+      if (data.entities.smalltalk) {
+        db.findEntityByType(data.entities.smalltalk[0].value)
+          .then((res) => {
+            //console.log(res);
+            response.status(200).send(JSON.stringify(res));
+          })
+          .catch(console.error);
+      }
+      if (data.entities.place) {
+        db.findPlaces(data.entities.place[0].value)
+          .then((res) => {
+            console.log(res);
+            //res to sa wszystkie miejsca ktore maja taki typ jak keyword
+            // to do preferenceModel() 
+            response.status(200).send(JSON.stringify(res));
+          })
+          .catch(console.error);
+      }
     })
     .catch(console.error);
 }

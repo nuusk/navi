@@ -1,3 +1,4 @@
+// operacje na bazie danych
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://maciejkrol:password@ds135817.mlab.com:35817/kruche_krolestwo');
 
@@ -6,11 +7,9 @@ const Entity = require('./models/entity');
 
 class Database {
 
+  // tworzy i dodaje miejsca do bazy na podstawie argumentu
   async addPlace(place) {
-    console.log(place);
-
     const insertedPlace = new Place({
-      _id: new mongoose.Types.ObjectId(),
       googleId: place.id,
       name: place.name,
       location: {
@@ -18,13 +17,12 @@ class Database {
         lng: place.geometry.location.lng
       },
       icon: place.icon,
-      //parametr do zapytania google photo api
+      // parametr do zapytania google photo api
       // photoReference: place.photos[0].photo_reference,     !!poprawic
       rating: place.rating,
       types: place.types,
       address: place.vicinity
     })
-
     await insertedPlace.save(err => {
       if (err) {
         console.error(err);
@@ -32,6 +30,7 @@ class Database {
     });
   }
 
+  // tworzy i dodaje encje do bazy na podstawie argumentów 
   async insertEntity(name, intents) {
     const entity = new Entity({
       name: name,
@@ -45,15 +44,23 @@ class Database {
     console.log(entity);
   }
 
-  findPlace() {
-
-    // to do preferenceModel() 
+  // szuka miejsc na podstawie keyworda
+  findPlaces(keyword) {
+    return new Promise(function (resolve, reject) {
+      Place.find({ types: keyword })
+        .then((res) => {
+          console.log(res);
+          resolve(res)
+        });
+    });
   }
-  
+
+  // zwraca encje na podstawie keyworda, encja zawiera tablice opcji, ktore sa losowane
   findEntityByType(type) {
     return new Promise(function (resolve, reject) {
       Entity.findOne({ name: type })
         .then((res) => {
+          console.log(res);
           let intent = res.intents[Math.floor(Math.random() * res.intents.length)];
           resolve(intent);
         })

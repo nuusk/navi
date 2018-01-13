@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const PlaceSchema = Schema({
-  _id: Schema.Types.ObjectId,
   googleId: String,
   name: String,
   location: {
