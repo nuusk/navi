@@ -4,6 +4,7 @@ mongoose.connect('mongodb://maciejkrol:password@ds135817.mlab.com:35817/kruche_k
 
 const Place = require('./models/place');
 const Entity = require('./models/entity');
+const User = require('./models/user');
 
 class Database {
 
@@ -63,8 +64,23 @@ class Database {
           console.log(res);
           let intent = res.intents[Math.floor(Math.random() * res.intents.length)];
           resolve(intent);
-        })
-    })
+        });
+    });
+  }
+
+  // setUserPreferenceModel() {
+  //   return new Promise(() => {
+  //   })
+  // }
+
+  findUserByEmail(req, res) {
+    return new Promise(function (resolve, reject) {
+      User.findOne({ email: req.body.email }, function (err, user) {
+        if (err) return res.status(500).send("There was a problem finding the user.");
+        res.status(200).send("git");
+        resolve(user.id);
+      });
+    });
   }
 
 }

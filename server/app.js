@@ -1,9 +1,9 @@
 // app.js
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 
-var CommunicationController = require('./controllers/CommunicationController');
-var UserController = require('./controllers/UserController');
+const CommunicationController = require('./controllers/CommunicationController');
+const UserController = require('./controllers/UserController');
 
 //cors middleware
 const allowCrossDomain = (req, res, next) => {
