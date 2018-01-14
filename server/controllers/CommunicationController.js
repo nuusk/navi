@@ -27,11 +27,23 @@ const client = new Wit({
 });
 
 let session = {};
+let user = {};
 
-router.get('/message', function (req, res) {
+router.get('/message', async function (req, res) {
   // cors filter
   // res.header('Access-Control-Allow-Origin', "*");
+  
   session = LoginController.getSession();
+  user = await db.findUserById(session.userId);
+  if(user) {
+    if (user.wantsToBeQuestioned !== null) {
+      console.log("chcesz zeby navi poznala cie lepiej?");
+      console.log(user);
+    } else {
+      console.log("dupa");
+    }
+  }
+  //db.findUserByIdAndUpdate()
   getJSON(req.query.name, res);
 });
 

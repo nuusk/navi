@@ -16,7 +16,7 @@ let sess = {};
 
 router.post('/login', async function (req, res) {
   //console.log(req.session);
-  let user = await db.findUserByEmail(req.body.email, res);
+  let user = await db.findUserByEmail(req.body.email);
   console.log("user: " + user);
   if (req.body.password === user.password) {
     req.session.userId = user.id
@@ -35,6 +35,6 @@ function getSession() {
 
 module.exports = {
   router,
-  getSess
+  getSession
 }
 

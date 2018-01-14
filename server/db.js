@@ -72,13 +72,37 @@ class Database {
   //   })
   // }
 
-  findUserByEmail(req, res) {
+  findUserByEmail(req) {
     return new Promise(function (resolve, reject) {
       User.findOne({ email: req }, function (err, user) {
-        if (err) return res.status(500).send("There was a problem finding the user.");
-        res.status(200).send("git");
+        if (err) return console.error(err);
         resolve(user);
       });
+    });
+  }
+
+  findUserById(userId) {
+    return new Promise(function (resolve, reject) {
+      User.findById(userId, function (err, user) {
+        if (err) return console.error(err);
+        resolve(user);
+      });
+    });
+  }
+
+  findUserByIdAndUpdate(userId, ratingImportance, priceImportance, wantsToBeQuestioned ) {
+    return new Promise(function (resolve, reject) {
+      User.findByIdAndUpdate(
+        userId,
+        {   
+          ratingImportance: ratingImportance,
+          priceImportance: priceImportancember,
+          wantsToBeQuestioned: wantsToBeQuestioned
+         }
+      )
+        .then((user) => {
+          resolve(user);
+        });
     });
   }
 
