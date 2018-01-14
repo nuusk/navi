@@ -13,6 +13,8 @@ const propTypes = {
   recognition: PropTypes.Object
 }
 
+
+
 class QueryField extends Component {
   constructor(props) {
     super(props);
@@ -44,10 +46,12 @@ class QueryField extends Component {
 
   render() {
     const { transcript, resetTranscript, browserSupportsSpeechRecognition, recognition } = this.props;
+    // const { latitude, longitude } = this.props;
     recognition.lang = 'pl-PL';
     if (!browserSupportsSpeechRecognition) {
       return null
     }
+    
 
     return (
       <div className="QueryField">
