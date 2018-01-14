@@ -32,23 +32,19 @@ let user = {};
 router.get('/message', async function (req, res) {
   // cors filter
   // res.header('Access-Control-Allow-Origin', "*");
-  
+  console.log(req.query);
   session = LoginController.getSession();
   user = await db.findUserById(session.userId);
   if(user) {
-    if (user.wantsToBeQuestioned !== null) {
-      console.log("chcesz zeby navi poznala cie lepiej?");
-      console.log(user);
-    } else {
-      console.log("dupa");
-    }
   }
   //db.findUserByIdAndUpdate()
-  getJSON(req.query.name, res);
+  getJSON(req.query.name, req.query.lat, req.query.lng, res);
 });
 
 // metoda do zwracania JSONa encji lub miejsca na podstawie keyworda i wysyla na front res
-function getJSON(keyword, response) {
+function getJSON(keyword, lat, lng, response) {
+  console.log(lat);
+  console.log(lng);
   client.message(keyword, {})
     .then((data) => {
       //console.log(data); //log dla odpowiedzi 
@@ -63,10 +59,10 @@ function getJSON(keyword, response) {
       if (data.entities.place) {
         db.findPlaces(data.entities.place[0].value)
           .then((res) => {
-            //console.log(res);
-            //res to sa wszystkie miejsca ktore maja taki typ jak keyword
+            console.log(res);
+            // res to sa wszystkie miejsca ktore maja taki typ jak keyword
             // to do preferenceModel()
-            console.log(session);
+            //console.log(session);
             response.status(200).send(JSON.stringify(res));
           })
           .catch(console.error);
