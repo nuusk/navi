@@ -14,7 +14,9 @@ class Main extends Component {
     this.state = {
       searching: false,
       query: '',
-      results: []
+      results: [],
+      latitude: '',
+      longitude: ''
     };
   }
 
@@ -33,7 +35,11 @@ class Main extends Component {
   getData(query) {
 
     console.log(query);
-    fetch('http://localhost:9004/api/message?name='+encodeURIComponent(query), {
+    console.log(this.state.latitude);
+    console.log(this.state.longitude);
+    fetch('http://localhost:9004/api/message?name='+encodeURIComponent(query)
+    +'?lat=this.state.latitude='+this.state.latitude
+    +'?lng='+this.state.longitude, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -53,6 +59,21 @@ class Main extends Component {
   }
 
   render() {
+    if (!navigator.geolocation){
+      console.log("Geolocation is not supported by your browser");
+      return null;
+    }
+
+    const success = (position) => {
+      this.state.latitude = position.coords.latitude;
+      this.state.longitude = position.coords.longitude;
+    }
+
+    function error() {
+      console.log("Unable to retrieve your location");
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error);
     return (
       <div className="main-view">
         <Logo />
@@ -64,6 +85,10 @@ class Main extends Component {
       </div>
     );
   }
+
+  // componentWillUpdate() {
+  //
+  // }
 }
 
 export default Main;
