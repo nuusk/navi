@@ -37,7 +37,9 @@ class Main extends Component {
     console.log(query);
     console.log(this.state.latitude);
     console.log(this.state.longitude);
-    fetch('http://localhost:9004/api/message?name='+encodeURIComponent(query)+'?latitude=this.state.latitude='+this.state.latitude+'?longitude='+this.state.longitude, {
+    fetch('http://localhost:9004/api/message?name='+encodeURIComponent(query)
+    +'?lat=this.state.latitude='+this.state.latitude
+    +'?lng='+this.state.longitude, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
