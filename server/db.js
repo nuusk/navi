@@ -50,7 +50,7 @@ class Database {
     return new Promise(function (resolve, reject) {
       Place.find({ types: keyword })
         .then((res) => {
-          console.log(res);
+          //console.log(res);
           resolve(res)
         });
     });
@@ -61,7 +61,6 @@ class Database {
     return new Promise(function (resolve, reject) {
       Entity.findOne({ name: type })
         .then((res) => {
-          console.log(res);
           let intent = res.intents[Math.floor(Math.random() * res.intents.length)];
           resolve(intent);
         });
@@ -75,10 +74,10 @@ class Database {
 
   findUserByEmail(req, res) {
     return new Promise(function (resolve, reject) {
-      User.findOne({ email: req.body.email }, function (err, user) {
+      User.findOne({ email: req }, function (err, user) {
         if (err) return res.status(500).send("There was a problem finding the user.");
         res.status(200).send("git");
-        resolve(user.id);
+        resolve(user);
       });
     });
   }

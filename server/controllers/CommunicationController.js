@@ -13,17 +13,25 @@ const db = new Database();
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
+
+// router config
 router.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.json());
+
+const LoginController = require('./LoginController');
+
 
 const client = new Wit({
   accessToken: _witAccessToken,
   logger: new log.Logger(log.DEBUG)
 });
 
+let session = {};
 
 router.get('/message', function (req, res) {
   // cors filter
   // res.header('Access-Control-Allow-Origin', "*");
+  session = LoginController.getSession();
   getJSON(req.query.name, res);
 });
 
@@ -31,7 +39,7 @@ router.get('/message', function (req, res) {
 function getJSON(keyword, response) {
   client.message(keyword, {})
     .then((data) => {
-      console.log(data); //log dla odpowiedzi 
+      //console.log(data); //log dla odpowiedzi 
       if (data.entities.smalltalk) {
         db.findEntityByType(data.entities.smalltalk[0].value)
           .then((res) => {
@@ -43,9 +51,10 @@ function getJSON(keyword, response) {
       if (data.entities.place) {
         db.findPlaces(data.entities.place[0].value)
           .then((res) => {
-            console.log(res);
+            //console.log(res);
             //res to sa wszystkie miejsca ktore maja taki typ jak keyword
-            // to do preferenceModel() 
+            // to do preferenceModel()
+            console.log(session);
             response.status(200).send(JSON.stringify(res));
           })
           .catch(console.error);

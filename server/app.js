@@ -4,7 +4,7 @@ const app = express();
 
 const CommunicationController = require('./controllers/CommunicationController');
 const UserController = require('./controllers/UserController');
-
+const LoginController = require('./controllers/LoginController');
 //cors middleware
 const allowCrossDomain = (req, res, next) => {
     res.header('Access-Control-Allow-Origin', "*");
@@ -17,5 +17,6 @@ app.use(allowCrossDomain);
 
 app.use('/api', CommunicationController);
 app.use('/api/users', UserController);
+app.use('/api', LoginController.router);
 
 module.exports = app;

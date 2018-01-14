@@ -2,20 +2,24 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
-router.use(bodyParser.urlencoded({ extended: true }));
 const User = require('../models/user');
+
+// router config
+
+router.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.json());
 
 // CREATES A NEW USER
 router.post('/', function (req, res) {
     User.create({
-            name : req.body.name,
-            email : req.body.email,
-            password : req.body.password,
-            localizationImportance: 0,
-            ratingImportance: 0,
-            priceImportance: 0,
-            wantsToBeQuestioned: null
-        }, 
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password,
+        localizationImportance: 0,
+        ratingImportance: 0,
+        priceImportance: 0,
+        wantsToBeQuestioned: null
+    },
         function (err, user) {
             if (err) return res.status(500).send(err);
             res.status(200).send(user);
