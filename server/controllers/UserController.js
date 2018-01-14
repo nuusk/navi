@@ -15,10 +15,9 @@ router.post('/', function (req, res) {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
-        localizationImportance: 0,
-        ratingImportance: 0,
-        priceImportance: 0,
-        wantsToBeQuestioned: null
+        localizationImportance: 1,
+        ratingImportance: 1,
+        priceImportance: 1
     },
         function (err, user) {
             if (err) return res.status(500).send(err);

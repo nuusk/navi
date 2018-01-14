@@ -28,13 +28,22 @@ router.post('/login', async function (req, res) {
   }
 });
 
-function getSession() {
-  return sess;
-}
+router.get('/logout', function (req, res) {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('logout successful')
+    }
+  });
+});
 
+  function getSession() {
+    return sess;
+  }
 
-module.exports = {
-  router,
-  getSession
-}
+  module.exports = {
+    router,
+    getSession
+  }
 
