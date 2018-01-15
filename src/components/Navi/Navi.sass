@@ -1,40 +1,33 @@
 @import '../../utilities/sizes'
-@import '../../utilities/palette'
+@import '../../utilities/palette.sass'
 
-$navi-size: 80px
+$navi-size: 40px
+
+%navi-center
+  position: absolute
+  left: 50%
+  top: 23%
+  transform: translate(-50%, -50%)
 
 .main-view
-  .Navi
-    text-align: center
-    transition: .7s
-    width: $navi-size
-    margin: 20vh auto 0 auto
-    .navi-blue-bell
-      height: $navi-size
+  .navi-wrapper
+    margin-top: 10vh
+    .navi-outer
+      @extend %navi-center
+      width: $navi-size*1.25
+      height: $navi-size*1.25
+      background-color: $navi-primary
+      margin: 0 auto
+      border-radius: 50%
+      animation: emitting-power 4s infinite
+    .navi-inner
+      @extend %navi-center
       width: $navi-size
+      height: $navi-size
+      background-color: $white
+      margin: auto
       border-radius: 50%
-      background-color: rgba(40, 100, 240, 0.76)
-      position: relative
-      animation: float-body 3s linear infinite
-      transform-origin: 48% 51%
-    .navi-small-dust
-      border-radius: 50%
-      position: relative
-      &--red
-        // background-color: #f74a6c
-        height: $navi-size*0.4
-        width: $navi-size*0.4
-        background-color: rgba(200, 25, 101, 0.5)
-        transform-origin: 38% 70%
-        animation: float-red 4s linear infinite reverse
-      &--yellow
-        height: $navi-size*0.3
-        width: $navi-size*0.3
-        background-color: rgba(240, 240, 20, 0.7)
-        transform-origin: 68% 30%
-        animation: float-yellow 5s linear infinite reverse
-    // &:hover
-    //   top: 30%
+      animation: glowing-body 1.5s infinite
 
 @keyframes float-red
   0%
@@ -74,3 +67,23 @@ $navi-size: 80px
     transform: scale(0.85)
   100%
     transform: scale(1)
+
+
+@keyframes glowing-body
+  0%
+    transform: translate(-50%, -50%) scale(1)
+  50%
+    transform: translate(-50%, -50%) scale(1.1)
+  100%
+    transform: translate(-50%, -50%) scale(1)
+
+@keyframes emitting-power
+  0%
+    transform: translate(-50%, -50%) scale(0)
+    opacity: 0
+  10%
+    transform: translate(-50%, -50%) scale(0.2)
+    opacity: 1
+  100%
+    transform: translate(-50%, -50%) scale(2)
+    opacity: 0

@@ -1,6 +1,19 @@
 @import '../../utilities/sizes'
-@import '../../utilities/palette'
+@import '../../utilities/palette.sass'
+@import '../../utilities/placeholders.sass'
+
+@font-face
+  font-family: 'Aileron'
+  src: url("Aileron/Aileron-Light.ttf") format("truetype")
+
+$font-main: 'Aileron', sans-serif
+
 
 .main-view
   .Logo
+    margin-top: 1vh
+    font-family: $font-main
+    width: 100%
     text-align: center
+    font-size: 4em
+    color: $navi-primary

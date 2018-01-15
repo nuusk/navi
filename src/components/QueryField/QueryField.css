@@ -1,12 +1,37 @@
+@import url("https://fonts.googleapis.com/css?family=Fredoka+One");
+@import url("https://fonts.googleapis.com/css?family=Ubuntu");
+body {
+  font-family: 'Fredoka One', cursive; }
+
 .main-view .QueryField {
   width: 100%;
-  margin: 10vh auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center; }
-  .main-view .QueryField input {
-    border: none;
-    border-bottom: 4px solid rgba(30, 30, 30, 0.3);
-    outline: none;
-    width: 30%;
-    font-size: 1.5em;
-    padding-left: 10px;
-    color: rgba(30, 30, 30, 0.7); }
+
+.main-view .QueryField input {
+  border: none;
+  border-bottom: 4px solid #295b98;
+  background-color: transparent;
+  outline: none;
+  width: 30%;
+  font-size: 1.5em;
+  padding-left: 10px;
+  color: #efefef; }
+
+.main-view .QueryField button {
+  color: #efefef;
+  font-size: 1.5em;
+  text-transform: lowercase;
+  border: none;
+  display: block;
+  background-color: transparent;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  margin: 10px auto; }
+
+.main-view .QueryField button:hover {
+  cursor: pointer; }

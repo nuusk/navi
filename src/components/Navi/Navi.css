@@ -1,35 +1,27 @@
-.main-view .Navi {
-  text-align: center;
-  transition: .7s;
-  width: 80px;
-  margin: 20vh auto 0 auto; }
+.main-view .navi-wrapper .navi-outer, .main-view .navi-wrapper .navi-inner {
+  position: absolute;
+  left: 50%;
+  top: 23%;
+  transform: translate(-50%, -50%); }
 
-.main-view .Navi .navi-blue-bell {
-  height: 80px;
-  width: 80px;
+.main-view .navi-wrapper {
+  margin-top: 10vh; }
+
+.main-view .navi-wrapper .navi-outer {
+  width: 50px;
+  height: 50px;
+  background-color: #2675de;
+  margin: 0 auto;
   border-radius: 50%;
-  background-color: rgba(40, 100, 240, 0.76);
-  position: relative;
-  animation: float-body 3s linear infinite;
-  transform-origin: 48% 51%; }
+  animation: emitting-power 4s infinite; }
 
-.main-view .Navi .navi-small-dust {
+.main-view .navi-wrapper .navi-inner {
+  width: 40px;
+  height: 40px;
+  background-color: #efefef;
+  margin: auto;
   border-radius: 50%;
-  position: relative; }
-
-.main-view .Navi .navi-small-dust--red {
-  height: 32px;
-  width: 32px;
-  background-color: rgba(200, 25, 101, 0.5);
-  transform-origin: 38% 70%;
-  animation: float-red 4s linear infinite reverse; }
-
-.main-view .Navi .navi-small-dust--yellow {
-  height: 24px;
-  width: 24px;
-  background-color: rgba(240, 240, 20, 0.7);
-  transform-origin: 68% 30%;
-  animation: float-yellow 5s linear infinite reverse; }
+  animation: glowing-body 1.5s infinite; }
 
 @keyframes float-red {
   0% {
@@ -66,3 +58,22 @@
     transform: scale(0.85); }
   100% {
     transform: scale(1); } }
+
+@keyframes glowing-body {
+  0% {
+    transform: translate(-50%, -50%) scale(1); }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1); }
+  100% {
+    transform: translate(-50%, -50%) scale(1); } }
+
+@keyframes emitting-power {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0; }
+  10% {
+    transform: translate(-50%, -50%) scale(0.2);
+    opacity: 1; }
+  100% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0; } }
