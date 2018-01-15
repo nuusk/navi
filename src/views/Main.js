@@ -5,6 +5,8 @@ import BorderLine from '../components/BorderLine/BorderLine';
 import QueryField from '../components/QueryField/QueryField';
 import Logo from '../components/Logo/Logo';
 
+import './setting.css'
+
 class Main extends Component {
   constructor(props) {
     super(props);
@@ -78,7 +80,6 @@ class Main extends Component {
       <div className="main-view">
         <Logo />
         <Navi />
-        <BorderLine />
         <QueryField query={this.state.query}
                     setQuery={this.setQuery}
                     getData={this.getData} />
