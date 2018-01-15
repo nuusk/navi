@@ -59,7 +59,7 @@ function getJSON(keyword, lat, lng, response) {
       if (data.entities.place) {
         db.findPlaces(data.entities.place[0].value)
           .then((res) => {
-            console.log(res);
+            //console.log(res);
             // res to sa wszystkie miejsca ktore maja taki typ jak keyword
             // to do preferenceModel()
             //console.log(session);
