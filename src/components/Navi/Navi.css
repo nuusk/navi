@@ -1,63 +1,42 @@
-.main-view .navi-wrapper .navi-outer, .main-view .navi-wrapper .navi-inner {
+.main-view div .navi-outer, .main-view div .navi-inner {
   position: absolute;
   left: 50%;
   top: 23%;
   transform: translate(-50%, -50%); }
 
-.main-view .navi-wrapper {
-  margin-top: 10vh; }
-
-.main-view .navi-wrapper .navi-outer {
+.main-view div .navi-outer {
   width: 50px;
   height: 50px;
   background-color: #2675de;
   margin: 0 auto;
-  border-radius: 50%;
-  animation: emitting-power 4s infinite; }
+  border-radius: 50%; }
 
-.main-view .navi-wrapper .navi-inner {
+.main-view div .navi-inner {
   width: 40px;
   height: 40px;
   background-color: #efefef;
   margin: auto;
-  border-radius: 50%;
+  border-radius: 50%; }
+
+.main-view .idle .navi-outer {
+  animation: emitting-power 4s infinite; }
+
+.main-view .idle .navi-inner {
   animation: glowing-body 1.5s infinite; }
 
-@keyframes float-red {
-  0% {
-    transform: translate(20px, -60px) translate(-10px, 40px) rotate(0deg); }
-  100% {
-    transform: translate(20px, -60px) translate(-10px, 40px) rotate(360deg); } }
+.main-view .loading .navi-outer {
+  animation: emitting-power 1s infinite; }
 
-@keyframes float-yellow {
-  0% {
-    transform: translate(70%, -550%) translate(30px, 20px) rotate(0deg); }
-  100% {
-    transform: translate(70%, -550%) translate(30px, 20px) rotate(360deg); } }
+.main-view .loading .navi-inner {
+  animation: glowing-body .5s infinite; }
 
-@keyframes float-body {
+@keyframes change-color {
   0% {
-    transform: scale(1) rotate(0deg); }
-  50% {
-    transform: scale(1.05) rotate(180deg); }
+    background-color: #efefef; }
+  90% {
+    background-color: #2675de; }
   100% {
-    transform: scale(1) rotate(360deg); } }
-
-@keyframes morph {
-  0% {
-    transform: skew(0); }
-  50% {
-    transform: skew(20px); }
-  100% {
-    transform: skew(0%); } }
-
-@keyframes shrink {
-  0% {
-    transform: scale(1); }
-  50% {
-    transform: scale(0.85); }
-  100% {
-    transform: scale(1); } }
+    background-color: #efefef; } }
 
 @keyframes glowing-body {
   0% {

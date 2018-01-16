@@ -13,8 +13,6 @@ const propTypes = {
   recognition: PropTypes.Object
 }
 
-
-
 class QueryField extends Component {
   constructor(props) {
     super(props);

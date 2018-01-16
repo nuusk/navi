@@ -10,8 +10,7 @@ $navi-size: 40px
   transform: translate(-50%, -50%)
 
 .main-view
-  .navi-wrapper
-    margin-top: 10vh
+  div
     .navi-outer
       @extend %navi-center
       width: $navi-size*1.25
@@ -19,7 +18,6 @@ $navi-size: 40px
       background-color: $navi-primary
       margin: 0 auto
       border-radius: 50%
-      animation: emitting-power 4s infinite
     .navi-inner
       @extend %navi-center
       width: $navi-size
@@ -27,48 +25,24 @@ $navi-size: 40px
       background-color: $white
       margin: auto
       border-radius: 50%
+  .idle
+    .navi-outer
+      animation: emitting-power 4s infinite
+    .navi-inner
       animation: glowing-body 1.5s infinite
+  .loading
+    .navi-outer
+      animation: emitting-power 1s infinite
+    .navi-inner
+      animation: glowing-body .5s infinite
 
-@keyframes float-red
+@keyframes change-color
   0%
-    transform: translate(20px, -60px) translate(-10px, 40px) rotate(0deg)
+    background-color: $white
+  90%
+    background-color: $navi-primary
   100%
-    transform: translate(20px, -60px) translate(-10px, 40px) rotate(360deg)
-
-@keyframes float-yellow
-  0%
-    transform: translate(70%, -550%) translate(30px, 20px) rotate(0deg)
-  100%
-    transform: translate(70%, -550%) translate(30px, 20px) rotate(360deg)
-
-
-@keyframes float-body
-  0%
-    transform: scale(1) rotate(0deg)
-  50%
-    transform: scale(1.05) rotate(180deg)
-  100%
-    transform: scale(1) rotate(360deg)
-
-@keyframes morph
-  0%
-    transform: skew(0)
-  50%
-    transform: skew(20px)
-  100%
-    transform: skew(0%)
-
-
-
-@keyframes shrink
-  0%
-    transform: scale(1)
-  50%
-    transform: scale(0.85)
-  100%
-    transform: scale(1)
-
-
+    background-color: $white
 @keyframes glowing-body
   0%
     transform: translate(-50%, -50%) scale(1)

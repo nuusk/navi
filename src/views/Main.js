@@ -18,7 +18,8 @@ class Main extends Component {
       query: '',
       results: [],
       latitude: '',
-      longitude: ''
+      longitude: '',
+      animation: 'idle'
     };
   }
 
@@ -34,8 +35,12 @@ class Main extends Component {
     });
   }
 
-  getData(query) {
+  setAnimation(type) {
 
+  }
+
+  getData(query) {
+    this.state.animation = 'loading';
     console.log(query);
     console.log(this.state.latitude);
     console.log(this.state.longitude);
@@ -79,7 +84,7 @@ class Main extends Component {
     return (
       <div className="main-view">
         <Logo />
-        <Navi />
+        <Navi animation={this.state.animation}/>
         <QueryField query={this.state.query}
                     setQuery={this.setQuery}
                     getData={this.getData} />
