@@ -59,9 +59,15 @@ class Main extends Component {
     })
     .then(result => {
       console.log('~ results: ' + result);
+      this.setState({
+        animation: 'idle'
+      });
     })
     .catch(err => {
       console.error('!Request failed! ~ ', err);
+      this.setState({
+        animation: 'idle'
+      });
     });
 
 

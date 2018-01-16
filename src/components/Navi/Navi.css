@@ -25,10 +25,10 @@
   animation: glowing-body 1.5s infinite; }
 
 .main-view .loading .navi-outer {
-  animation: emitting-power 1s infinite; }
+  animation: emitting-power .3s infinite; }
 
 .main-view .loading .navi-inner {
-  animation: glowing-body .5s infinite; }
+  animation: glowing-body .2s infinite; }
 
 @keyframes change-color {
   0% {

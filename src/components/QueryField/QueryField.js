@@ -17,7 +17,8 @@ class QueryField extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: this.props.query
+      query: this.props.query,
+      transcript: ''
     };
 
     this.handleInput = this.handleInput.bind(this);
