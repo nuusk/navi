@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import Navi from '../components/Navi/Navi';
-import BorderLine from '../components/BorderLine/BorderLine';
 import QueryField from '../components/QueryField/QueryField';
 import Logo from '../components/Logo/Logo';
 
@@ -40,7 +39,10 @@ class Main extends Component {
   }
 
   getData(query) {
-    this.state.animation = 'loading';
+    this.setState({
+      animation: 'loading'
+    });
+
     console.log(query);
     console.log(this.state.latitude);
     console.log(this.state.longitude);
@@ -72,8 +74,11 @@ class Main extends Component {
     }
 
     const success = (position) => {
-      this.state.latitude = position.coords.latitude;
-      this.state.longitude = position.coords.longitude;
+      this.setState({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+      });
+
     }
 
     function error() {
