@@ -61,8 +61,14 @@ class Database {
     return new Promise(function (resolve, reject) {
       Entity.findOne({ name: type })
         .then((res) => {
-          let intent = res.intents[Math.floor(Math.random() * res.intents.length)];
-          resolve(intent);
+          if(res) {
+            console.log(res);
+            let intent = res.intents[Math.floor(Math.random() * res.intents.length)];
+            resolve(intent);
+          } else {
+            console.log(res);
+          }
+
         });
     });
   }
