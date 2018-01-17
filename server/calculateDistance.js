@@ -1,3 +1,8 @@
+Number.prototype.toRadians = function() {
+  console.log(this);
+  return this * Math.PI / 180;
+}
+
 function calculateDistance(lat1, lon1, lat2, lon2) {
   const R = 6371e3; // metres
   const lat1Radians = lat1.toRadians();
@@ -13,6 +18,5 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
   const d = R * c;
   return d;
 }
-
 
 module.exports = calculateDistance;
