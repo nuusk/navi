@@ -8,8 +8,8 @@ mongoose.connect('mongodb://maciejkrol:password@ds135817.mlab.com:35817/kruche_k
 const Entity = require('../models/entity');
 const Database = require('../db');
 const db = new Database();
-const Calculator = require('../calculateDistance');
-const calculator = new Calculator();
+const calculateDistance = require('../calculateDistance');
+
 
 //express, router, api requirements
 const express = require('express');
@@ -62,15 +62,13 @@ function getJSON(keyword, lat, lng, response) {
             console.log(lat);
             console.log(lng);
             res.forEach(x => {
-              console.log(x);
-              x.distance = calculator.calculateDistance(lat, lng, x.lat, x.lng)
-              console.log(x);
+              console.log(calculateDistance(lat, lng, x.location.lat, x.location.lng));
             });
             //console.log(res);
             // res to sa wszystkie miejsca ktore maja taki typ jak keyword
             // to do preferenceModel()
             //console.log(session);
-            response.status(200).send(JSON.stringify(res));
+            response.status(200).send(JSON.stringify(res[0]));
           })
           .catch(console.error);
       }
