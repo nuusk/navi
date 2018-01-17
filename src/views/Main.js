@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Navi from '../components/Navi/Navi';
+import SpeechBalloon from '../components/SpeechBalloon/SpeechBalloon';
 import QueryField from '../components/QueryField/QueryField';
 import Logo from '../components/Logo/Logo';
 
@@ -18,7 +19,8 @@ class Main extends Component {
       results: [],
       latitude: '',
       longitude: '',
-      animation: 'idle'
+      animation: 'idle',
+      dialogue: 'hidden'
     };
   }
 
@@ -60,7 +62,9 @@ class Main extends Component {
     .then(result => {
       console.log('~ results: ' + result);
       this.setState({
-        animation: 'idle'
+        animation: 'idle',
+        response: result,
+        dialogue: 'appear'
       });
     })
     .catch(err => {
@@ -95,7 +99,8 @@ class Main extends Component {
     return (
       <div className="main-view">
         <Logo />
-        <Navi animation={this.state.animation}/>
+        <SpeechBalloon response={this.state.response} dialogue={this.state.dialogue}/>
+        <Navi animation={this.state.animation} />
         <QueryField query={this.state.query}
                     setQuery={this.setQuery}
                     getData={this.getData} />
