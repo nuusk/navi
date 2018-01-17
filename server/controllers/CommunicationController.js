@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://maciejkrol:password@ds135817.mlab.com:35817/kruche_krolestwo');
 const Entity = require('../models/entity');
 const Database = require('../db');
+const calculateDistance = require('../calculateDistance');
 const db = new Database();
 
 //express, router, api requirements
@@ -60,8 +61,9 @@ function getJSON(keyword, lat, lng, response) {
             console.log(lat);
             console.log(lng);
             res.forEach(x => {
-              
-              console.log(x.location);
+              console.log(x);
+              x.distance = calculateDistance(lat, lng, x.lat, x.lng)
+              console.log(x);
             });
             //console.log(res);
             // res to sa wszystkie miejsca ktore maja taki typ jak keyword
