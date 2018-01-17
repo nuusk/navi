@@ -7,8 +7,9 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://maciejkrol:password@ds135817.mlab.com:35817/kruche_krolestwo');
 const Entity = require('../models/entity');
 const Database = require('../db');
-const calculateDistance = require('../calculateDistance');
 const db = new Database();
+const Calculator = require('../calculateDistance');
+const calculator = new Calculator();
 
 //express, router, api requirements
 const express = require('express');
@@ -62,7 +63,7 @@ function getJSON(keyword, lat, lng, response) {
             console.log(lng);
             res.forEach(x => {
               console.log(x);
-              x.distance = calculateDistance(lat, lng, x.lat, x.lng)
+              x.distance = calculator.calculateDistance(lat, lng, x.lat, x.lng)
               console.log(x);
             });
             //console.log(res);
