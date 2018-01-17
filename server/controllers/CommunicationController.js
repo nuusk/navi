@@ -43,8 +43,6 @@ router.get('/message', async function (req, res) {
 
 // metoda do zwracania JSONa encji lub miejsca na podstawie keyworda i wysyla na front res
 function getJSON(keyword, lat, lng, response) {
-  console.log(lat);
-  console.log(lng);
   client.message(keyword, {})
     .then((data) => {
       //console.log(data); //log dla odpowiedzi 
@@ -59,6 +57,12 @@ function getJSON(keyword, lat, lng, response) {
       if (data.entities.place) {
         db.findPlaces(data.entities.place[0].value)
           .then((res) => {
+            console.log(lat);
+            console.log(lng);
+            res.forEach(x => {
+              
+              console.log(x.location);
+            });
             //console.log(res);
             // res to sa wszystkie miejsca ktore maja taki typ jak keyword
             // to do preferenceModel()
