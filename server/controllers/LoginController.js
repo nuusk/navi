@@ -5,6 +5,7 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const Database = require('../db');
 const db = new Database();
+const bcrypt = require('bcrypt');
 
 
 // router config
@@ -18,13 +19,14 @@ router.post('/login', async function (req, res) {
   //console.log(req.session);
   let user = await db.findUserByEmail(req.body.email);
   console.log("user: " + user);
-  if (req.body.password === user.password) {
+  if (bcrypt.compareSync(req.body.password, user.password)) {
     req.session.userId = user.id
     sess = req.session;
     console.log(sess);
     res.end('done');
   } else {
     console.log("Nieprawidłowy email albo hasło.");
+    res.end("Nieprawidłowy email albo hasło.");
   }
 });
 

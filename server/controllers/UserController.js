@@ -3,6 +3,8 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const User = require('../models/user');
+const bcrypt = require('bcrypt');
+
 
 // router config
 
@@ -11,10 +13,11 @@ router.use(bodyParser.json());
 
 // CREATES A NEW USER
 router.post('/', function (req, res) {
+    let hash = bcrypt.hashSync(req.body.password, 10);
     User.create({
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password,
+        password:  hash,
         localizationImportance: 1,
         ratingImportance: 1,
         priceImportance: 1
