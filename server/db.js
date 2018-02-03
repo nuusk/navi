@@ -1,11 +1,13 @@
-// operacje na bazie danych
+// import bibloteki mongoose i komunikacja ze zdalną bazą danych
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://maciejkrol:password@ds135817.mlab.com:35817/kruche_krolestwo');
 
+// import modeli
 const Place = require('./models/place');
 const Entity = require('./models/entity');
 const User = require('./models/user');
 
+// klasa zawierająca operacje bazodanowe
 class Database {
 
   // tworzy i dodaje miejsca do bazy na podstawie argumentu
@@ -18,8 +20,6 @@ class Database {
         lng: place.geometry.location.lng
       },
       icon: place.icon,
-      // parametr do zapytania google photo api
-      // photoReference: place.photos[0].photo_reference,     !!poprawic
       rating: place.rating,
       types: place.types,
       address: place.vicinity
@@ -56,7 +56,7 @@ class Database {
     });
   }
 
-  // zwraca encje na podstawie keyworda, encja zawiera tablice opcji, ktore sa losowane
+  // znajduje encje na podstawie keyworda, encja zawiera tablice opcji, ktore sa losowane
   findEntityByType(type) {
     return new Promise(function (resolve, reject) {
       Entity.findOne({ name: type })
@@ -68,16 +68,11 @@ class Database {
           } else {
             console.log(res);
           }
-
         });
     });
   }
 
-  // setUserPreferenceModel() {
-  //   return new Promise(() => {
-  //   })
-  // }
-
+  // znajduje użytkownika na podstawie adresu e-mail
   findUserByEmail(req) {
     return new Promise(function (resolve, reject) {
       User.findOne({ email: req }, function (err, user) {
@@ -87,6 +82,7 @@ class Database {
     });
   }
 
+  // znajduje użytkownika na podstawie id
   findUserById(userId) {
     return new Promise(function (resolve, reject) {
       User.findById(userId, function (err, user) {
@@ -95,7 +91,8 @@ class Database {
       });
     });
   }
-
+  
+  // znajduje użytkownika na podstawie id i aktualizuje jego pola
   findUserByIdAndUpdate(userId, ratingImportance, priceImportance, wantsToBeQuestioned ) {
     return new Promise(function (resolve, reject) {
       User.findByIdAndUpdate(
@@ -113,5 +110,5 @@ class Database {
   }
 
 }
-
+// eksport pliku z operacjami na bazie danych
 module.exports = Database;

@@ -3,13 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
+<<<<<<< HEAD
     "google-map-react": "^0.28.0",
+=======
+    "mocha": "^5.0.0",
+>>>>>>> 51616783c01f8e851ca64a42cead440e65f5228c
     "mongoose": "^5.0.0-rc2",
     "node-fetch": "^1.7.3",
     "node-wit": "^4.3.0",
+    "nodemon": "^1.14.11",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-google-maps": "^9.4.5",
@@ -22,7 +28,7 @@
     "sass": "node-sass -rw src/components -o src/components",
     "start": "react-scripts start & node ./server/server.js",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "nodemon --exec 'mocha -R min'",
     "eject": "react-scripts eject"
   },
   "devDependencies": {

@@ -1,33 +1,40 @@
 // LoginController.js
+// import bibliotek 
 const express = require('express');
 const session = require('express-session');
-const router = express.Router();
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
+// utworzenie instancji routera, który korzysta z modułu biblioteki express
+const router = express.Router();
+
+// import pliku do operacji bazodanowych i utworzenie instancji bazy danych 
 const Database = require('../db');
 const db = new Database();
 
-
-// router config
+// router config - konfiguracja trasowania i kodowania JSONa
 router.use(session({ secret: 'ssshhhhh' }));
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
+// deklaracja sesji
 let sess = {};
 
+//metoda post do logowania, korzysta z bcrypta do odkodowania hasła
 router.post('/login', async function (req, res) {
-  //console.log(req.session);
   let user = await db.findUserByEmail(req.body.email);
   console.log("user: " + user);
-  if (req.body.password === user.password) {
+  if (bcrypt.compareSync(req.body.password, user.password)) {
     req.session.userId = user.id
     sess = req.session;
     console.log(sess);
     res.end('done');
   } else {
     console.log("Nieprawidłowy email albo hasło.");
+    res.end("Nieprawidłowy email albo hasło.");
   }
 });
 
+// metoda get do wylogowania
 router.get('/logout', function (req, res) {
   req.session.destroy((err) => {
     if (err) {
@@ -38,12 +45,13 @@ router.get('/logout', function (req, res) {
   });
 });
 
-  function getSession() {
-    return sess;
-  }
-
-  module.exports = {
-    router,
-    getSession
-  }
+//getter sesji
+function getSession() {
+  return sess;
+}
+// eksport routera, i funkcji getSession
+module.exports = {
+  router,
+  getSession
+}
 
