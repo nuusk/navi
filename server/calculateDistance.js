@@ -19,7 +19,7 @@ function calculateDistance(lat1, lng1, lat2, lng2) {
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
   const d = R * c;
-  console.log(d);
+  //console.log(d);
   return d;
 }
 
