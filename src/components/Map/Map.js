@@ -8,9 +8,9 @@ import more from './more.svg';
 const MapIntegration = withScriptjs(withGoogleMap((props) =>
   <GoogleMap
     defaultZoom={8}
-    defaultCenter={{ lat: -34.397, lng: 150.644 }}
+    defaultCenter={{ lat: props.lat, lng: props.lng }}
   >
-    {props.isMarkerShown && <Marker position={{ lat: this.props.lat, lng: this.props.lng }} />}
+    {props.isMarkerShown && <Marker position={{ lat: props.lat, lng: props.lng }} />}
   </GoogleMap>
 ));
 
@@ -37,12 +37,12 @@ class Map extends Component {
     });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    this.setState({
-      lat: this.props.lat,
-      lng: this.props.lng
-    });
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   this.setState({
+  //     lat: this.props.lat,
+  //     lng: this.props.lng
+  //   });
+  // }
 
   render() {
     return (
@@ -62,8 +62,8 @@ class Map extends Component {
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: `150px` }} />}
             mapElement={<div style={{ height: `100%` }} />}
-            lat={this.state.lat}
-            lng={this.state.lng}/>
+            lat={this.props.lat}
+            lng={this.props.lng}/>
         </div>
       </div>
     );

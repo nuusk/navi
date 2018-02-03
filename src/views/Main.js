@@ -96,7 +96,7 @@ class Main extends Component {
 
   }
 
-  render() {
+  componentWillMount() {
     if (!navigator.geolocation){
       console.log("Geolocation is not supported by your browser");
       return null;
@@ -115,6 +115,10 @@ class Main extends Component {
     }
 
     navigator.geolocation.getCurrentPosition(success, error);
+  }
+
+  render() {
+
     return (
       <div className="main-view">
         <Logo />
