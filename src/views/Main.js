@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Navi from '../components/Navi/Navi';
 import SpeechBalloon from '../components/SpeechBalloon/SpeechBalloon';
+import PlaceInfo from '../components/PlaceInfo/PlaceInfo';
 import QueryField from '../components/QueryField/QueryField';
 import Logo from '../components/Logo/Logo';
 
@@ -20,7 +21,12 @@ class Main extends Component {
       latitude: '',
       longitude: '',
       animation: 'idle',
-      dialogue: 'hidden'
+      dialogue: 'hidden',
+      placeName: '',
+      placeAddress: '',
+      placeLat: '',
+      placeLng: '',
+      placeRating: ''
     };
   }
 
@@ -60,12 +66,25 @@ class Main extends Component {
       return res.json();
     })
     .then(result => {
-      console.log('~ results: ' + result);
-      this.setState({
-        animation: 'idle',
-        response: result,
-        dialogue: 'appear'
-      });
+      //if this is a place
+      if (result.location) {
+        this.setState({
+          animation: 'idle',
+          dialogue: 'appear',
+          response: 'proponuję to',
+          placeName: result.name,
+          placeAddress: result.address,
+          placeLat: result.location.lat,
+          placeLng: result.location.lng,
+          placeRating: result.rating
+        });
+      } else {
+        this.setState({
+          animation: 'idle',
+          response: result,
+          dialogue: 'appear'
+        });
+      }
     })
     .catch(err => {
       console.error('!Request failed! ~ ', err);
@@ -104,6 +123,11 @@ class Main extends Component {
         <QueryField query={this.state.query}
                     setQuery={this.setQuery}
                     getData={this.getData} />
+        <PlaceInfo  placeName={this.state.placeName}
+                    placeAddress={this.state.placeAddress}
+                    placeLat={this.state.placeLat}
+                    placeLng={this.state.placeLng}
+                    placeRating={this.state.placeRating} />
       </div>
     );
   }
