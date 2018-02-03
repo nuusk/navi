@@ -1,14 +1,22 @@
+// import bibliotek i funkcji zewnętrznych
 const askGooglePlaces = require('./askGooglePlaces');
 const createDivisions = require('./createDivisions');
 const Database = require('./db');
+
+// stworzenie instancji klasy bazy danych
 const db = new Database();
 
+// asynchroniczna funkcja do zapisu danych
+// do bazy mongoDB
 const fillDatabase = async (cityLocations) => {
-  //next page token will determine whether we have to process the next page with a given token to see more of the results from the same request
+  // token następnej strony określi czy 
+  // potrzebujemy przetworzyć nast. stronę
+  // aby zobaczyć więcej wyników tej odpowiedzi
   let nextPageToken = '';
-  //we can only fetch 3 pages of one request (each page has 20 places)
+  // max 3 strony na zapytanie
   let pageCounter = 0;
   do {
+    // użycie funkcji askGooglePlaces
     const data = await askGooglePlaces(cityLocations, nextPageToken);
     if (data) {
     const results = data.results;
@@ -20,19 +28,17 @@ const fillDatabase = async (cityLocations) => {
       console.log(data);
     }
     nextPageToken = data.nextPageToken;
-    for(let i =0; i < 10000000000/5; i++){}; //wait for Google Api
+    for(let i =0; i < 10000000000/5; i++){};
     results.forEach( (place) => {
-      //insert data into mongo
       db.addPlace(place);
     });
 }
   } while( pageCounter++ < 2 );
-  // db.store();
 };
 
-// let fillingCounter = 0;
 let fillerIteration = 0;
-// let tmpFill = 0;
+
+// używam funkcji createDivisions opisanej wyżej
 createDivisions.getCenterOfDivisions(52.40692, 16.92993, 20, 20, 50)
   .forEach( (array) => {
     array.forEach( (position) => {

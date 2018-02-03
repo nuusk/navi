@@ -1,6 +1,8 @@
+// import bibliotek i modeli
 const assert = require('assert');
 const User = require('../server/models/user');
 const Place = require('../server/models/place');
+const Entity = require('../server/models/entity');
 const bcrypt = require('bcrypt');
 
 
@@ -55,4 +57,18 @@ describe('Creating records', () => {
         done();
       });
   });
-})
+
+  it.only('saves a entity', (done) => {
+    // tworze instancje entity
+    const entity = new Entity({
+      name: 'greet',
+      intents: ['hello', 'hey', 'hi', 'good morning']
+    })
+
+    entity.save()
+      .then(() => {
+        assert(!entity.isNew);
+        done();
+      });
+  });
+});

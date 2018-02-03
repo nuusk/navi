@@ -1,40 +1,46 @@
+// import bibliotek fs i node-fetch
+// import klucza z google places api
 const fs = require('fs');
 const fetch = require("node-fetch");
 const _googlePlacesKey = fs.readFileSync('../resources/keys/google-web-places-key.txt', 'utf8').split('\n')[0];
 
-//calculate radius of the circle from given area
+// oblicza promięn okręgu danej powierzchnii
 function getRadius(area) {
   return Math.sqrt(area/Math.PI).toString();
 }
 
-//create request url for the google web places api with given parameters
+// stwórz url wraz z parametrami, 
+// który będzie zapytaniem do google places api
 function createUrl(parameters, nextPage) {
   let url = parameters['baseUrl'];
-  //if type field in parameters object is not empty, add type field to the request url
+  // jeśli pole typ w parametrach nie jest puste,
+  // dodaj takie pole
   if (parameters['type']!='') {
     url += (parameters['type'] + '?');
   }
-  //same goes for location...
+  // analogicznie dla lokalizacji
   if (!nextPage && parameters['location']!='') {
     url += ('&location=' + parameters['location']);
   }
-  //and radius...
+  // i promień
   if (!nextPage && parameters['radius']!='') {
     url += ('&radius=' + parameters['radius']);
   }
-  //add google web places api
+  // dodaj klucz google places api
   url += ('&key=' + _googlePlacesKey);
 
-  //google web places api can only handle 20 places at a time.
-  //if there was more than that in the area we specified, the response will include a token to the next page.
-  //using that token in a request will give next places that couldn't make it to the previous list.
-  //In total, we can only get 3 pages (including the first one without a token), which is 60 places max.
+
+  // google places api jest w stanie obłużyć 20 miejsc na raz
+  // jeśli będzie więcej wyników na określonej przestrzeni, 
+  // odpowiedź będzie zawierać token do następnej strony
+  // możemy otrzymać 3 maksymalnie 3 strony, czyli 60 miejsc max
   if (nextPage) {
     url += ('&pagetoken=' + decodeURIComponent(nextPage));
   }
   return url;
 };
-
+// funkcja asynchroniczna, jako parametr przyjmuje 
+// koordynaty i wyżej wspomniany token
 async function askGooglePlaces(cityLocations, nextPageToken = '') {
   const parameters = {
     'baseUrl': 'https://maps.googleapis.com/maps/api/place/nearbysearch/',
