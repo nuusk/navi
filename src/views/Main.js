@@ -5,6 +5,7 @@ import SpeechBalloon from '../components/SpeechBalloon/SpeechBalloon';
 import PlaceInfo from '../components/PlaceInfo/PlaceInfo';
 import QueryField from '../components/QueryField/QueryField';
 import Logo from '../components/Logo/Logo';
+import RegisterForm from '../components/RegisterForm/RegisterForm';
 
 import './setting.css'
 
@@ -26,7 +27,8 @@ class Main extends Component {
       placeAddress: '',
       placeLat: '',
       placeLng: '',
-      placeRating: ''
+      placeRating: '',
+      view: 'query'
     };
   }
 
@@ -119,26 +121,41 @@ class Main extends Component {
 
   render() {
 
+    //zmienna view zawiera główne komponenty
+    let view;
+    //w zależności od stanu widoku Main.js, zmieniamy główne komponenty
+    switch (this.state.view) {
+      case 'query':
+        view = (
+          <span>
+          <QueryField query={this.state.query}
+                      setQuery={this.setQuery}
+                      getData={this.getData} />
+          <PlaceInfo  placeName={this.state.placeName}
+                      placeAddress={this.state.placeAddress}
+                      placeLat={this.state.placeLat}
+                      placeLng={this.state.placeLng}
+                      placeRating={this.state.placeRating} />
+          </span>
+        )
+        break;
+    case 'register':
+      view = (
+        <RegisterForm />
+      )
+      break;
+    }
+
     return (
       <div className="main-view">
         <Logo />
         <SpeechBalloon response={this.state.response} dialogue={this.state.dialogue}/>
         <Navi animation={this.state.animation} />
-        <QueryField query={this.state.query}
-                    setQuery={this.setQuery}
-                    getData={this.getData} />
-        <PlaceInfo  placeName={this.state.placeName}
-                    placeAddress={this.state.placeAddress}
-                    placeLat={this.state.placeLat}
-                    placeLng={this.state.placeLng}
-                    placeRating={this.state.placeRating} />
+        { view }
       </div>
     );
   }
 
-  // componentWillUpdate() {
-  //
-  // }
 }
 
 export default Main;
