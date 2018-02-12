@@ -25,24 +25,21 @@ $navi-size: 40px
       background-color: $white
       margin: auto
       border-radius: 50%
+  //klase zawierające konkretne animacje
+  //idle jest to domyślna animacja
   .idle
     .navi-outer
       animation: emitting-power 4s infinite
     .navi-inner
       animation: glowing-body 1.5s infinite
+  //animacja loader jest załączana, kiedy użytkownik czeka na odpowiedź
   .loading
     .navi-outer
       animation: emitting-power .3s infinite
     .navi-inner
       animation: glowing-body .2s infinite
 
-@keyframes change-color
-  0%
-    background-color: $white
-  90%
-    background-color: $navi-primary
-  100%
-    background-color: $white
+//definicja animacji na podstawie konkretnych stanów w określonych punktach w czasie
 @keyframes glowing-body
   0%
     transform: translate(-50%, -50%) scale(1)
@@ -61,3 +58,11 @@ $navi-size: 40px
   100%
     transform: translate(-50%, -50%) scale(2)
     opacity: 0
+
+@keyframes change-color
+  0%
+    background-color: $white
+  90%
+    background-color: $navi-primary
+  100%
+    background-color: $white
