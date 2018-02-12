@@ -19,5 +19,4 @@ class Navi extends Component {
   }
 }
 
-
 export default Navi;

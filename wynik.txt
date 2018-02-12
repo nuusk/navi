@@ -1,0 +1,13 @@
+{
+  "_text": "cześć",
+  "entities": {
+    "smalltalk": [
+      {
+        "confidence": 1,
+        "value": "greet",
+        "type": "value"
+      }
+    ]
+  },
+  "msg_id": "0EbdFgcEW2WuI1GfA"
+}
