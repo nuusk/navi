@@ -9,8 +9,7 @@ const UserSchema = Schema({
   password: String,
   localizationImportance: Number,
   ratingImportance: Number,
-  priceImportance: Number,
-  wantsToBeQuestioned: Boolean
+  priceImportance: Number
 });
 
 // tworze model, na podstawie Schema
