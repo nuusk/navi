@@ -9,8 +9,8 @@ const propTypes = {
   // Props injected by SpeechRecognition
   transcript: PropTypes.string,
   resetTranscript: PropTypes.func,
-  browserSupportsSpeechRecognition: PropTypes.bool,
-  recognition: PropTypes.Object
+  browserSupportsSpeechRecognition: PropTypes.bool
+  // recognition: PropTypes.Object
 }
 
 class QueryField extends Component {
