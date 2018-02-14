@@ -26,6 +26,16 @@ body {
 .main-view .QueryField .center {
   margin-top: 200px; }
 
+.main-view .QueryField svg {
+  cursor: pointer;
+  margin-left: -40px; }
+
+.main-view .QueryField svg #circle {
+  fill: #e01f4f; }
+
+.main-view .QueryField svg #mouse {
+  fill: white; }
+
 .main-view .QueryField button {
   color: #efefef;
   font-size: 1.5em;
