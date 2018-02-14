@@ -28,8 +28,12 @@ $navi-size: 40px
   .dialogue
     .navi-outer
       animation: go-to-dialogue 2s forwards, emitting-power 4s infinite
+      @media screen and (max-width: 500px)
+        animation: hide 2s forwards
     .navi-inner
       animation: go-to-dialogue 2s forwards, glowing-body 1.5s infinite
+      @media screen and (max-width: 500px)
+        animation: hide 2s forwards
   //klase zawierające konkretne animacje
   //idle jest to domyślna animacja
   .idle
@@ -77,8 +81,16 @@ $navi-size: 40px
     left: 50%
     top: 23%
   15%
-    left: 38%
+    left: 40%
     top: 24%
   100%
-    left: 33%
-    top: 23%
+    left: 37%
+    top: 25%
+
+@keyframes hide
+  from
+    left: 37%
+    top: 25%
+  to
+    left: 20%
+    top: 25%
