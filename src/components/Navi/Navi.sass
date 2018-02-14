@@ -10,7 +10,7 @@ $navi-size: 40px
   transform: translate(-50%, -50%)
 
 .main-view
-  div
+  .Navi
     .navi-outer
       @extend %navi-center
       width: $navi-size*1.25
@@ -25,6 +25,14 @@ $navi-size: 40px
       background-color: $white
       margin: auto
       border-radius: 50%
+  .dialogue
+    transition: 1.7s
+    transition-timing-function: ease-in-out
+    position: absolute
+    transform: translate(-50%, -50%)
+    top: 23%
+    left: 35%
+
   //klase zawierające konkretne animacje
   //idle jest to domyślna animacja
   .idle

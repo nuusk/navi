@@ -31,7 +31,7 @@ class Main extends Component {
       placeLat: '',
       placeLng: '',
       placeRating: '',
-      view: 'query'
+      view: 'dialogue'
     };
   }
 
@@ -133,6 +133,9 @@ class Main extends Component {
       case 'query':
         view = (
           <span>
+          <Logo />
+          <SpeechBalloon response={this.state.response} dialogue={this.state.dialogue}/>
+          <Navi animation={this.state.animation} />
           <QueryField query={this.state.query}
                       setQuery={this.setQuery}
                       getData={this.getData} />
@@ -146,16 +149,36 @@ class Main extends Component {
         break;
     case 'register':
       view = (
+        <span>
+        <Logo />
+        <SpeechBalloon response={this.state.response} dialogue={this.state.dialogue}/>
+        <Navi animation={this.state.animation} />
         <RegisterForm />
+        </span>
+      )
+      break;
+    case 'dialogue':
+      view = (
+        <span>
+        <Logo />
+        <QueryField query={this.state.query}
+                    setQuery={this.setQuery}
+                    getData={this.getData} />
+        <Navi animation={this.state.animation}
+              view="dialogue"/>
+        <SpeechBalloon response={this.state.response} dialogue={this.state.dialogue}/>
+        <PlaceInfo  placeName={this.state.placeName}
+                    placeAddress={this.state.placeAddress}
+                    placeLat={this.state.placeLat}
+                    placeLng={this.state.placeLng}
+                    placeRating={this.state.placeRating} />
+        </span>
       )
       break;
     }
 
     return (
       <div className="main-view">
-        <Logo />
-        <SpeechBalloon response={this.state.response} dialogue={this.state.dialogue}/>
-        <Navi animation={this.state.animation} />
         { view }
       </div>
     );

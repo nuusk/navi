@@ -10,9 +10,11 @@ class SpeechBalloon extends Component {
   render() {
     return (
       <div className="SpeechBalloon">
-        <div className={this.props.dialogue}>
-          {this.props.response}
-        </div>
+        <div className="balloon-wrapper">
+          <div className={this.props.dialogue}>
+            {this.props.response}
+          </div>
+        </div>  
       </div>
     );
   }

@@ -1,22 +1,30 @@
-.main-view div .navi-outer, .main-view div .navi-inner {
+.main-view .Navi .navi-outer, .main-view .Navi .navi-inner {
   position: absolute;
   left: 50%;
   top: 23%;
   transform: translate(-50%, -50%); }
 
-.main-view div .navi-outer {
+.main-view .Navi .navi-outer {
   width: 50px;
   height: 50px;
   background-color: #2675de;
   margin: 0 auto;
   border-radius: 50%; }
 
-.main-view div .navi-inner {
+.main-view .Navi .navi-inner {
   width: 40px;
   height: 40px;
   background-color: #efefef;
   margin: auto;
   border-radius: 50%; }
+
+.main-view .dialogue {
+  transition: 1.7s;
+  transition-timing-function: ease-in-out;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 23%;
+  left: 35%; }
 
 .main-view .idle .navi-outer {
   animation: emitting-power 4s infinite; }
