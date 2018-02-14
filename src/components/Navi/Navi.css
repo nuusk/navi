@@ -30,14 +30,6 @@
 .main-view .loading .navi-inner {
   animation: glowing-body .2s infinite; }
 
-@keyframes change-color {
-  0% {
-    background-color: #efefef; }
-  90% {
-    background-color: #2675de; }
-  100% {
-    background-color: #efefef; } }
-
 @keyframes glowing-body {
   0% {
     transform: translate(-50%, -50%) scale(1); }
@@ -56,3 +48,11 @@
   100% {
     transform: translate(-50%, -50%) scale(2);
     opacity: 0; } }
+
+@keyframes change-color {
+  0% {
+    background-color: #efefef; }
+  90% {
+    background-color: #2675de; }
+  100% {
+    background-color: #efefef; } }

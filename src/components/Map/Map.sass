@@ -1,25 +1,35 @@
+@import '../../utilities/palette.sass'
+
 .map .button-wrapper
   display: flex
   justify-content: flex-end
-  padding: 0 1.5rem 0.5rem
+  padding: 0 1.5rem
 
 .map .button
-  padding: 1rem 0.5rem
-  color: #666
+  color: $setting
   background: transparent
+  transition: .3s
+  &:hover
+    cursor: pointer
+  border: none
+  outline: none
+  margin-top: -10px
 
 .map .icon
   margin-top: 0.3rem
   cursor: pointer
+  margin-top: -10px
 
 .map-wrapper-hidden,
 .map-wrapper-expanded
   overflow: hidden
+  padding: 0 20px
 
 .map-wrapper-hidden
   height: 0
   transition: height 0.3s ease-out
 
+
 .map-wrapper-expanded
-  height: 15rem
+  height: 10rem
   transition: height 0.3s ease-out

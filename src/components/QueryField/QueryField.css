@@ -1,10 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Fredoka+One");
-@import url("https://fonts.googleapis.com/css?family=Ubuntu");
+@import url("https://fonts.googleapis.com/css?family=Julius+Sans+One");
 body {
-  font-family: 'Fredoka One', cursive; }
+  font-family: 'Aileron', cursive; }
 
 .main-view .QueryField {
-  width: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -16,10 +15,16 @@ body {
   border-bottom: 4px solid #295b98;
   background-color: transparent;
   outline: none;
-  width: 30%;
+  transition: .3s;
+  width: 470px;
+  padding-left: 30px;
   font-size: 1.5em;
-  padding-left: 10px;
   color: #efefef; }
+
+@media screen and (max-width: 700px) {
+  .main-view .QueryField input {
+    width: 290px;
+    padding-left: 10px; } }
 
 .main-view .QueryField button {
   color: #efefef;

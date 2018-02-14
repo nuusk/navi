@@ -30,23 +30,9 @@ class Map extends Component {
     //są to domyślne wartości, które ulegną zmianie,
       //jeśli z backendu otrzymamy informację o położeniu wyszukiwanego miejsca
     this.state = {
-      expanded: false,
       lat: -34.397,
       lng: 150.644
     }
-
-    //zdarzenia odbywające się na elementach DOM na stronie internetowej nalezy powiązać
-      //z komponentami renderowanymi przez React
-    this.handleExpanding = this.handleExpanding.bind(this);
-  }
-
-  //funkcja podpięta pod zdarzenie naciśnięcia na przycisk rozwijający mapę
-  handleExpanding() {
-    //następuje zmiana stanu. przy zmianie stanu React dostaje informację, że należy przerenderować komponenty
-    //oznacza to, że do funkcji render trafi informacja o optymalnych operacjach modyfikujących wyświetlany stan
-    this.setState({
-      expanded: !(this.state.expanded)
-    });
   }
 
   // componentDidUpdate(prevProps, prevState) {
@@ -62,16 +48,15 @@ class Map extends Component {
     //wywołanie funkcji render będzie skutkowało wyświetleniem komponentu zgodnie z jego obecnym stanem
     return (
       <div className="map">
-        <div className="button-wrapper">
-          <button className='button'
-                  onClick={this.handleExpanding}>
-            {this.state.expanded ? this.textHide : this.textExpand}
+        <span className="button-wrapper">
+          <button className='button'>
+            {this.props.expanded ? this.textHide : this.textExpand}
           </button>
           <img className='icon'
-               src={this.state.expanded ? less : more}
-               onClick={this.handleExpanding} />
-        </div>
-        <div className={this.state.expanded ? "map-wrapper-expanded" : "map-wrapper-hidden"}>
+               src={this.props.expanded ? less : more}
+               onClick={this.props.handleExpanding} />
+        </span>
+        <div className={this.props.expanded ? "map-wrapper-expanded" : "map-wrapper-hidden"}>
           <MapIntegration isMarkerShown
             googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
             loadingElement={<div style={{ height: `100%` }} />}

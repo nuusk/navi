@@ -1,9 +1,8 @@
-@import '../../utilities/placeholders'
+@import '../../utilities/placeholders.sass'
 @import '../../utilities/palette.sass'
 
 .main-view
   .QueryField
-    width: 100%
     position: absolute
     top: 50%
     left: 50%
@@ -14,9 +13,13 @@
       border-bottom: 4px solid $navi-dark
       background-color: rgba(0, 0, 0, 0)
       outline: none
-      width: 30%
+      transition: .3s
+      width: 470px
+      padding-left: 30px
+      @media screen and (max-width: 700px)
+        width: 290px
+        padding-left: 10px
       font-size: 1.5em
-      padding-left: 10px
       color: $white
     button
       color: $white
