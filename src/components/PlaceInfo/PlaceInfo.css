@@ -4,6 +4,7 @@ body {
   font-family: 'Aileron', cursive; }
 
 .main-view .PlaceInfo .place {
+  animation: appear 1.5s;
   margin: 0 auto;
   color: #efefef;
   font-size: 1.5em;
@@ -42,3 +43,9 @@ body {
   color: #bcbcbc;
   margin-top: -8px;
   overflow: hidden; }
+
+@keyframes appear {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
