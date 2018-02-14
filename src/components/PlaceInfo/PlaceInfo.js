@@ -28,7 +28,7 @@ class PlaceInfo extends Component {
   }
 
   render() {
-    if (this.props.placeName == '') {
+    if (this.props.placeName === '') {
       return null
     } else {
       return (

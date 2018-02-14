@@ -175,6 +175,8 @@ class Main extends Component {
         </span>
       )
       break;
+     default:
+      break;
     }
 
     return (

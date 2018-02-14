@@ -55,6 +55,9 @@ class QueryField extends Component {
 
   render() {
     const { transcript, resetTranscript, browserSupportsSpeechRecognition, recognition } = this.props;
+    if(transcript && resetTranscript) {
+      console.log('lipa');
+    }
     // const { latitude, longitude } = this.props;
     recognition.lang = 'pl-PL';
     if (!browserSupportsSpeechRecognition) {

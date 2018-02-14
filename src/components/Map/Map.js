@@ -54,7 +54,8 @@ class Map extends Component {
           </button>
           <img className='icon'
                src={this.props.expanded ? less : more}
-               onClick={this.props.handleExpanding} />
+               onClick={this.props.handleExpanding}
+               alt=""/>
         </span>
         <div className={this.props.expanded ? "map-wrapper-expanded" : "map-wrapper-hidden"}>
           <MapIntegration isMarkerShown
