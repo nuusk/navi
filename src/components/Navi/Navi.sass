@@ -26,13 +26,10 @@ $navi-size: 40px
       margin: auto
       border-radius: 50%
   .dialogue
-    transition: 1.7s
-    transition-timing-function: ease-in-out
-    position: absolute
-    transform: translate(-50%, -50%)
-    top: 23%
-    left: 35%
-
+    .navi-outer
+      animation: go-to-dialogue 2s forwards, emitting-power 4s infinite
+    .navi-inner
+      animation: go-to-dialogue 2s forwards, glowing-body 1.5s infinite
   //klase zawierające konkretne animacje
   //idle jest to domyślna animacja
   .idle
@@ -74,3 +71,9 @@ $navi-size: 40px
     background-color: $navi-primary
   100%
     background-color: $white
+
+@keyframes go-to-dialogue
+  0%
+    left: 50%
+  100%
+    left: 33%

@@ -72,7 +72,8 @@ class QueryField extends Component {
                onChange={this.handleInput}
                onKeyPress={this.handleKeyPress}
                onFocus={this.handleFocus}
-               ref='input' />
+               ref='input'
+               className={this.props.position}/>
         {/* <button onClick={resetTranscript}>Reset</button> */}
       </div>
     );

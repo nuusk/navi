@@ -18,13 +18,11 @@
   margin: auto;
   border-radius: 50%; }
 
-.main-view .dialogue {
-  transition: 1.7s;
-  transition-timing-function: ease-in-out;
-  position: absolute;
-  transform: translate(-50%, -50%);
-  top: 23%;
-  left: 35%; }
+.main-view .dialogue .navi-outer {
+  animation: go-to-dialogue 2s forwards, emitting-power 4s infinite; }
+
+.main-view .dialogue .navi-inner {
+  animation: go-to-dialogue 2s forwards, glowing-body 1.5s infinite; }
 
 .main-view .idle .navi-outer {
   animation: emitting-power 4s infinite; }
@@ -64,3 +62,9 @@
     background-color: #2675de; }
   100% {
     background-color: #efefef; } }
+
+@keyframes go-to-dialogue {
+  0% {
+    left: 50%; }
+  100% {
+    left: 33%; } }

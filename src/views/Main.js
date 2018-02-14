@@ -31,7 +31,7 @@ class Main extends Component {
       placeLat: '',
       placeLng: '',
       placeRating: '',
-      view: 'dialogue'
+      view: 'query'
     };
   }
 
@@ -55,9 +55,9 @@ class Main extends Component {
   getData(query) {
     //informacja o zmianie stanu zostanie przekazana do komponentu Navi
     this.setState({
-      animation: 'loading'
+      animation: 'loading',
+      view: 'dialogue'
     });
-
     //żądanie GET zostaje wysłane na adres dostarczany przez API
     fetch('http://localhost:9004/api/message?name='+encodeURIComponent(query)
     +'&lat='+this.state.latitude
@@ -68,6 +68,9 @@ class Main extends Component {
       }
     })
     .then(res => {
+      this.setState({
+        animation: 'idle'
+      });
       return res.json();
     })
     .then(result => {
@@ -75,7 +78,7 @@ class Main extends Component {
       //to wiemy, że Navi zaproponuje to miejsce użytkownikowi
       if (result.location) {
         this.setState({
-          animation: 'idle',
+          animation: 'dialogue',
           dialogue: 'appear',
           response: 'proponuję to',
           placeName: result.name,
@@ -86,7 +89,7 @@ class Main extends Component {
         });
       } else {
         this.setState({
-          animation: 'idle',
+          animation: 'dialogue',
           response: result,
           dialogue: 'appear'
         });
@@ -134,11 +137,10 @@ class Main extends Component {
         view = (
           <span>
           <Logo />
-          <SpeechBalloon response={this.state.response} dialogue={this.state.dialogue}/>
-          <Navi animation={this.state.animation} />
           <QueryField query={this.state.query}
                       setQuery={this.setQuery}
-                      getData={this.getData} />
+                      getData={this.getData}
+                      position="center"/>
           <PlaceInfo  placeName={this.state.placeName}
                       placeAddress={this.state.placeAddress}
                       placeLat={this.state.placeLat}
@@ -152,7 +154,6 @@ class Main extends Component {
         <span>
         <Logo />
         <SpeechBalloon response={this.state.response} dialogue={this.state.dialogue}/>
-        <Navi animation={this.state.animation} />
         <RegisterForm />
         </span>
       )
@@ -163,9 +164,8 @@ class Main extends Component {
         <Logo />
         <QueryField query={this.state.query}
                     setQuery={this.setQuery}
-                    getData={this.getData} />
-        <Navi animation={this.state.animation}
-              view="dialogue"/>
+                    getData={this.getData}
+                    position="top"/>
         <SpeechBalloon response={this.state.response} dialogue={this.state.dialogue}/>
         <PlaceInfo  placeName={this.state.placeName}
                     placeAddress={this.state.placeAddress}
@@ -179,6 +179,8 @@ class Main extends Component {
 
     return (
       <div className="main-view">
+        <Navi animation={this.state.animation}
+              view={this.state.view} />
         { view }
       </div>
     );
