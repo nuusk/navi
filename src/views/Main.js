@@ -17,7 +17,8 @@ class Main extends Component {
     this.setQuery = this.setQuery.bind(this);
     this.getData = this.getData.bind(this);
 
-    //stan, który definiuje zachowanie wszystkich komponentów w danym widoku
+    //stan, który definiuje zachowanie
+    //wszystkich komponentów w danym widoku
     this.state = {
       searching: false,
       query: '',
@@ -35,31 +36,40 @@ class Main extends Component {
     };
   }
 
-  //funkcja ta jest wywoływana przez komponent QueryField, kiedy użytkownik wpisze zapytanie
-  //informacja o tym, że navi szuka odpowiedzi, trafi następnie do komponentu Navi
-  //komponent Navi dostosuje swój stan (w tym przypadku animacje) do podanej wartości
+  //funkcja ta jest wywoływana przez komponent QueryField,
+  //kiedy użytkownik wpisze zapytanie
+  //informacja o tym, że navi szuka odpowiedzi,
+  //trafi następnie do komponentu Navi
+  //komponent Navi dostosuje swój stan
+  //(w tym przypadku animacje) do podanej wartości
   setSearching(value = true) {
     this.setState({
       searching: value
     });
   }
 
-  //funkcja ta jest wywoływana za każdym razem, kiedy zmieni się wartość zapytania wprowadzanego przez użytkownika
+  //funkcja ta jest wywoływana za każdym razem,
+  //kiedy zmieni się wartość zapytania
+  //wprowadzanego przez użytkownika
   setQuery(value) {
     this.setState({
       query: value
     });
   }
 
-  //funkcja ta jest wywoływana, kiedy użytkownik wpisze zapytanie
+  //funkcja ta jest wywoływana,
+  //kiedy użytkownik wpisze zapytanie
   getData(query) {
-    //informacja o zmianie stanu zostanie przekazana do komponentu Navi
+    //informacja o zmianie stanu
+    //zostanie przekazana do komponentu Navi
     this.setState({
       animation: 'loading',
       view: 'dialogue'
     });
-    //żądanie GET zostaje wysłane na adres dostarczany przez API
-    fetch('http://localhost:9004/api/message?name='+encodeURIComponent(query)
+    //żądanie GET zostaje wysłane
+    //na adres dostarczany przez API
+    fetch('http://localhost:9004/api/message?name='
+    +encodeURIComponent(query)
     +'&lat='+this.state.latitude
     +'&lng='+this.state.longitude, {
       method: 'GET',
@@ -74,8 +84,9 @@ class Main extends Component {
       return res.json();
     })
     .then(result => {
-      //jeśli to co otrzymaliśmy w odpowiedzi jest miejscem
-      //to wiemy, że Navi zaproponuje to miejsce użytkownikowi
+      //jeśli to co otrzymaliśmy w odpowiedzi
+      //jest miejscem to wiemy, że Navi
+      //zaproponuje to miejsce użytkownikowi
       if (result.location) {
         this.setState({
           animation: 'dialogue',
@@ -103,15 +114,18 @@ class Main extends Component {
     });
   }
 
-  //geolokalizacja jest walidowana tylko w przypadku, jeśli przeglądarka wspiera ten moduł
+  //geolokalizacja jest walidowana tylko w przypadku,
+  //jeśli przeglądarka wspiera ten moduł
   componentWillMount() {
     if (!navigator.geolocation){
       console.log("Geolocation is not supported by your browser");
       return null;
     }
 
-    //jeśli udało się zlokalizować położenie, zmieniany jest stan głównego komponentu
-    //te wartości będą wykorzystywane podczas zapytań do określenia pozycji użytkownika
+    //jeśli udało się zlokalizować położenie,
+    //zmieniany jest stan głównego komponentu
+    //te wartości będą wykorzystywane
+    //podczas zapytań do określenia pozycji użytkownika
     const success = (position) => {
       this.setState({
         latitude: position.coords.latitude,
@@ -119,19 +133,22 @@ class Main extends Component {
       });
     }
 
-    //jeśli nie udało się zlokalizować użytkownika z jakiegokolwiek powodu, wywoływana jest funkcja error
+    //jeśli nie udało się zlokalizować użytkownika
+    //z jakiegokolwiek powodu, wywoływana jest funkcja error
     function error() {
       console.log("Unable to retrieve your location");
     }
 
-    //przekierowanie na odpowiednią funkcję w zależności od stanu powodzenia geolokalizacji
+    //przekierowanie na odpowiednią funkcję
+    //w zależności od stanu powodzenia geolokalizacji
     navigator.geolocation.getCurrentPosition(success, error);
   }
 
   render() {
     //zmienna view zawiera główne komponenty
     let view;
-    //w zależności od stanu widoku Main.js, zmieniamy główne komponenty
+    //w zależności od stanu widoku Main.js,
+    //zmieniamy główne komponenty
     switch (this.state.view) {
       case 'query':
         view = (
@@ -153,7 +170,8 @@ class Main extends Component {
       view = (
         <span>
         <Logo />
-        <SpeechBalloon response={this.state.response} dialogue={this.state.dialogue}/>
+        <SpeechBalloon response={this.state.response}
+                       dialogue={this.state.dialogue}/>
         <RegisterForm />
         </span>
       )
@@ -166,7 +184,8 @@ class Main extends Component {
                     setQuery={this.setQuery}
                     getData={this.getData}
                     position="top"/>
-        <SpeechBalloon response={this.state.response} dialogue={this.state.dialogue}/>
+        <SpeechBalloon response={this.state.response}
+                       dialogue={this.state.dialogue}/>
         <PlaceInfo  placeName={this.state.placeName}
                     placeAddress={this.state.placeAddress}
                     placeLat={this.state.placeLat}
@@ -178,7 +197,6 @@ class Main extends Component {
      default:
       break;
     }
-
     return (
       <div className="main-view">
         <Navi animation={this.state.animation}
