@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 
-import SpeechRecognition from 'react-speech-recognition'
+import SpeechRecognition from 'react-speech-recognition';
 
-import microphone from './Microphone.svg'
+// import microphone from './Microphone.svg'
 import './QueryField.css';
 
 const propTypes = {
@@ -67,7 +67,7 @@ class QueryField extends Component {
   }
 
   startRecording() {
-    const { startListening, transcript, stopListening, resetTranscript } = this.props;
+    const { startListening, transcript, resetTranscript } = this.props;
     resetTranscript();
     this.setState({
       microphoneMode: true
@@ -95,7 +95,7 @@ class QueryField extends Component {
   }
 
   render() {
-    const { transcript, browserSupportsSpeechRecognition, recognition, stopListening } = this.props;
+    const { transcript, browserSupportsSpeechRecognition, recognition } = this.props;
     recognition.lang = 'pl-PL';
     if (!browserSupportsSpeechRecognition) {
       return null;

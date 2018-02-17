@@ -18,7 +18,10 @@
     "react-google-maps": "^9.4.5",
     "react-p5-wrapper": "0.0.4",
     "react-scripts": "1.0.17",
+    "react-speech": "^0.3.2",
     "react-speech-recognition": "^1.0.4",
+    "react-speech-recognition-input": "^0.1.1",
+    "react-voice-components": "^1.0.0",
     "request": "^2.83.0"
   },
   "scripts": {
