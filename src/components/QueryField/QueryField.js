@@ -67,6 +67,7 @@ class QueryField extends Component {
 
   startRecording() {
     const { startListening, transcript, stopListening, resetTranscript } = this.props;
+    resetTranscript();
     this.setState({
       microphoneMode: true
     });
@@ -79,9 +80,6 @@ class QueryField extends Component {
       this.setState({
         microphoneMode: false
       });
-      stopListening();
-      resetTranscript();
-      this.props.animate("idle");
      }.bind(this), 3000);
   }
 
