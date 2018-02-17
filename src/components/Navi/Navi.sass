@@ -10,7 +10,7 @@ $navi-size: 40px
   transform: translate(-50%, -50%)
 
 .main-view
-  div
+  .Navi
     .navi-outer
       @extend %navi-center
       width: $navi-size*1.25
@@ -25,24 +25,30 @@ $navi-size: 40px
       background-color: $white
       margin: auto
       border-radius: 50%
+  .dialogue
+    .navi-outer
+      animation: go-to-dialogue 2s forwards, emitting-power 4s infinite
+      @media screen and (max-width: 500px)
+        animation: hide 2s forwards
+    .navi-inner
+      animation: go-to-dialogue 2s forwards, glowing-body 1.5s infinite
+      @media screen and (max-width: 500px)
+        animation: hide 2s forwards
+  //klase zawierające konkretne animacje
+  //idle jest to domyślna animacja
   .idle
     .navi-outer
       animation: emitting-power 4s infinite
     .navi-inner
       animation: glowing-body 1.5s infinite
+  //animacja loader jest załączana, kiedy użytkownik czeka na odpowiedź
   .loading
     .navi-outer
       animation: emitting-power .3s infinite
     .navi-inner
       animation: glowing-body .2s infinite
 
-@keyframes change-color
-  0%
-    background-color: $white
-  90%
-    background-color: $navi-primary
-  100%
-    background-color: $white
+//definicja animacji na podstawie konkretnych stanów w określonych punktach w czasie
 @keyframes glowing-body
   0%
     transform: translate(-50%, -50%) scale(1)
@@ -61,3 +67,30 @@ $navi-size: 40px
   100%
     transform: translate(-50%, -50%) scale(2)
     opacity: 0
+
+@keyframes change-color
+  0%
+    background-color: $white
+  90%
+    background-color: $navi-primary
+  100%
+    background-color: $white
+
+@keyframes go-to-dialogue
+  0%
+    left: 50%
+    top: 23%
+  15%
+    left: 40%
+    top: 24%
+  100%
+    left: 37%
+    top: 25%
+
+@keyframes hide
+  from
+    left: 37%
+    top: 25%
+  to
+    left: 20%
+    top: 25%

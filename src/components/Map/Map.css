@@ -1,0 +1,33 @@
+.map .button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 1.5rem; }
+
+.map .button {
+  color: #232221;
+  background: transparent;
+  transition: .3s;
+  border: none;
+  outline: none;
+  margin-top: -10px; }
+
+.map .button:hover {
+  cursor: pointer; }
+
+.map .icon {
+  margin-top: 0.3rem;
+  cursor: pointer;
+  margin-top: -10px; }
+
+.map-wrapper-hidden,
+.map-wrapper-expanded {
+  overflow: hidden;
+  padding: 0 20px; }
+
+.map-wrapper-hidden {
+  height: 0;
+  transition: height 0.3s ease-out; }
+
+.map-wrapper-expanded {
+  height: 10rem;
+  transition: height 0.3s ease-out; }
