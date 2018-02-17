@@ -36,7 +36,7 @@ const client = new Wit({
 // deklaracja sesji i użytkownika
 let session = {};
 let user = {};
-
+let array = [];
 
 // nieskonczone!!! metoda która na podstawie zapytania przeglądarki wywoluje metodę
 // getJSON
@@ -46,9 +46,6 @@ router.get('/message', async function (req, res) {
   user = await db.findUserById(session.userId);
   //console.log(user);
   // jeśli user jest zalogowany to przechodzi przez model preferencyjny
-  if(user) {
-
-  }
   //db.findUserByIdAndUpdate()
   getJSON(req.query.name, req.query.lat, req.query.lng, res);
 });
@@ -56,7 +53,7 @@ router.get('/message', async function (req, res) {
 // metoda do zwracania JSONa encji lub miejsca na podstawie keyworda i wysyla
 // odpowiedź do przeglądarki
 function getJSON(keyword, lat, lng, response) {
-  let array = [];
+
   let tempDistance;
   let tempResult;
   client.message(keyword, {})
@@ -80,11 +77,19 @@ function getJSON(keyword, lat, lng, response) {
               if(!array.includes(x.tempDistance)) {
                 array.push(x);
               }
-            });
-            array.sort((a, b) => b.tempDistance - a.tempDistance);
-            tempResult = array.pop();
-            //console.log('array ', array);
-            console.log(tempResult.tempDistance);
+              if(user) {
+                x.importanceFactor =  user.ratingImportance * x.rating + user.locationImportance * 1 / x.tempDistance
+                array.sort((a, b) => b.importanceFactor - a.importanceFactor);
+              } else {
+                array.sort((a, b) => b.tempDistance - a.tempDistance);
+              }
+             })//.then(() => { // czekam az zrobi tablice places i dodaje placeowi wartosc tempDistance
+            //   preferenceModel(array);
+            // })
+            //tempResult = array.pop();
+            array.length = 10;
+            console.log('array ', array);
+            //console.log(tempResult.tempDistance);
 
             //console.log(array);
 
@@ -92,20 +97,25 @@ function getJSON(keyword, lat, lng, response) {
             // res to sa wszystkie miejsca ktore maja taki typ jak keyword
             // to do preferenceModel()
             //console.log(session);
-            response.status(200).send(JSON.stringify(res[0]));
+            response.status(200).send(JSON.stringify(array[array.length-1]));
           })
           .catch(console.error);
       }
       if (data.entities.another) {
-        db.findEntityByType(data.entities.another[0].value)
-          .then((res) => {
-            //console.log(res);
-            response.status(200).send(JSON.stringify(res));
-          })
-          .catch(console.error);
+        array.pop();
+        console.log('array', array);
+        console.log(array.length)
+        response.status(200).send(JSON.stringify(array[array.length-1]));
       }
     })
     .catch(console.error);
+}
+
+function preferenceModel(array) {
+  array.forEach((place) => {
+    place.importanceFactor =  user.ratingImportance * place.rating + user.locationImportance * 1 / place.tempDistance
+  })
+  array.sort((a, b) => b.importanceFactor - a.importanceFactor);
 }
 
 // eksport routera
