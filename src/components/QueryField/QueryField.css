@@ -34,11 +34,12 @@ body {
   transition: .3s; }
 
 .main-view .QueryField svg #circle {
-  fill: #e01f4f; }
+  transition: .3s;
+  fill: #bcbcbc; }
 
 .main-view .QueryField svg #mouse {
   transition: .3s;
-  fill: #efefef; }
+  fill: #bcbcbc; }
 
 .main-view .QueryField svg:hover {
   transform: scale(1.05); }
@@ -50,10 +51,12 @@ body {
   transform: scale(0.9); }
 
 .main-view .QueryField .recording #circle {
-  fill: #efefef; }
+  transition: .3s;
+  fill: #e01f4f; }
 
 .main-view .QueryField .recording #mouse {
-  fill: #efefef; }
+  transition: .3s;
+  fill: #e01f4f; }
 
 .main-view .QueryField button {
   color: #efefef;

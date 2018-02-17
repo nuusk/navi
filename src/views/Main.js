@@ -67,6 +67,7 @@ class Main extends Component {
   //funkcja ta jest wywoływana,
   //kiedy użytkownik wpisze zapytanie
   getData(query) {
+    console.log(query);
     //informacja o zmianie stanu
     //zostanie przekazana do komponentu Navi
     this.setState({
