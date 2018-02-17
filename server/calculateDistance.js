@@ -1,9 +1,13 @@
+// funkcja przeliczająca kąt na radiany
 function toRadians(angle) {
   return angle * Math.PI / 180;
 }
 
+// funkcja przyjmująca koordynaty,
+// 2 z nich to koordynaty użytkownika
+// pozostałe 2 zwróconego miejsca
 function calculateDistance(lat1, lng1, lat2, lng2) {
-  const R = 6371e3; // metres
+  const R = 6371e3; // metry
   const lat1Radians = toRadians(lat1);
   const lat2Radians = toRadians(lat2);
   const latDelta = toRadians((lat2 - lat1));
@@ -19,4 +23,5 @@ function calculateDistance(lat1, lng1, lat2, lng2) {
   return d;
 }
 
+// eskportuje metodę calculateDistance
 module.exports = calculateDistance;

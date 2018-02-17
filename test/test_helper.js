@@ -1,6 +1,8 @@
+// import biblioteki mongoose.js
 const mongoose = require('mongoose');
 
-//mongoose uzywaj global promisow a nie
+// mongoose uzywaj global promisow,
+// a nie dedykowanych promisów mongoose
 mongoose.Promise = global.Promise;
 
 // funkcja ktora wykonuje sie tylko raz przed rozpoczeciem wykonywania testow
