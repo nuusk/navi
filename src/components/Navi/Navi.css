@@ -5,6 +5,7 @@
   transform: translate(-50%, -50%); }
 
 .main-view .Navi .navi-outer {
+  transition: 1s;
   width: 50px;
   height: 50px;
   background-color: #2675de;
@@ -12,6 +13,7 @@
   border-radius: 50%; }
 
 .main-view .Navi .navi-inner {
+  transition: 1s;
   width: 40px;
   height: 40px;
   background-color: #efefef;
@@ -44,6 +46,17 @@
 .main-view .loading .navi-inner {
   animation: glowing-body .2s infinite; }
 
+.main-view .recording .navi-outer {
+  transition: .3s;
+  background-color: #efefef;
+  animation: recording-outer 1.3s infinite;
+  animation-direction: alternate; }
+
+.main-view .recording .navi-inner {
+  transition: .3s;
+  background-color: #e01f4f;
+  animation: recording-inner 1.2s infinite; }
+
 @keyframes glowing-body {
   0% {
     transform: translate(-50%, -50%) scale(1); }
@@ -62,6 +75,25 @@
   100% {
     transform: translate(-50%, -50%) scale(2);
     opacity: 0; } }
+
+@keyframes recording-outer {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0; }
+  10% {
+    transform: translate(-50%, -50%) scale(0.2);
+    opacity: 1; }
+  100% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0; } }
+
+@keyframes recording-inner {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5); }
+  50% {
+    transform: translate(-50%, -50%) scale(0.8); }
+  100% {
+    transform: translate(-50%, -50%) scale(0.5); } }
 
 @keyframes change-color {
   0% {

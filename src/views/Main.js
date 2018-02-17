@@ -16,6 +16,7 @@ class Main extends Component {
 
     this.setQuery = this.setQuery.bind(this);
     this.getData = this.getData.bind(this);
+    this.animate = this.animate.bind(this);
 
     //stan, który definiuje zachowanie
     //wszystkich komponentów w danym widoku
@@ -54,6 +55,12 @@ class Main extends Component {
   setQuery(value) {
     this.setState({
       query: value
+    });
+  }
+
+  animate(animation) {
+    this.setState({
+      animation: animation
     });
   }
 
@@ -157,7 +164,8 @@ class Main extends Component {
           <QueryField query={this.state.query}
                       setQuery={this.setQuery}
                       getData={this.getData}
-                      position="center"/>
+                      position="center"
+                      animate={this.animate}/>
           <PlaceInfo  placeName={this.state.placeName}
                       placeAddress={this.state.placeAddress}
                       placeLat={this.state.placeLat}
@@ -183,7 +191,8 @@ class Main extends Component {
         <QueryField query={this.state.query}
                     setQuery={this.setQuery}
                     getData={this.getData}
-                    position="top"/>
+                    position="top"
+                    animate={this.animate}/>
         <SpeechBalloon response={this.state.response}
                        dialogue={this.state.dialogue}/>
         <PlaceInfo  placeName={this.state.placeName}

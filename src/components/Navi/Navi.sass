@@ -12,6 +12,7 @@ $navi-size: 40px
 .main-view
   .Navi
     .navi-outer
+      transition: 1s
       @extend %navi-center
       width: $navi-size*1.25
       height: $navi-size*1.25
@@ -19,6 +20,7 @@ $navi-size: 40px
       margin: 0 auto
       border-radius: 50%
     .navi-inner
+      transition: 1s
       @extend %navi-center
       width: $navi-size
       height: $navi-size
@@ -47,6 +49,17 @@ $navi-size: 40px
       animation: emitting-power .3s infinite
     .navi-inner
       animation: glowing-body .2s infinite
+  .recording
+    .navi-outer
+      transition: .3s
+      background-color: $white
+      animation: recording-outer 1.3s infinite
+      animation-direction: alternate
+
+    .navi-inner
+      transition: .3s
+      background-color: $balloon-red
+      animation: recording-inner 1.2s infinite
 
 //definicja animacji na podstawie konkretnych stanów w określonych punktach w czasie
 @keyframes glowing-body
@@ -67,6 +80,26 @@ $navi-size: 40px
   100%
     transform: translate(-50%, -50%) scale(2)
     opacity: 0
+
+@keyframes recording-outer
+  0%
+    transform: translate(-50%, -50%) scale(0)
+    opacity: 0
+  10%
+    transform: translate(-50%, -50%) scale(0.2)
+    opacity: 1
+  100%
+    transform: translate(-50%, -50%) scale(1.2)
+    opacity: 0
+
+@keyframes recording-inner
+  0%
+    transform: translate(-50%, -50%) scale(.5)
+  50%
+    transform: translate(-50%, -50%) scale(.8)
+  100%
+    transform: translate(-50%, -50%) scale(.5)
+
 
 @keyframes change-color
   0%

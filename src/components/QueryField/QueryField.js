@@ -71,6 +71,7 @@ class QueryField extends Component {
       microphoneMode: true
     });
     startListening();
+    this.props.animate("recording");
   }
 
   stopRecording() {
@@ -79,6 +80,7 @@ class QueryField extends Component {
       microphoneMode: false
     });
     stopListening();
+    this.props.animate("idle");
   }
 
   render() {
@@ -105,7 +107,7 @@ class QueryField extends Component {
                className={this.props.position}/>
         {/* <button onClick={resetTranscript}>Reset</button> */}
         <svg version="1.1" id="Capa_1" x="0px" y="0px"
-        	 width="40px" height="40px" viewBox="0 0 64 64" onClick={!this.state.microphoneMode ? this.startRecording : this.stopRecording}>
+        	 width="40px" height="40px" viewBox="0 0 64 64" onClick={!this.state.microphoneMode ? this.startRecording : this.stopRecording} className={this.state.microphoneMode ? "recording" : ""}>
         <g>
         	<g>
         		<g id="circle">

@@ -25,10 +25,24 @@
     svg
       cursor: pointer
       margin-left: -40px
+      transition: .3s
       #circle
         fill: $balloon-red
       #mouse
-        fill: white
+        transition: .3s
+        fill: $white
+      &:hover
+        transform: scale(1.05)
+        #mouse
+          fill: $balloon-red
+      &:active
+        transform: scale(.9)
+    .recording
+      #circle
+        fill: $white
+      #mouse
+        fill: $white
+
     button
       color: $white
       font-size: 1.5em
