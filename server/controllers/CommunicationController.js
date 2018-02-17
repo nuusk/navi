@@ -41,11 +41,7 @@ let user = {};
 // nieskonczone!!! metoda która na podstawie zapytania przeglądarki wywoluje metodę
 // getJSON
 router.get('/message', async function (req, res) {
-<<<<<<< HEAD
-  console.log(req.query);
-=======
   console.log(req.query.name);
->>>>>>> 431c9ec2aa85a32c46c9cb329a4d3ab3e9f1f041
   session = LoginController.getSession();
   user = await db.findUserById(session.userId);
   //console.log(user);
@@ -112,9 +108,5 @@ function getJSON(keyword, lat, lng, response) {
     .catch(console.error);
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 431c9ec2aa85a32c46c9cb329a4d3ab3e9f1f041
 // eksport routera
 module.exports = router;
