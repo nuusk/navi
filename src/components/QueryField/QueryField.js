@@ -33,18 +33,19 @@ class QueryField extends Component {
   }
 
   handleInput(event) {
+    const { transcript } = this.props;
     if (!this.state.microphone) {
       this.setState({
         query: event.target.value
       });
     } else {
       this.setState({
-        query: event.target.value
+        query: transcript
       });
-      setTimeout(()=> {
-        this.props.setQuery(this.state.query);
-        this.props.getData(this.state.query);
-      }, 2000);
+    //   setTimeout(()=> {
+    //     this.props.setQuery(this.state.query);
+    //     this.props.getData(this.state.query);
+    //   }, 2000);
     }
   }
 
@@ -66,11 +67,22 @@ class QueryField extends Component {
   }
 
   startRecording() {
-    const { startListening } = this.props;
+    const { startListening, transcript, stopListening, resetTranscript } = this.props;
+    resetTranscript();
     this.setState({
       microphoneMode: true
     });
     startListening();
+    this.props.animate("recording");
+    setTimeout(function() {
+      console.log("transcript: " + transcript);
+      this.props.setQuery(this.state.query);
+      this.props.getData(this.state.query);
+      this.setState({
+        microphoneMode: false
+      });
+      this.stopRecording();
+     }.bind(this), 3000);
   }
 
   stopRecording() {
@@ -79,25 +91,23 @@ class QueryField extends Component {
       microphoneMode: false
     });
     stopListening();
+    this.props.animate("idle");
   }
 
   render() {
-    const { transcript, resetTranscript, browserSupportsSpeechRecognition, recognition, stopListening } = this.props;
+    const { transcript, browserSupportsSpeechRecognition, recognition, stopListening } = this.props;
     recognition.lang = 'pl-PL';
-    if(transcript && resetTranscript) {
-      console.log('lipa');
-    }
     if (!browserSupportsSpeechRecognition) {
       return null;
     }
-
+    this.state.query = transcript;
     return (
       <div className="QueryField">
         <input id="query-field"
                placeholder="What's up?"
                type="text"
                name="query"
-               value={this.state.microphoneMode ? transcript : this.state.query}
+               value={this.state.query}
                onChange={this.handleInput}
                onKeyPress={this.handleKeyPress}
                onFocus={this.handleFocus}
@@ -105,7 +115,7 @@ class QueryField extends Component {
                className={this.props.position}/>
         {/* <button onClick={resetTranscript}>Reset</button> */}
         <svg version="1.1" id="Capa_1" x="0px" y="0px"
-        	 width="40px" height="40px" viewBox="0 0 64 64" onClick={!this.state.microphoneMode ? this.startRecording : this.stopRecording}>
+        	 width="40px" height="40px" viewBox="0 0 64 64" onClick={!this.state.microphoneMode ? this.startRecording : this.stopRecording} className={this.state.microphoneMode ? "recording" : ""}>
         <g>
         	<g>
         		<g id="circle">

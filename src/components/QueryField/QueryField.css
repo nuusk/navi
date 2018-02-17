@@ -13,8 +13,10 @@ body {
   background-color: transparent;
   outline: none;
   transition: .3s;
-  width: 470px;
+  width: 420px;
   padding-left: 30px;
+  padding-right: 50px;
+  overflow: hidden;
   font-size: 1.5em;
   color: #efefef; }
 
@@ -28,13 +30,33 @@ body {
 
 .main-view .QueryField svg {
   cursor: pointer;
-  margin-left: -40px; }
+  margin-left: -40px;
+  transition: .3s; }
 
 .main-view .QueryField svg #circle {
-  fill: #e01f4f; }
+  transition: .3s;
+  fill: #bcbcbc; }
 
 .main-view .QueryField svg #mouse {
-  fill: white; }
+  transition: .3s;
+  fill: #bcbcbc; }
+
+.main-view .QueryField svg:hover {
+  transform: scale(1.05); }
+
+.main-view .QueryField svg:hover #mouse {
+  fill: #e01f4f; }
+
+.main-view .QueryField svg:active {
+  transform: scale(0.9); }
+
+.main-view .QueryField .recording #circle {
+  transition: .3s;
+  fill: #e01f4f; }
+
+.main-view .QueryField .recording #mouse {
+  transition: .3s;
+  fill: #e01f4f; }
 
 .main-view .QueryField button {
   color: #efefef;
