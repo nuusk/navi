@@ -9,7 +9,7 @@ const db = new Database();
 // asynchroniczna funkcja do zapisu danych
 // do bazy mongoDB
 const fillDatabase = async (cityLocations) => {
-  // token następnej strony określi czy 
+  // token następnej strony określi czy
   // potrzebujemy przetworzyć nast. stronę
   // aby zobaczyć więcej wyników tej odpowiedzi
   let nextPageToken = '';
@@ -39,11 +39,11 @@ const fillDatabase = async (cityLocations) => {
 let fillerIteration = 0;
 
 // używam funkcji createDivisions opisanej wyżej
-createDivisions.getCenterOfDivisions(52.40692, 16.92993, 20, 20, 50)
+createDivisions.getCenterOfDivisions(52.4670679, 16.930448699999943, 20, 20, 5000)
   .forEach( (array) => {
     array.forEach( (position) => {
       // for(let i = 0; i < 10000000000/10; i++) {}; //wait for Google Api
-      if(fillerIteration >= 0 && fillerIteration < 3) {
+      if(fillerIteration >= 9 && fillerIteration < 12) {
         console.log(position);
         fillDatabase(position);
       }

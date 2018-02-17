@@ -33,13 +33,14 @@ class QueryField extends Component {
   }
 
   handleInput(event) {
+    const { transcript } = this.props;
     if (!this.state.microphone) {
       this.setState({
         query: event.target.value
       });
     } else {
       this.setState({
-        query: event.target.value
+        query: transcript
       });
     //   setTimeout(()=> {
     //     this.props.setQuery(this.state.query);
@@ -75,11 +76,12 @@ class QueryField extends Component {
     this.props.animate("recording");
     setTimeout(function() {
       console.log("transcript: " + transcript);
-      this.props.setQuery(transcript);
-      this.props.getData(transcript);
+      this.props.setQuery(this.state.query);
+      this.props.getData(this.state.query);
       this.setState({
         microphoneMode: false
       });
+      this.stopRecording();
      }.bind(this), 3000);
   }
 
@@ -93,22 +95,19 @@ class QueryField extends Component {
   }
 
   render() {
-    const { transcript, resetTranscript, browserSupportsSpeechRecognition, recognition, stopListening } = this.props;
+    const { transcript, browserSupportsSpeechRecognition, recognition, stopListening } = this.props;
     recognition.lang = 'pl-PL';
-    if(transcript && resetTranscript) {
-      console.log('lipa');
-    }
     if (!browserSupportsSpeechRecognition) {
       return null;
     }
-
+    this.state.query = transcript;
     return (
       <div className="QueryField">
         <input id="query-field"
                placeholder="What's up?"
                type="text"
                name="query"
-               value={this.state.microphoneMode ? transcript : this.state.query}
+               value={this.state.query}
                onChange={this.handleInput}
                onKeyPress={this.handleKeyPress}
                onFocus={this.handleFocus}
