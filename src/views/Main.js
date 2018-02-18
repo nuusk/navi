@@ -242,7 +242,6 @@ class Main extends Component {
     }
     return (
       <div className="main-view">
-        <audio src="" ref="speech" hidden></audio>
         <Navi animation={this.state.animation}
               view={this.state.view} />
         { view }
