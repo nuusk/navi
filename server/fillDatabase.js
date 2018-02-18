@@ -39,7 +39,7 @@ const fillDatabase = async (cityLocations) => {
 let fillerIteration = 0;
 
 // używam funkcji createDivisions opisanej wyżej
-createDivisions.getCenterOfDivisions(52.409538, 16.931992, 20, 20, 9100)
+createDivisions.getCenterOfDivisions(52.4114393, 16.93555779999997, 20, 20, 5100)
   .forEach( (array) => {
     array.forEach( (position) => {
       // for(let i = 0; i < 10000000000/10; i++) {}; //wait for Google Api
