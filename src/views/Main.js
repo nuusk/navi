@@ -241,7 +241,8 @@ class Main extends Component {
     }).then(result => {
       if(result.status === 200) {
         this.setState({
-          registerSuccess: true
+          registerSuccess: true,
+          view: 'login'
         });
       } else if (result.status === 409){
         this.setState({
@@ -302,7 +303,6 @@ class Main extends Component {
 
   registerForm() {
     this.setState({
-      view: 'login',
       view: 'register'
     });
   }
