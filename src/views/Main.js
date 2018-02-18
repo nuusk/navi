@@ -113,7 +113,7 @@ class Main extends Component {
     //żądanie GET zostaje wysłane
     //na adres dostarczany przez API
     fetch('http://localhost:9004/api/message?name='
-    +encodeURIComponent(query)
+    +encodeURIComponent(query.toLowerCase())
     +'&lat='+this.state.latitude
     +'&lng='+this.state.longitude, {
       method: 'GET',
