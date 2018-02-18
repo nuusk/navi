@@ -22,7 +22,7 @@ let sess = {};
 //metoda post do logowania, korzysta z bcrypta do odkodowania hasła
 router.post('/login', async function (req, res) {
   let user = await db.findUserByEmail(req.body.email);
-  console.log("user: " + user);
+  //console.log("user: " + user);
   if (bcrypt.compareSync(req.body.password, user.password)) {
     req.session.userId = user.id
     req.session.userName = user.name
