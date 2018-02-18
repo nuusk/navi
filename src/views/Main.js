@@ -261,7 +261,8 @@ class Main extends Component {
       console.log(res);
       this.setState({
         view: 'query',
-        username: 'maciejogarnij'
+        username: 'maciejogarnij',
+        animation: 'starting'
       })
     })
     .catch((error) => {
@@ -306,7 +307,7 @@ class Main extends Component {
   registerForm() {
     this.setState({
       view: 'register',
-      animation: 'register'
+      animation: 'login'
     });
   }
 
