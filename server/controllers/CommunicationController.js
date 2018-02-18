@@ -37,6 +37,7 @@ const client = new Wit({
 let session = {};
 let user = {};
 let array = [];
+let lastId;
 
 // nieskonczone!!! metoda która na podstawie zapytania przeglądarki wywoluje metodę
 // getJSON
@@ -103,6 +104,7 @@ function getJSON(keyword, lat, lng, response) {
             // res to sa wszystkie miejsca ktore maja taki typ jak keyword
             // to do preferenceModel()
             //console.log(session);
+            lastId = array[array.length-1]._id;
             response.status(200).send(JSON.stringify(array[array.length-1]));
           })
           .catch(console.error);
@@ -111,9 +113,12 @@ function getJSON(keyword, lat, lng, response) {
         if(data.entities.another[0].value == keyword) {
           response.status(200).send(JSON.stringify("Nie rozumiem."));
         }
-        array.pop();
+        do {
+          currentId = array.pop()._id;
+        } while (lastId === currentId)
         console.log('array', array);
         console.log(array.length)
+        lastId = array[array.length-1]._id;
         response.status(200).send(JSON.stringify(array[array.length-1]));
       }
       
