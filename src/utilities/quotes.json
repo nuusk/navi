@@ -1,0 +1,33 @@
+{
+  "greet": [
+    "Cześć",
+    "Hej.",
+    "Miło cię słyszeć."
+  ],
+  "goodbye": [
+    "Trzymaj się.",
+    "Do usłyszenia.",
+    "Do następnego.",
+    "Na razie.",
+    "Miło było.",
+    "Ok, cześć."
+  ],
+  "introduce": [
+    "Nazywam się Navi. Jestem tu, by ci pomóc.",
+    "Jestem Navi. Jeśli chcesz wiedzieć co potrafię, spytaj się mnie o to.",
+    "Tu Navi.",
+    "Navi.",
+    "Mów mi Navi"
+  ],
+  "proposition": [
+    "Może to?",
+    "Spróbuj tego.",
+    "Znalazłam coś takiego.",
+    "To powinno Ci się spodobać.",
+    "Udało mi się znaleźć coś takiego.",
+    "Według mnie, to miejsce Ci się spodoba.",
+    "Co powiesz na to miejsce?",
+    "Proponuję Ci to miejsce.",
+    "Zajrzyj tutaj."
+  ]
+}

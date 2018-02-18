@@ -11,6 +11,8 @@ import LoginForm from '../components/LoginForm/LoginForm';
 import ViewButton from '../components/ViewButton/ViewButton';
 import User from '../components/User/User';
 
+import naviQuotes from '../utilities/quotes.json';
+
 import axios from 'axios';
 
 import './setting.css';
@@ -132,17 +134,17 @@ class Main extends Component {
       //jest miejscem to wiemy, że Navi
       //zaproponuje to miejsce użytkownikowi
       if (result.location) {
+        this.speech.text = naviQuotes.proposition[Math.floor(Math.random() * (naviQuotes.proposition.length + 1))];
         this.setState({
           animation: 'dialogue',
           dialogue: 'appear',
-          response: 'proponuję to',
+          response: this.speech.text,
           placeName: result.name,
           placeAddress: result.address,
           placeLat: result.location.lat,
           placeLng: result.location.lng,
           placeRating: result.rating
         });
-        this.speech.text = "proponuję to";
         this.synth.speak(this.speech);
       } else if (result === "login") {
         this.loginForm();
