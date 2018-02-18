@@ -12,7 +12,7 @@ class Navi extends Component {
     return (
       <div className={classes}>
         <div className="navi-outer"></div>
-        <div className="navi-inner"></div>
+        <div className="navi-inner" onClick={this.props.metamorphosis}></div>
       </div>
     );
   }

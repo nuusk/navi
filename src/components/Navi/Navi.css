@@ -27,11 +27,27 @@
   margin: auto;
   border-radius: 50%; }
 
+.main-view .Navi .navi-inner:hover {
+  cursor: pointer; }
+
+.main-view .Navi .navi-inner:active {
+  transform: scale(0.8) !important; }
+
 .main-view .dialogue .navi-outer {
   animation: emitting-power 4s infinite; }
 
 .main-view .dialogue .navi-inner {
   animation: glowing-body 1.5s infinite; }
+
+.main-view .starting .navi-outer {
+  top: -120px;
+  left: 50%;
+  animation: starting-outer 4s infinite; }
+
+.main-view .starting .navi-inner {
+  top: -120px;
+  left: 50%;
+  animation: starting-inner 1.5s infinite; }
 
 .main-view .idle .navi-outer {
   animation: emitting-power 4s infinite; }
@@ -40,10 +56,14 @@
   animation: glowing-body 1.5s infinite; }
 
 .main-view .loading .navi-outer {
-  animation: emitting-power .3s infinite; }
+  width: 10px;
+  height: 10px;
+  animation: loader-outer .3s infinite; }
 
 .main-view .loading .navi-inner {
-  animation: glowing-body .2s infinite; }
+  width: 10px;
+  height: 10px;
+  animation: loader-inner .2s infinite; }
 
 .main-view .recording .navi-outer {
   transition: .3s;
@@ -56,6 +76,18 @@
   background-color: #e01f4f;
   animation: recording-inner 1.2s infinite; }
 
+@keyframes loader-inner {
+  0% {
+    transform: translate(-50%, 0%) rotate(0deg); }
+  100% {
+    transform: translate(-50%, 0%) rotate(360deg); } }
+
+@keyframes loader-outer {
+  0% {
+    transform: translate(50%, 0%) rotate(0deg); }
+  100% {
+    transform: translate(50%, 0%) rotate(360deg); } }
+
 @keyframes glowing-body {
   0% {
     transform: translate(-50%, -50%) scale(1); }
@@ -63,6 +95,25 @@
     transform: translate(-50%, -50%) scale(1.1); }
   100% {
     transform: translate(-50%, -50%) scale(1); } }
+
+@keyframes starting-inner {
+  0% {
+    transform: translate(-50%, -50%) scale(1); }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1); }
+  100% {
+    transform: translate(-50%, -50%) scale(1); } }
+
+@keyframes starting-outer {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0; }
+  10% {
+    transform: translate(-50%, -50%) scale(0.2);
+    opacity: 1; }
+  100% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0; } }
 
 @keyframes emitting-power {
   0% {
