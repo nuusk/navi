@@ -63,7 +63,7 @@ function getJSON(keyword, lat, lng, response) {
       console.log(data); //log dla odpowiedzi 
       if (data.entities.smalltalk) {
         console.log(data.entities.smalltalk[0].value);
-        if(data.entities.smalltalk[0].value == keyword) {
+        if (data.entities.smalltalk[0].value == keyword) {
           response.status(200).send(JSON.stringify("Nie rozumiem."));
         }
 
@@ -74,32 +74,36 @@ function getJSON(keyword, lat, lng, response) {
           .catch(console.error);
       }
       if (data.entities.place) {
-        if(data.entities.place[0].value == keyword) {
+        if (data.entities.place[0].value == keyword) {
           response.status(200).send(JSON.stringify("Nie rozumiem."));
         }
         array = [];
         db.findPlaces(data.entities.place[0].value)
           .then((res) => {
-            res.forEach(x => {               
+            res.forEach(x => {
               x.tempDistance = calculateDistance(lat, lng, x.location.lat, x.location.lng);
               array.push(x);
-             })
-             if(user) {
+            })
+            if (user) {
               array.sort((a, b) => a.rating - b.rating);
             } else {
               array.sort((a, b) => b.tempDistance - a.tempDistance);
             }
-            if (array[array.length-1]) {
-              lastId = array[array.length-1].googleId;
-            } 
-            console.log(array[array.length-1]);
-           //console.log(array);
-            response.status(200).send(JSON.stringify(array[array.length-1]));
+            if (array[array.length - 1]) {
+              lastId = array[array.length - 1].googleId;
+            }
+            console.log(array[array.length - 1]);
+            //console.log(array);
+            if (array.length === 0) {
+              response.status(200).send(JSON.stringify("Brak rezultatów."));
+            } else {
+              response.status(200).send(JSON.stringify(array[array.length - 1]));
+            }
           })
           .catch(console.error);
       }
       if (data.entities.another) {
-        if(data.entities.another[0].value == keyword) {
+        if (data.entities.another[0].value == keyword) {
           response.status(200).send(JSON.stringify("Nie rozumiem."));
         }
         do {
@@ -111,17 +115,17 @@ function getJSON(keyword, lat, lng, response) {
         } while (lastId === currentId);
         //console.log('array', array);
         console.log(array.length)
-        lastId = array[array.length-1].googleId;
-        response.status(200).send(JSON.stringify(array[array.length-1]));
+        lastId = array[array.length - 1].googleId;
+        response.status(200).send(JSON.stringify(array[array.length - 1]));
       }
-      
+
     })
     .catch(console.error);
 }
 
 function preferenceModel(array) {
   array.forEach((place) => {
-    place.importanceFactor =  user.ratingImportance * place.rating + user.locationImportance * 1 / place.tempDistance
+    place.importanceFactor = user.ratingImportance * place.rating + user.locationImportance * 1 / place.tempDistance
   })
   array.sort((a, b) => b.importanceFactor - a.importanceFactor);
 }
