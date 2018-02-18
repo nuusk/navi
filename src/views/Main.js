@@ -134,7 +134,7 @@ class Main extends Component {
       //jest miejscem to wiemy, że Navi
       //zaproponuje to miejsce użytkownikowi
       if (result.location) {
-        this.speech.text = naviQuotes.proposition[Math.floor(Math.random() * (naviQuotes.proposition.length + 1))];
+        this.speech.text = naviQuotes.proposition[Math.floor(Math.random() * (naviQuotes.proposition.length))];
         this.setState({
           animation: 'dialogue',
           dialogue: 'appear',
@@ -220,8 +220,10 @@ class Main extends Component {
 
   //change navi
   metamorphosis() {
+    this.speech.text = naviQuotes.metamorphosis[Math.floor(Math.random() * (naviQuotes.metamorphosis.length))];
     this.speech.pitch += .1;
     this.speech.pitch %= 2;
+    this.synth.speak(this.speech);
   }
 
   register() {
@@ -266,7 +268,7 @@ class Main extends Component {
   }
 
   logout() {
-    this.speech.text = naviQuotes.goodbye[Math.floor(Math.random() * (naviQuotes.goodbye.length + 1))];
+    this.speech.text = naviQuotes.goodbye[Math.floor(Math.random() * (naviQuotes.goodbye.length))];
     axios.get('http://localhost:9004/api/logout')
     .then((res) => {
       console.log(res);
