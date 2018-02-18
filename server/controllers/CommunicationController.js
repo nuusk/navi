@@ -38,6 +38,7 @@ let session = {};
 let user = {};
 let array = [];
 let lastId;
+let currentId;
 
 // nieskonczone!!! metoda która na podstawie zapytania przeglądarki wywoluje metodę
 // getJSON
@@ -88,7 +89,9 @@ function getJSON(keyword, lat, lng, response) {
             } else {
               array.sort((a, b) => b.tempDistance - a.tempDistance);
             }
-            lastId = array[array.length-1].googleId;
+            if (array[array.length-1]) {
+              lastId = array[array.length-1].googleId;
+            } 
             console.log(array[array.length-1]);
            //console.log(array);
             response.status(200).send(JSON.stringify(array[array.length-1]));
@@ -100,9 +103,11 @@ function getJSON(keyword, lat, lng, response) {
           response.status(200).send(JSON.stringify("Nie rozumiem."));
         }
         do {
-          currentId = array.pop().googleId;
-          console.log('currentid' ,currentId)
-          console.log('lastid', lastId)
+          if (array.length !== 0) {
+            currentId = array.pop().googleId;
+          } else {
+            response.status(200).send(JSON.stringify("W twojej okolicy to jedyna opcja."));
+          }
         } while (lastId === currentId);
         //console.log('array', array);
         console.log(array.length)
