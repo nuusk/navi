@@ -3,6 +3,11 @@ import React, { Component } from 'react';
 //importowanie komponentów
 import Navi from '../components/Navi/Navi';
 import SpeechBalloon from '../components/SpeechBalloon/SpeechBalloon';
+
+//AlertBalloon to komponent ktory wyswietla taki alert jaki jest stan this.state.alert.
+//komponent ten zyje tylko 4 sekundy. zaorowno jego animacja trwa 4 sekundy,
+//jak i stan this.state.alert zostaje wyzerowany po 4 sekundach od momentu nadania mu wartosci
+import AlertBalloon from '../components/AlertBalloon/AlertBalloon';
 import PlaceInfo from '../components/PlaceInfo/PlaceInfo';
 import QueryField from '../components/QueryField/QueryField';
 import Logo from '../components/Logo/Logo';
@@ -58,7 +63,8 @@ class Main extends Component {
       registerSuccess: false,
       emailAlreadyUsed: false,
       username: '',
-      formAnimation: ''
+      formAnimation: '',
+      alert: null
     };
   }
 
@@ -243,8 +249,14 @@ class Main extends Component {
       if(result.status === 200) {
         this.setState({
           registerSuccess: true,
-          view: 'login'
+          view: 'login',
+          alert: 'Zarejestrowano.'
         });
+        setTimeout(function() {
+          this.setState({
+            alert: null
+          });
+        }.bind(this), 4000);
       } else if (result.status === 409){
         this.setState({
           emailAlreadyUsed: true
@@ -265,8 +277,14 @@ class Main extends Component {
         this.setState({
           view: 'query',
           username: user.email,
-          animation: 'starting'
+          animation: 'starting',
+          alert: 'Pomyślnie zalogowano.'
         });
+        setTimeout(function() {
+          this.setState({
+            alert: null
+          });
+        }.bind(this), 4000);
       } else {
         this.setState({
           formAnimation: 'wrong'
@@ -297,8 +315,14 @@ class Main extends Component {
     .then((res) => {
       console.log(res);
       this.setState({
-        username: null
+        username: null,
+        alert: 'Pomyślnie wylogowano'
       });
+      setTimeout(function() {
+        this.setState({
+          alert: null
+        });
+      }.bind(this), 4000);
     })
     .catch((error) => {
       console.log(error);
@@ -431,6 +455,9 @@ class Main extends Component {
           <User username={this.state.username} />
         }
         { view }
+        {this.state.alert &&
+          <AlertBalloon alert={this.state.alert} />
+        }
       </div>
     );
   }
