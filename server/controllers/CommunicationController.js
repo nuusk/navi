@@ -68,7 +68,6 @@ function getJSON(keyword, lat, lng, response) {
 
         db.findEntityByType(data.entities.smalltalk[0].value)
           .then((res) => {
-            //console.log(res);
             response.status(200).send(JSON.stringify(res));
           })
           .catch(console.error);
@@ -79,32 +78,16 @@ function getJSON(keyword, lat, lng, response) {
         }
         db.findPlaces(data.entities.place[0].value)
           .then((res) => {
-            //console.log(lat);
-            //console.log(lng);
             res.forEach(x => {               
               x.tempDistance = calculateDistance(lat, lng, x.location.lat, x.location.lng);
-              if(!array.includes(x)) {
-                array.push(x);
-              }
-              if(user) {
-                x.importanceFactor =  user.ratingImportance * x.rating + user.locationImportance * 1 / x.tempDistance
-                console.log(x.importanceFactor)
-                array.sort((a, b) => b.importanceFactor - a.importanceFactor);
-              } else {
-                array.sort((a, b) => b.tempDistance - a.tempDistance);
-              }
+              array.push(x);
              })
-            array.length = 10;
-            console.log('array ', array);
-            //console.log(tempResult.tempDistance);
-
-            //console.log(array);
-
-            //console.log(res);
-            // res to sa wszystkie miejsca ktore maja taki typ jak keyword
-            // to do preferenceModel()
-            //console.log(session);
-            lastId = array[array.length-1]._id;
+             if(user) {
+              array.sort((a, b) => a.rating - b.rating);
+            } else {
+              array.sort((a, b) => b.tempDistance - a.tempDistance);
+            }
+            lastId = array[array.length-1].googleId;
             response.status(200).send(JSON.stringify(array[array.length-1]));
           })
           .catch(console.error);
@@ -114,11 +97,13 @@ function getJSON(keyword, lat, lng, response) {
           response.status(200).send(JSON.stringify("Nie rozumiem."));
         }
         do {
-          currentId = array.pop()._id;
+          currentId = array.pop().googleId;
+          console.log('currentid' ,currentId)
+          console.log('lastid', lastId)
         } while (lastId === currentId);
-        console.log('array', array);
+        //console.log('array', array);
         console.log(array.length)
-        lastId = array[array.length-1]._id;
+        lastId = array[array.length-1].googleId;
         response.status(200).send(JSON.stringify(array[array.length-1]));
       }
       
