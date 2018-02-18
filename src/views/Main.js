@@ -269,6 +269,11 @@ class Main extends Component {
     });
     console.log('asd');
     console.log(this.state.username);
+    this.setState({
+      username: null
+    });
+    this.speech.text = "Na razie";
+    this.synth.speak(this.speech);
   }
 
   loginForm() {

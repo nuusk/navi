@@ -3,8 +3,10 @@
 body {
   font-family: 'Aileron', cursive; }
 
+.main-view .RegisterForm {
+  animation: fade .7s; }
+
 .main-view .RegisterForm form {
-  animation: appear 1.5s;
   margin: 100px auto 0 auto;
   color: #efefef;
   font-size: 1.5em;
@@ -65,8 +67,8 @@ body {
   .main-view .RegisterForm button {
     width: 300px; } }
 
-@keyframes appear {}0% {
-  opacity: 0; }
-
-100% {
-  opacity: 1; }
+@keyframes fade {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }

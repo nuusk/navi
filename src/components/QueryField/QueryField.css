@@ -4,6 +4,7 @@ body {
   font-family: 'Aileron', cursive; }
 
 .main-view .QueryField {
+  animation: fade .7s;
   transition: .3s;
   text-align: center; }
 
@@ -72,3 +73,9 @@ body {
 
 .main-view .QueryField button:hover {
   cursor: pointer; }
+
+@keyframes fade {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
