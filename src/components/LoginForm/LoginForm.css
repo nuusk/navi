@@ -3,7 +3,7 @@
 body {
   font-family: 'Aileron', cursive; }
 
-.main-view .RegisterForm form {
+.main-view .LoginForm form {
   animation: appear 1.5s;
   margin: 100px auto 0 auto;
   color: #efefef;
@@ -17,25 +17,22 @@ body {
   border-radius: 4px;
   box-shadow: 0px 8px 5px rgba(0, 0, 0, 0.12), 0 2px 3px rgba(0, 0, 0, 0.34);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+  @media screen and (max-width: 700px) {
+    .main-view .LoginForm form {
+      width: 300px; } }
+  .main-view .LoginForm form input {
+    display: block;
+    margin: 15px auto;
+    width: 80%;
+    font-size: 1em;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #bcbcbc;
+    color: #efefef; }
+    .main-view .LoginForm form input:focus {
+      outline: none; }
 
-@media screen and (max-width: 700px) {
-  .main-view .RegisterForm form {
-    width: 300px; } }
-
-.main-view .RegisterForm form input {
-  display: block;
-  margin: 15px auto;
-  width: 80%;
-  font-size: 1em;
-  background-color: transparent;
-  border: none;
-  border-bottom: 2px solid #bcbcbc;
-  color: #efefef; }
-
-.main-view .RegisterForm form input:focus {
-  outline: none; }
-
-.main-view .RegisterForm button {
+.main-view .LoginForm button {
   display: block;
   border: none;
   animation: appear 1.5s;
@@ -52,18 +49,15 @@ body {
   border-radius: 4px;
   box-shadow: 0px 8px 5px rgba(0, 0, 0, 0.12), 0 2px 3px rgba(0, 0, 0, 0.34);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
-
-.main-view .RegisterForm button:hover {
-  cursor: pointer;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  transform: translate(120px, -2px); }
-
-.main-view .RegisterForm button:focus {
-  outline: none; }
-
-@media screen and (max-width: 700px) {
-  .main-view .RegisterForm button {
-    width: 300px; } }
+  .main-view .LoginForm button:hover {
+    cursor: pointer;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    transform: translate(120px, -2px); }
+  .main-view .LoginForm button:focus {
+    outline: none; }
+  @media screen and (max-width: 700px) {
+    .main-view .LoginForm button {
+      width: 300px; } }
 
 @keyframes appear {}0% {
   opacity: 0; }
