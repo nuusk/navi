@@ -30,6 +30,7 @@ class QueryField extends Component {
     this.handleFocus = this.handleFocus.bind(this);
     this.startRecording = this.startRecording.bind(this);
     this.stopRecording = this.stopRecording.bind(this);
+
   }
 
   handleInput(event) {
@@ -66,6 +67,10 @@ class QueryField extends Component {
     stopListening();
   }
 
+  componentWillMount() {
+    this.timeouts = [];
+  }
+
   startRecording() {
     const { startListening, transcript, resetTranscript } = this.props;
     resetTranscript();
@@ -74,7 +79,7 @@ class QueryField extends Component {
     });
     startListening();
     this.props.animate("recording");
-    setTimeout(function() {
+    this.timer = setTimeout(function() {
       console.log("transcript: " + transcript);
       this.props.setQuery(this.state.query);
       this.props.getData(this.state.query);
@@ -101,6 +106,18 @@ class QueryField extends Component {
       return null;
     }
     if (listening) {
+      if (this.state.query != transcript) {
+        clearTimeout(this.timer);
+        this.timer = setTimeout(function() {
+          console.log("transcript: " + transcript);
+          this.props.setQuery(transcript);
+          this.props.getData(transcript);
+          this.setState({
+            microphoneMode: false
+          });
+          this.stopRecording();
+         }.bind(this), 3000);
+      }
       this.state.query = transcript;
     }
     return (

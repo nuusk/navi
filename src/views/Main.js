@@ -235,7 +235,6 @@ class Main extends Component {
         });
       }
     }).catch(error => console.log('error============:', error));
-
   }
 
   login() {
