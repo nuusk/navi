@@ -8,7 +8,7 @@ import QueryField from '../components/QueryField/QueryField';
 import Logo from '../components/Logo/Logo';
 import RegisterForm from '../components/RegisterForm/RegisterForm';
 
-import './setting.css'
+import './setting.css';
 
 class Main extends Component {
   constructor(props) {

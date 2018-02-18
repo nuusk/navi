@@ -95,12 +95,14 @@ class QueryField extends Component {
   }
 
   render() {
-    const { transcript, browserSupportsSpeechRecognition, recognition } = this.props;
+    const { transcript, browserSupportsSpeechRecognition, recognition, listening } = this.props;
     recognition.lang = 'pl-PL';
     if (!browserSupportsSpeechRecognition) {
       return null;
     }
-    this.state.query = transcript;
+    if (listening) {
+      this.state.query = transcript;
+    }
     return (
       <div className="QueryField">
         <input id="query-field"
