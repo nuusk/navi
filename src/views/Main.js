@@ -302,6 +302,7 @@ class Main extends Component {
 
   registerForm() {
     this.setState({
+      view: 'login',
       view: 'register'
     });
   }
