@@ -7,6 +7,7 @@ import PlaceInfo from '../components/PlaceInfo/PlaceInfo';
 import QueryField from '../components/QueryField/QueryField';
 import Logo from '../components/Logo/Logo';
 import RegisterForm from '../components/RegisterForm/RegisterForm';
+import ViewButton from '../components/ViewButton/ViewButton';
 
 import './setting.css';
 
@@ -18,6 +19,14 @@ class Main extends Component {
     this.getData = this.getData.bind(this);
     this.animate = this.animate.bind(this);
     this.populateVoiceList = this.populateVoiceList.bind(this);
+    this.metamorphosis = this.metamorphosis.bind(this);
+    this.triggerMenu = this.triggerMenu.bind(this);
+    this.register = this.register.bind(this);
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
+    this.registerForm = this.registerForm.bind(this);
+    this.loginForm = this.loginForm.bind(this);
+    this.mainView = this.mainView.bind(this);
 
     this.synth = window.speechSynthesis;
     this.speech = new SpeechSynthesisUtterance();
@@ -31,14 +40,15 @@ class Main extends Component {
       results: [],
       latitude: '',
       longitude: '',
-      animation: 'idle',
+      animation: 'starting',
       dialogue: 'hidden',
       placeName: '',
       placeAddress: '',
       placeLat: '',
       placeLng: '',
       placeRating: '',
-      view: 'query'
+      view: 'query',
+      menu: true
     };
   }
 
@@ -73,10 +83,18 @@ class Main extends Component {
     this.voices = this.synth.getVoices();
   }
 
+  triggerMenu() {
+
+    this.setState({
+      menu: !this.state.menu
+    });
+    console.log('menu jest ' + this.state.menu);
+  }
+
   //funkcja ta jest wywoływana,
   //kiedy użytkownik wpisze zapytanie
   getData(query) {
-    console.log(query);
+    // console.log(query);
     //informacja o zmianie stanu
     //zostanie przekazana do komponentu Navi
     this.setState({
@@ -115,8 +133,7 @@ class Main extends Component {
           placeLng: result.location.lng,
           placeRating: result.rating
         });
-        let text = "proponuję to";
-        this.speech.text = text;
+        this.speech.text = "proponuję to";
         this.synth.speak(this.speech);
       } else {
         this.setState({
@@ -124,6 +141,8 @@ class Main extends Component {
           response: result,
           dialogue: 'appear'
         });
+        this.speech.text = result;
+        this.synth.speak(this.speech);
       }
     })
     .catch(err => {
@@ -168,20 +187,52 @@ class Main extends Component {
     //jesli jeszce nie mamy listy glosow, wybieramy z nich Zosie i przypisujemy do Navi
     if (this.voices.length == 0) {
       this.populateVoiceList();
-      console.log(this.voices);
       this.voices.forEach(voice => {
         if(voice.name === "Zosia") {
-          console.log(voice);
           this.speech.voice = voice;
 
           //losowy pitch
-          this.speech.pitch = Math.random(1);
+          this.speech.pitch = 0.3;
 
           //0.8 sprawdza sie swietnie.
           this.speech.rate = 0.8;
         }
       });
     }
+  }
+
+  //change navi
+  metamorphosis() {
+    this.speech.pitch += .1;
+    this.speech.pitch %= 2;
+  }
+
+  register() {
+
+  }
+
+  login() {
+
+  }
+
+  logout() {
+
+  }
+
+  loginForm() {
+
+  }
+
+  mainView() {
+    this.setState({
+      view: 'query'
+    });
+  }
+
+  registerForm() {
+    this.setState({
+      view: 'register'
+    });
   }
 
   render() {
@@ -199,10 +250,11 @@ class Main extends Component {
                       setQuery={this.setQuery}
                       getData={this.getData}
                       position="center"
-                      animate={this.animate}/>
+                      animate={this.animate} />
 
           <Navi       animation={this.state.animation}
-                      view={this.state.view} />
+                      view={this.state.view}
+                      metamorphosis={this.metamorphosis}/>
           <PlaceInfo  placeName={this.state.placeName}
                       placeAddress={this.state.placeAddress}
                       placeLat={this.state.placeLat}
@@ -215,11 +267,10 @@ class Main extends Component {
       view = (
         <span>
         <Logo />
-        <Navi animation={this.state.animation}
-              view={this.state.view} />
-        <SpeechBalloon response={this.state.response}
-                       dialogue={this.state.dialogue}/>
-        <RegisterForm />
+        <Navi       animation={this.state.animation}
+                    view={this.state.view}
+                    metamorphosis={this.metamorphosis}/>
+        <RegisterForm onSubmit={this.register}/>
         </span>
       )
       break;
@@ -235,7 +286,8 @@ class Main extends Component {
                     animate={this.animate}/>
         <div className="grid-wrapper">
         <Navi       animation={this.state.animation}
-                    view={this.state.view} />
+                    view={this.state.view}
+                    metamorphosis={this.metamorphosis}/>
         <SpeechBalloon response={this.state.response}
                        dialogue={this.state.dialogue}/>
         </div>
@@ -253,6 +305,20 @@ class Main extends Component {
     }
     return (
       <div className="main-view">
+        <div className="menu">
+          <ViewButton viewName="trigger-menu" onClick={this.triggerMenu} mode={this.state.menu ? 'on' : 'off'}/>
+          {this.state.menu &&
+            <span>
+              {this.state.view != 'register' &&
+                <ViewButton viewName="register" onClick={this.registerForm} />
+              }
+              {this.state.view == 'register' &&
+                <ViewButton viewName="main" onClick={this.mainView} />
+              }
+              <ViewButton viewName="login" onClick={this.loginForm} />
+            </span>
+          }
+        </div>
         { view }
       </div>
     );

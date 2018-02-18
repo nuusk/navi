@@ -1,0 +1,56 @@
+@import '../../utilities/palette.sass'
+
+$hover-offset: 10px
+$active-offset: 20px
+
+.main-view
+  .menu
+    .ViewButton
+      position: fixed
+      top: 10px
+      left: 10px
+      width: 60px
+      height: 20px
+      background-color: $balloon-red
+      color: $white
+      border: none
+      border-radius: 16px
+      font-size: .75em
+      transition: .3s
+      &:focus
+        outline: none
+      &:hover
+        cursor: pointer
+    .trigger-menu
+      width: 20px
+      &:active
+        transform: scale(0.9)
+    .on
+      &:after
+        content: ""
+        border: solid $white
+        border-radius: 4px
+        outline: none
+        border-width: 0 3px 3px 0
+        display: inline-block
+        padding: 3px
+        transform: rotate(135deg)
+    .off
+      &:after
+        content: ""
+        border: solid $white
+        border-radius: 4px
+        outline: none
+        border-width: 0 3px 3px 0
+        display: inline-block
+        padding: 3px
+        transform: translateX(-2px) rotate(-45deg)
+
+    .register, .main
+      transform: translateY(30px)
+      &:active
+        transform: translateY(30px) scale(0.9)
+    .login
+      transform: translateY(60px)
+      &:active
+        transform: translateY(60px) scale(0.9)
