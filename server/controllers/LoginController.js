@@ -25,9 +25,10 @@ router.post('/login', async function (req, res) {
   console.log("user: " + user);
   if (bcrypt.compareSync(req.body.password, user.password)) {
     req.session.userId = user.id
+    req.session.userName = user.name
     sess = req.session;
     console.log(sess);
-    res.end('done');
+    res.status(200).send(JSON.stringify(sess));
   } else {
     console.log("Nieprawidłowy email albo hasło.");
     res.end("Nieprawidłowy email albo hasło.");
@@ -39,8 +40,10 @@ router.get('/logout', function (req, res) {
   req.session.destroy((err) => {
     if (err) {
       console.log(err);
+      res.status(400).send(JSON.stringify(err));
     } else {
       console.log('logout successful')
+      res.end('logout successful');
     }
   });
 });
