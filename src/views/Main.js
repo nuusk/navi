@@ -257,6 +257,7 @@ class Main extends Component {
       password: document.getElementById('password').value
     })
     .then((res) => {
+      console.log(res);
       this.setState({
         view: 'query',
         username: 'maciejogarnij'
