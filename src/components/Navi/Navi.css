@@ -69,10 +69,12 @@
   animation: glowing-body 1.5s infinite; }
 
 .main-view .login .navi-outer {
-  animation: swing-outer 8s infinite cubic-bezier(0.75, 0.2, 0.87, 1); }
+  left: 50%;
+  animation: swing-outer 2s infinite cubic-bezier(0.75, 0.2, 0.87, 1); }
 
 .main-view .login .navi-inner {
-  animation: swing-inner 4s infinite ease-out; }
+  left: 50%;
+  animation: swing-inner 2s infinite ease-out; }
 
 .main-view .loading .navi-outer {
   transform-origin: 0% 0%;
@@ -105,20 +107,8 @@
 @keyframes swing-outer {
   0% {
     transform: translate(-50%, -50%) translate(60px, 0) scale(1); }
-  12.5% {
-    transform: translate(-50%, -50%) translate(0, 0) scale(0.5); }
-  25% {
-    transform: translate(-50%, -50%) translate(-60px, 0) scale(1); }
-  37.5% {
-    transform: translate(-50%, -50%) translate(0, 0) scale(0.5); }
   50% {
-    transform: translate(-50%, -50%) translate(60px, 0) scale(1); }
-  62.5% {
-    transform: translate(-50%, -50%) translate(0, 0) scale(0.5); }
-  75% {
-    transform: translate(-50%, -50%) translate(-60px, 0) scale(1); }
-  87.5% {
-    transform: translate(-50%, -50%) translate(0, 0) scale(0.5); }
+    transform: translate(-50%, -50%) translate(-60px, 0) scale(0.5); }
   100% {
     transform: translate(-50%, -50%) translate(60px, 0) scale(1); } }
 
