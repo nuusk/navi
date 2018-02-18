@@ -143,6 +143,12 @@ class Main extends Component {
         });
         this.speech.text = "proponuję to";
         this.synth.speak(this.speech);
+      } else if (result === "login") {
+        this.loginForm();
+      } else if (result === "logout") {
+        this.logout();
+      } else if (result === "register") {
+        this.registerForm();
       } else {
         this.setState({
           animation: 'dialogue',
