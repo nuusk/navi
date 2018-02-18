@@ -130,7 +130,7 @@ class Main extends Component {
     })
     .then(res => {
       this.setState({
-        animation: 'idle',
+        animation: 'dialogue',
       });
       document.getElementById('balloon').classList.toggle('swap-a');
       document.getElementById('balloon').classList.toggle('swap-b');

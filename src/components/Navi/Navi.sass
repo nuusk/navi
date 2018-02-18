@@ -38,9 +38,9 @@ $navi-size: 40px
         transform: scale(0.8) !important
   .dialogue
     .navi-outer
-      animation: emitting-power 4s infinite 3s
+      animation: emitting-power 4s infinite
     .navi-inner
-      animation: glowing-body 2s infinite
+      animation: glowing-body 1.5s infinite
   .starting
     .navi-outer
       top: -120px
@@ -65,9 +65,9 @@ $navi-size: 40px
   //idle jest to domyślna animacja
   .idle
     .navi-outer
-      animation: emitting-power 4s infinite 3s
+      animation: emitting-power 4s infinite
     .navi-inner
-      animation: glowing-body 2s infinite
+      animation: glowing-body 1.5s infinite
 
   .login
     .navi-outer
@@ -80,12 +80,11 @@ $navi-size: 40px
   .loading
     .navi-outer
       transform-origin: 0% 0%
-      animation: loader-outer .6s infinite linear
+      animation: loader-outer 1s infinite cubic-bezier(.15,1,.74,.11)
       animation-delay: .2s
     .navi-inner
       transform-origin: 0% 0%
       animation: loader-inner 1s infinite cubic-bezier(.15,1,.74,.11)
-
   .recording
     .navi-outer
       transition: .3s
@@ -116,27 +115,17 @@ $swing-distance: 40px
   100%
     transform: translate(-50%, -50%) translate($swing-distance*1.5, 0) scale(1)
 
-@keyframes bounce-inner
+@keyframes loader-inner
   0%
-    transform: translateY(0px) scaleX(1)
-  60%
-    transform: translateY(60px) scaleX(0.9)
-  80%
-    transform: translateY(70px) scaleY(0.4) scaleX(1.4)
+    transform: scale(0.4) rotate(0deg)
   100%
-    transform: translateY(0px)
+    transform: scale(0.4) rotate(360deg)
 
 @keyframes loader-outer
   0%
     transform: scale(0.4) rotate(0deg)
   100%
     transform: scale(0.4) rotate(360deg)
-
-@keyframes loader-inner
-  0%
-    transform: scale(0.6) rotate(0deg)
-  100%
-    transform: scale(0.6) rotate(360deg)
 
 //definicja animacji na podstawie konkretnych stanów w określonych punktach w czasie
 @keyframes glowing-body
@@ -146,27 +135,6 @@ $swing-distance: 40px
     transform: translate(-50%, -50%) scale(1.1)
   100%
     transform: translate(-50%, -50%) scale(1)
-
-@keyframes dialogue-outer
-  0%
-    transform: translate(-50%, -50%) scale(0.1, 0)
-  30%
-    transform: translate(-50%, -50%) scale(0.1, 2)
-  40%
-    transform: translate(-50%, -50%) scale(0.1, 2)
-  60%
-    transform: translate(-50%, -50%) scale(0.1, 2) rotate(360deg)
-  100%
-    transform: translate(-50%, -50%) scale(2)
-    opacity: 0
-
-@keyframes dialogue-inner
-  0%
-    transform: translate(-50%, -50%) scale(0.8, 1.1)
-  50%
-    transform: translate(-50%, -50%) scale(1.2, 0.7)
-  100%
-    transform: translate(-50%, -50%) scale(0.8, 1.1)
 
 //definicja animacji na podstawie konkretnych stanów w określonych punktach w czasie
 @keyframes starting-inner
