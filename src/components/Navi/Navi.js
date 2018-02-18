@@ -8,12 +8,11 @@ class Navi extends Component {
     //funkcja ta zwraca komponent
     //z głównego widoku przekazywana jest tutaj informacja o animacji
     //animacja jest definiowana w pliku .sass
+    let classes = "Navi " + this.props.animation;
     return (
-      <div className="Navi">
-        <div className={this.props.animation}>
-          <div className="navi-outer"></div>
-          <div className="navi-inner"></div>
-        </div>
+      <div className={classes}>
+        <div className="navi-outer"></div>
+        <div className="navi-inner"></div>
       </div>
     );
   }

@@ -3,7 +3,7 @@
 @import '../../utilities/placeholders.sass'
 
 .SpeechBalloon
-  div
+  .balloon-wrapper
     margin: 40px auto
     text-align: right
     width: 500px
@@ -11,19 +11,18 @@
     @media screen and (max-width: 700px)
       width: 300px
     div
-      display: inline
+      transition: .5s
       padding: 20px
       color: $white
       font-size: 1.5em
       text-align: center
-      margin-right: 5%
+      margin-left: 100px
       max-width: 100%
+      overflow: auto
       @media screen and (max-width: 700px)
         max-width: 50%
         background-color: rgba(0,0,0,0)
         color: $balloon-red
-      height: 60px
-      line-height: 60px
       transition: .3s
       background-color: $balloon-red
       border-radius: 4px

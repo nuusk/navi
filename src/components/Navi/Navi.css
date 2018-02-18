@@ -1,8 +1,15 @@
 .main-view .Navi .navi-outer, .main-view .Navi .navi-inner {
   position: absolute;
-  left: 50%;
-  top: 23%;
-  transform: translate(-50%, -50%); }
+  top: 25px;
+  left: calc(50vw - 200px); }
+
+@media screen and (max-width: 700px) {
+  .main-view .Navi .navi-outer, .main-view .Navi .navi-inner {
+    left: calc(50vw - 120px); } }
+
+.main-view .Navi {
+  position: relative;
+  background-color: red; }
 
 .main-view .Navi .navi-outer {
   transition: 1s;
@@ -21,18 +28,10 @@
   border-radius: 50%; }
 
 .main-view .dialogue .navi-outer {
-  animation: go-to-dialogue 2s forwards, emitting-power 4s infinite; }
-
-@media screen and (max-width: 500px) {
-  .main-view .dialogue .navi-outer {
-    animation: hide 2s forwards; } }
+  animation: emitting-power 4s infinite; }
 
 .main-view .dialogue .navi-inner {
-  animation: go-to-dialogue 2s forwards, glowing-body 1.5s infinite; }
-
-@media screen and (max-width: 500px) {
-  .main-view .dialogue .navi-inner {
-    animation: hide 2s forwards; } }
+  animation: glowing-body 1.5s infinite; }
 
 .main-view .idle .navi-outer {
   animation: emitting-power 4s infinite; }
@@ -111,8 +110,8 @@
     left: 40%;
     top: 24%; }
   100% {
-    left: 37%;
-    top: 25%; } }
+    left: 50%;
+    top: 50%; } }
 
 @keyframes hide {
   from {

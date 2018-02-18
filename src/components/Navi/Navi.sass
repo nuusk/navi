@@ -1,16 +1,21 @@
-@import '../../utilities/sizes'
+@import '../../utilities/sizes.sass'
 @import '../../utilities/palette.sass'
+@import '../../utilities/variables.sass'
 
 $navi-size: 40px
 
 %navi-center
   position: absolute
-  left: 50%
-  top: 23%
-  transform: translate(-50%, -50%)
+  top: 25px
+  left: calc(50vw - 200px)
+  @media screen and (max-width: 700px)
+    left: calc(50vw - 120px)
+
 
 .main-view
   .Navi
+    position: relative
+    background-color: red
     .navi-outer
       transition: 1s
       @extend %navi-center
@@ -29,13 +34,9 @@ $navi-size: 40px
       border-radius: 50%
   .dialogue
     .navi-outer
-      animation: go-to-dialogue 2s forwards, emitting-power 4s infinite
-      @media screen and (max-width: 500px)
-        animation: hide 2s forwards
+      animation: emitting-power 4s infinite
     .navi-inner
-      animation: go-to-dialogue 2s forwards, glowing-body 1.5s infinite
-      @media screen and (max-width: 500px)
-        animation: hide 2s forwards
+      animation: glowing-body 1.5s infinite
   //klase zawierające konkretne animacje
   //idle jest to domyślna animacja
   .idle
@@ -117,8 +118,8 @@ $navi-size: 40px
     left: 40%
     top: 24%
   100%
-    left: 37%
-    top: 25%
+    left: 50%
+    top: 50%
 
 @keyframes hide
   from

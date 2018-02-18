@@ -200,6 +200,9 @@ class Main extends Component {
                       getData={this.getData}
                       position="center"
                       animate={this.animate}/>
+
+          <Navi       animation={this.state.animation}
+                      view={this.state.view} />
           <PlaceInfo  placeName={this.state.placeName}
                       placeAddress={this.state.placeAddress}
                       placeLat={this.state.placeLat}
@@ -212,6 +215,8 @@ class Main extends Component {
       view = (
         <span>
         <Logo />
+        <Navi animation={this.state.animation}
+              view={this.state.view} />
         <SpeechBalloon response={this.state.response}
                        dialogue={this.state.dialogue}/>
         <RegisterForm />
@@ -222,18 +227,24 @@ class Main extends Component {
       view = (
         <span>
         <Logo />
+
         <QueryField query={this.state.query}
                     setQuery={this.setQuery}
                     getData={this.getData}
                     position="top"
                     animate={this.animate}/>
+        <div className="grid-wrapper">
+        <Navi       animation={this.state.animation}
+                    view={this.state.view} />
         <SpeechBalloon response={this.state.response}
                        dialogue={this.state.dialogue}/>
+        </div>
         <PlaceInfo  placeName={this.state.placeName}
                     placeAddress={this.state.placeAddress}
                     placeLat={this.state.placeLat}
                     placeLng={this.state.placeLng}
                     placeRating={this.state.placeRating} />
+
         </span>
       )
       break;
@@ -242,8 +253,6 @@ class Main extends Component {
     }
     return (
       <div className="main-view">
-        <Navi animation={this.state.animation}
-              view={this.state.view} />
         { view }
       </div>
     );
