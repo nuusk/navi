@@ -258,9 +258,6 @@ class Main extends Component {
       email: document.getElementById('email').value,
       password: document.getElementById('password').value
     })
-    .then(res => {
-      return res.json();
-    })
     .then((res) => {
       let user = JSON.parse(res.config.data);
       console.log(res.config);
