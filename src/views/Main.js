@@ -122,8 +122,9 @@ class Main extends Component {
     .then(res => {
       this.setState({
         animation: 'idle',
-
       });
+      document.getElementById('balloon').classList.toggle('swap-a');
+      document.getElementById('balloon').classList.toggle('swap-b');
       return res.json();
     })
     .then(result => {

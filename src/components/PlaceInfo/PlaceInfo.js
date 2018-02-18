@@ -7,7 +7,7 @@ class PlaceInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      expanded: false
+      expanded: true
     }
 
     //zdarzenia odbywające się na elementach DOM na stronie internetowej nalezy powiązać

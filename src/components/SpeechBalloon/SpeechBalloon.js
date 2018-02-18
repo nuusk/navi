@@ -5,7 +5,7 @@ class SpeechBalloon extends Component {
   render() {
     return (
       <div className="SpeechBalloon">
-        <div className="balloon-wrapper">
+        <div id="balloon" className="balloon-wrapper swap-a">
           <div className={this.props.dialogue}>
             {this.props.response}
           </div>
