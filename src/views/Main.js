@@ -291,19 +291,22 @@ class Main extends Component {
 
   loginForm() {
     this.setState({
-      view: 'login'
+      view: 'login',
+      animation: 'login'
     });
   }
 
   mainView() {
     this.setState({
-      view: 'query'
+      view: 'query',
+      animation: 'starting'
     });
   }
 
   registerForm() {
     this.setState({
-      view: 'register'
+      view: 'register',
+      animation: 'register'
     });
   }
 
@@ -327,11 +330,6 @@ class Main extends Component {
           <Navi       animation={this.state.animation}
                       view={this.state.view}
                       metamorphosis={this.metamorphosis}/>
-          <PlaceInfo  placeName={this.state.placeName}
-                      placeAddress={this.state.placeAddress}
-                      placeLat={this.state.placeLat}
-                      placeLng={this.state.placeLng}
-                      placeRating={this.state.placeRating} />
           </span>
         )
         break;

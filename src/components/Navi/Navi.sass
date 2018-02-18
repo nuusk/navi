@@ -68,6 +68,12 @@ $navi-size: 40px
       animation: emitting-power 4s infinite
     .navi-inner
       animation: glowing-body 1.5s infinite
+
+  .login
+    .navi-outer
+      animation: swing-outer 8s infinite cubic-bezier(.75,.2,.87,1)
+    .navi-inner
+      animation: swing-inner 4s infinite ease-out
   //animacja loader jest załączana, kiedy użytkownik czeka na odpowiedź
   .loading
     .navi-outer
@@ -89,6 +95,35 @@ $navi-size: 40px
       background-color: $balloon-red
       animation: recording-inner 1.2s infinite
 
+$swing-distance: 40px
+
+@keyframes swing-inner
+  0%
+    transform: translate(-50%, -50%) translate($swing-distance, 0)
+  50%
+    transform: translate(-50%, -50%) translate(-$swing-distance, 0)
+  100%
+    transform: translate(-50%, -50%) translate($swing-distance, 0)
+
+@keyframes swing-outer
+  0%
+    transform: translate(-50%, -50%) translate($swing-distance*1.5, 0) scale(1)
+  12.5%
+    transform: translate(-50%, -50%) translate(0, 0) scale(.5)
+  25%
+    transform: translate(-50%, -50%) translate(-$swing-distance*1.5, 0) scale(1)
+  37.5%
+    transform: translate(-50%, -50%) translate(0, 0) scale(.5)
+  50%
+    transform: translate(-50%, -50%) translate($swing-distance*1.5, 0) scale(1)
+  62.5%
+    transform: translate(-50%, -50%) translate(0, 0) scale(.5)
+  75%
+    transform: translate(-50%, -50%) translate(-$swing-distance*1.5, 0) scale(1)
+  87.5%
+    transform: translate(-50%, -50%) translate(0, 0) scale(.5)
+  100%
+    transform: translate(-50%, -50%) translate($swing-distance*1.5, 0) scale(1)
 
 @keyframes loader-inner
   0%
