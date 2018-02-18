@@ -8,6 +8,7 @@
     left: calc(50vw - 120px); } }
 
 .main-view .Navi {
+  animation: fade .7s;
   position: relative;
   background-color: red; }
 
@@ -183,3 +184,9 @@
   to {
     left: 20%;
     top: 25%; } }
+
+@keyframes fade {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }

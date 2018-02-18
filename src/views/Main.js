@@ -9,6 +9,9 @@ import Logo from '../components/Logo/Logo';
 import RegisterForm from '../components/RegisterForm/RegisterForm';
 import LoginForm from '../components/LoginForm/LoginForm';
 import ViewButton from '../components/ViewButton/ViewButton';
+import User from '../components/User/User';
+
+import naviQuotes from '../utilities/quotes.json';
 
 import axios from 'axios';
 
@@ -53,7 +56,8 @@ class Main extends Component {
       view: 'query',
       menu: true,
       registerSuccess: false,
-      emailAlreadyUsed: false
+      emailAlreadyUsed: false,
+      username: ''
     };
   }
 
@@ -119,8 +123,10 @@ class Main extends Component {
     })
     .then(res => {
       this.setState({
-        animation: 'idle'
+        animation: 'idle',
       });
+      document.getElementById('balloon').classList.toggle('swap-a');
+      document.getElementById('balloon').classList.toggle('swap-b');
       return res.json();
     })
     .then(result => {
@@ -128,18 +134,24 @@ class Main extends Component {
       //jest miejscem to wiemy, że Navi
       //zaproponuje to miejsce użytkownikowi
       if (result.location) {
+        this.speech.text = naviQuotes.proposition[Math.floor(Math.random() * (naviQuotes.proposition.length))];
         this.setState({
           animation: 'dialogue',
           dialogue: 'appear',
-          response: 'proponuję to',
+          response: this.speech.text,
           placeName: result.name,
           placeAddress: result.address,
           placeLat: result.location.lat,
           placeLng: result.location.lng,
           placeRating: result.rating
         });
-        this.speech.text = "proponuję to";
         this.synth.speak(this.speech);
+      } else if (result === "login") {
+        this.loginForm();
+      } else if (result === "logout") {
+        this.logout();
+      } else if (result === "register") {
+        this.registerForm();
       } else {
         this.setState({
           animation: 'dialogue',
@@ -208,8 +220,10 @@ class Main extends Component {
 
   //change navi
   metamorphosis() {
+    this.speech.text = naviQuotes.metamorphosis[Math.floor(Math.random() * (naviQuotes.metamorphosis.length))];
     this.speech.pitch += .1;
     this.speech.pitch %= 2;
+    this.synth.speak(this.speech);
   }
 
   register() {
@@ -242,16 +256,35 @@ class Main extends Component {
       email: document.getElementById('email').value,
       password: document.getElementById('password').value
     })
+    .then((res) => {
+      this.setState({
+        view: 'query',
+        username: 'maciejogarnij'
+      })
+    })
     .catch((error) => {
       console.log(error);
     });
   }
 
   logout() {
+    this.speech.text = naviQuotes.goodbye[Math.floor(Math.random() * (naviQuotes.goodbye.length))];
     axios.get('http://localhost:9004/api/logout')
+    .then((res) => {
+      console.log(res);
+      this.setState({
+        username: null
+      });
+    })
     .catch((error) => {
       console.log(error);
     });
+    console.log('asd');
+    console.log(this.state.username);
+    this.setState({
+      username: null
+    });
+    this.synth.speak(this.speech);
   }
 
   loginForm() {
@@ -357,16 +390,22 @@ class Main extends Component {
           <ViewButton viewName="trigger-menu" onClick={this.triggerMenu} mode={this.state.menu ? 'on' : 'off'}/>
           {this.state.menu &&
             <span>
-              {this.state.view != 'register' &&
-                <ViewButton viewName="register" onClick={this.registerForm} />
+              <ViewButton viewName="main" onClick={this.mainView} />
+              {this.state.username &&
+                <ViewButton viewName="logout" onClick={this.logout} />
               }
-              {this.state.view == 'register' &&
-                <ViewButton viewName="main" onClick={this.mainView} />
+              {!this.state.username &&
+                <span>
+                  <ViewButton viewName="login" onClick={this.loginForm} />
+                  <ViewButton viewName="register" onClick={this.registerForm} />
+                </span>
               }
-              <ViewButton viewName="login" onClick={this.loginForm} />
             </span>
           }
         </div>
+        {this.state.username &&
+          <User username={this.state.username} />
+        }
         { view }
       </div>
     );

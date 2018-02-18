@@ -33,6 +33,10 @@
   .hidden
     opacity: 0
     transform: scale(0)
+  .swap-a
+    animation: swap-a .7s
+  .swap-b
+    animation: swap-b .7s
 
 @keyframes pop-up
   0%
@@ -46,6 +50,22 @@
   90%
     transform: scale(.9)
     opacity: 1
+  100%
+    transform: scale(1)
+    opacity: 1
+
+@keyframes swap-a
+  50%
+    opacity: 0.5
+    transform: scale(.9)
+  100%
+    transform: scale(1)
+    opacity: 1
+
+@keyframes swap-b
+  50%
+    opacity: 0.5
+    transform: scale(.9)
   100%
     transform: scale(1)
     opacity: 1

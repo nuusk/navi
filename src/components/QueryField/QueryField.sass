@@ -3,6 +3,7 @@
 
 .main-view
   .QueryField
+    animation: fade .7s
     transition: .3s
     text-align: center
     input
@@ -60,3 +61,9 @@
       margin: 10px auto
       &:hover
         cursor: pointer
+
+@keyframes fade
+  0%
+    opacity: 0
+  100%
+    opacity: 1

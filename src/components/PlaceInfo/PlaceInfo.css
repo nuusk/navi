@@ -3,6 +3,9 @@
 body {
   font-family: 'Aileron', cursive; }
 
+.main-view .PlaceInfo {
+  animation: fade .7s; }
+
 .main-view .PlaceInfo .place {
   animation: appear 1.5s;
   margin: 0 auto;
@@ -45,6 +48,12 @@ body {
   overflow: hidden; }
 
 @keyframes appear {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@keyframes fade {
   0% {
     opacity: 0; }
   100% {

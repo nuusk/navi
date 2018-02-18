@@ -1,4 +1,5 @@
 .main-view .menu .ViewButton {
+  animation: fade .7s;
   position: fixed;
   top: 10px;
   left: 10px;
@@ -10,15 +11,18 @@
   border-radius: 16px;
   font-size: .75em;
   transition: .3s; }
-  .main-view .menu .ViewButton:focus {
-    outline: none; }
-  .main-view .menu .ViewButton:hover {
-    cursor: pointer; }
+
+.main-view .menu .ViewButton:focus {
+  outline: none; }
+
+.main-view .menu .ViewButton:hover {
+  cursor: pointer; }
 
 .main-view .menu .trigger-menu {
   width: 20px; }
-  .main-view .menu .trigger-menu:active {
-    transform: scale(0.9); }
+
+.main-view .menu .trigger-menu:active {
+  transform: scale(0.9); }
 
 .main-view .menu .on:after {
   content: "";
@@ -40,12 +44,26 @@
   padding: 3px;
   transform: translateX(-2px) rotate(-45deg); }
 
-.main-view .menu .register, .main-view .menu .main {
-  transform: translateY(30px); }
-  .main-view .menu .register:active, .main-view .menu .main:active {
-    transform: translateY(30px) scale(0.9); }
+.main-view .menu .register {
+  transform: translateY(90px); }
 
-.main-view .menu .login {
+.main-view .menu .register:active {
+  transform: translateY(90px) scale(0.9); }
+
+.main-view .menu .main {
+  transform: translateY(30px); }
+
+.main-view .menu .main:active {
+  transform: translateY(30px) scale(0.9); }
+
+.main-view .menu .login, .main-view .menu .logout {
   transform: translateY(60px); }
-  .main-view .menu .login:active {
-    transform: translateY(60px) scale(0.9); }
+
+.main-view .menu .login:active, .main-view .menu .logout:active {
+  transform: translateY(60px) scale(0.9); }
+
+@keyframes fade {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }

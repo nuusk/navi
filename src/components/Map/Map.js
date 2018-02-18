@@ -10,7 +10,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-map
 //zmienne w props definiują punkty charakterystyczne na mapie oraz położenie kursora
 const MapIntegration = withScriptjs(withGoogleMap((props) =>
   <GoogleMap
-    defaultZoom={8}
+    defaultZoom={15}
     defaultCenter={{ lat: props.lat, lng: props.lng }}
   >
     {props.isMarkerShown && <Marker position={{ lat: props.lat, lng: props.lng }} />}
