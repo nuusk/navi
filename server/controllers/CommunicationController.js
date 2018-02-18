@@ -76,6 +76,7 @@ function getJSON(keyword, lat, lng, response) {
         if(data.entities.place[0].value == keyword) {
           response.status(200).send(JSON.stringify("Nie rozumiem."));
         }
+        array = [];
         db.findPlaces(data.entities.place[0].value)
           .then((res) => {
             res.forEach(x => {               
@@ -88,6 +89,8 @@ function getJSON(keyword, lat, lng, response) {
               array.sort((a, b) => b.tempDistance - a.tempDistance);
             }
             lastId = array[array.length-1].googleId;
+            console.log(array[array.length-1]);
+           //console.log(array);
             response.status(200).send(JSON.stringify(array[array.length-1]));
           })
           .catch(console.error);
