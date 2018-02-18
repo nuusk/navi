@@ -234,7 +234,7 @@ class Main extends Component {
       this.synth.speak(this.speech);
       if (!this.state.alert) {
         this.setState({
-          alert: this.speech.text
+          alert: "Zmieniono głos Navi."
         });
         setTimeout(function(){
           this.setState({

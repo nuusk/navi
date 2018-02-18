@@ -35,10 +35,10 @@
   transform: scale(0.8) !important; }
 
 .main-view .dialogue .navi-outer {
-  animation: dialogue-outer 4s infinite; }
+  animation: emitting-power 4s infinite 3s; }
 
 .main-view .dialogue .navi-inner {
-  animation: dialogue-inner 1.5s infinite; }
+  animation: glowing-body 2s infinite; }
 
 .main-view .starting .navi-outer {
   top: -120px;
