@@ -7,11 +7,9 @@ const db = new Database();
 // oraz synonimy słowa kluczowego
 function insertEntity() {
   db.insertEntity(
-    'joke',
+    'goal',
     [
-      'Przychodzi informatyk do apteki i mówi: - Poproszę witaminę C++.', 
-      'Jak śni informatyk? - Na Javie.', 
-      'Co mówi informatyk, gdy dostanie pendrive na urodziny? - Dzięki za pamięć.']
+      'Miejsce, gdzie chcesz się udać.']
   );
 }
 

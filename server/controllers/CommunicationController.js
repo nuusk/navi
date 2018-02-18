@@ -82,7 +82,7 @@ function getJSON(keyword, lat, lng, response) {
             //console.log(lng);
             res.forEach(x => {               
               x.tempDistance = calculateDistance(lat, lng, x.location.lat, x.location.lng);
-              if(!array.includes(x.tempDistance)) {
+              if(!array.includes(x)) {
                 array.push(x);
               }
               if(user) {
