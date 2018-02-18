@@ -115,7 +115,7 @@ function getJSON(keyword, lat, lng, response) {
         }
         do {
           currentId = array.pop()._id;
-        } while (lastId === currentId)
+        } while (lastId === currentId);
         console.log('array', array);
         console.log(array.length)
         lastId = array[array.length-1]._id;
