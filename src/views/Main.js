@@ -51,7 +51,7 @@ class Main extends Component {
       results: [],
       latitude: '',
       longitude: '',
-      animation: 'starting',
+      animation: 'loading',
       dialogue: 'hidden',
       placeName: '',
       placeAddress: '',

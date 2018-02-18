@@ -80,11 +80,12 @@ $navi-size: 40px
   .loading
     .navi-outer
       transform-origin: 0% 0%
-      animation: loader-outer 1s infinite cubic-bezier(.15,1,.74,.11)
+      animation: loader-outer .6s infinite linear
       animation-delay: .2s
     .navi-inner
       transform-origin: 0% 0%
       animation: loader-inner 1s infinite cubic-bezier(.15,1,.74,.11)
+
   .recording
     .navi-outer
       transition: .3s
@@ -115,17 +116,27 @@ $swing-distance: 40px
   100%
     transform: translate(-50%, -50%) translate($swing-distance*1.5, 0) scale(1)
 
-@keyframes loader-inner
+@keyframes bounce-inner
   0%
-    transform: scale(0.4) rotate(0deg)
+    transform: translateY(0px) scaleX(1)
+  60%
+    transform: translateY(60px) scaleX(0.9)
+  80%
+    transform: translateY(70px) scaleY(0.4) scaleX(1.4)
   100%
-    transform: scale(0.4) rotate(360deg)
+    transform: translateY(0px)
 
 @keyframes loader-outer
   0%
     transform: scale(0.4) rotate(0deg)
   100%
     transform: scale(0.4) rotate(360deg)
+
+@keyframes loader-inner
+  0%
+    transform: scale(0.6) rotate(0deg)
+  100%
+    transform: scale(0.6) rotate(360deg)
 
 //definicja animacji na podstawie konkretnych stanów w określonych punktach w czasie
 @keyframes glowing-body
