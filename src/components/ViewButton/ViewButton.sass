@@ -46,11 +46,15 @@ $active-offset: 20px
         padding: 3px
         transform: translateX(-2px) rotate(-45deg)
 
-    .register, .main
+    .register
+      transform: translateY(90px)
+      &:active
+        transform: translateY(90px) scale(0.9)
+    .main
       transform: translateY(30px)
       &:active
         transform: translateY(30px) scale(0.9)
-    .login
+    .login, .logout
       transform: translateY(60px)
       &:active
         transform: translateY(60px) scale(0.9)

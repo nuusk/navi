@@ -9,6 +9,7 @@ import Logo from '../components/Logo/Logo';
 import RegisterForm from '../components/RegisterForm/RegisterForm';
 import LoginForm from '../components/LoginForm/LoginForm';
 import ViewButton from '../components/ViewButton/ViewButton';
+import User from '../components/User/User';
 
 import axios from 'axios';
 
@@ -53,7 +54,8 @@ class Main extends Component {
       view: 'query',
       menu: true,
       registerSuccess: false,
-      emailAlreadyUsed: false
+      emailAlreadyUsed: false,
+      username: ''
     };
   }
 
@@ -119,7 +121,8 @@ class Main extends Component {
     })
     .then(res => {
       this.setState({
-        animation: 'idle'
+        animation: 'idle',
+
       });
       return res.json();
     })
@@ -242,6 +245,12 @@ class Main extends Component {
       email: document.getElementById('email').value,
       password: document.getElementById('password').value
     })
+    .then((res) => {
+      this.setState({
+        view: 'query',
+        username: 'maciejogarnij'
+      })
+    })
     .catch((error) => {
       console.log(error);
     });
@@ -249,9 +258,17 @@ class Main extends Component {
 
   logout() {
     axios.get('http://localhost:9004/api/logout')
+    .then((res) => {
+      console.log(res);
+      this.setState({
+        username: null
+      });
+    })
     .catch((error) => {
       console.log(error);
     });
+    console.log('asd');
+    console.log(this.state.username);
   }
 
   loginForm() {
@@ -357,16 +374,22 @@ class Main extends Component {
           <ViewButton viewName="trigger-menu" onClick={this.triggerMenu} mode={this.state.menu ? 'on' : 'off'}/>
           {this.state.menu &&
             <span>
-              {this.state.view != 'register' &&
-                <ViewButton viewName="register" onClick={this.registerForm} />
+              <ViewButton viewName="main" onClick={this.mainView} />
+              {this.state.username &&
+                <ViewButton viewName="logout" onClick={this.logout} />
               }
-              {this.state.view == 'register' &&
-                <ViewButton viewName="main" onClick={this.mainView} />
+              {!this.state.username &&
+                <span>
+                  <ViewButton viewName="login" onClick={this.loginForm} />
+                  <ViewButton viewName="register" onClick={this.registerForm} />
+                </span>
               }
-              <ViewButton viewName="login" onClick={this.loginForm} />
             </span>
           }
         </div>
+        {this.state.username &&
+          <User username={this.state.username} />
+        }
         { view }
       </div>
     );
