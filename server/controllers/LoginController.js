@@ -28,7 +28,7 @@ router.post('/login', async function (req, res) {
     req.session.userName = user.name
     sess = req.session;
     console.log(sess);
-    res.status(200).send(JSON.stringify(sess));
+    res.status(200).send(JSON.stringify(user));
   } else {
     console.log("Nieprawidłowy email albo hasło.");
     res.end("Nieprawidłowy email albo hasło.");
