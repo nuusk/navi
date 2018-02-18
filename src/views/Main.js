@@ -5,8 +5,8 @@ import Navi from '../components/Navi/Navi';
 import SpeechBalloon from '../components/SpeechBalloon/SpeechBalloon';
 
 //AlertBalloon to komponent ktory wyswietla taki alert jaki jest stan this.state.alert.
-//komponent ten zyje tylko 4 sekundy. zaorowno jego animacja trwa 4 sekundy,
-//jak i stan this.state.alert zostaje wyzerowany po 4 sekundach od momentu nadania mu wartosci
+//komponent ten zyje tylko 4 sekundy. zaorowno jego animacja trwa 3 sekundy,
+//jak i stan this.state.alert zostaje wyzerowany po 3 sekundach od momentu nadania mu wartosci
 import AlertBalloon from '../components/AlertBalloon/AlertBalloon';
 import PlaceInfo from '../components/PlaceInfo/PlaceInfo';
 import QueryField from '../components/QueryField/QueryField';
@@ -51,7 +51,7 @@ class Main extends Component {
       results: [],
       latitude: '',
       longitude: '',
-      animation: 'loading',
+      animation: 'starting',
       dialogue: 'hidden',
       placeName: '',
       placeAddress: '',
@@ -227,10 +227,22 @@ class Main extends Component {
 
   //change navi
   metamorphosis() {
-    this.speech.text = naviQuotes.metamorphosis[Math.floor(Math.random() * (naviQuotes.metamorphosis.length))];
-    this.speech.pitch += .1;
-    this.speech.pitch %= 2;
-    this.synth.speak(this.speech);
+    if (!this.state.alert) {
+      this.speech.text = naviQuotes.metamorphosis[Math.floor(Math.random() * (naviQuotes.metamorphosis.length))];
+      this.speech.pitch += Math.random();
+      this.speech.pitch %= 2;
+      this.synth.speak(this.speech);
+      if (!this.state.alert) {
+        this.setState({
+          alert: this.speech.text
+        });
+        setTimeout(function(){
+          this.setState({
+            alert: null
+          });
+        }.bind(this), 3000);
+      }
+    }
   }
 
   register() {
@@ -256,7 +268,7 @@ class Main extends Component {
           this.setState({
             alert: null
           });
-        }.bind(this), 4000);
+        }.bind(this), 3000);
       } else if (result.status === 409){
         this.setState({
           emailAlreadyUsed: true
@@ -284,7 +296,7 @@ class Main extends Component {
           this.setState({
             alert: null
           });
-        }.bind(this), 4000);
+        }.bind(this), 3000);
       } else {
         this.setState({
           formAnimation: 'wrong'
@@ -322,7 +334,7 @@ class Main extends Component {
         this.setState({
           alert: null
         });
-      }.bind(this), 4000);
+      }.bind(this), 3000);
     })
     .catch((error) => {
       console.log(error);
