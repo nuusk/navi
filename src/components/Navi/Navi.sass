@@ -10,8 +10,6 @@ $navi-size: 40px
   left: calc(50vw - 200px)
   @media screen and (max-width: 700px)
     left: calc(50vw - 120px)
-
-
 .main-view
   .Navi
     position: relative
@@ -50,6 +48,17 @@ $navi-size: 40px
       top: -120px
       left: 50%
       animation: starting-inner 1.5s infinite
+  .register
+    .navi-outer
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%)
+    .navi-inner
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%)
   //klase zawierające konkretne animacje
   //idle jest to domyślna animacja
   .idle

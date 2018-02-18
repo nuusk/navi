@@ -7,11 +7,10 @@ class ViewButton extends Component {
   //
   // }
 
-
   render() {
     let classes = "ViewButton " + this.props.viewName + " " + this.props.mode;
     return (
-      <button className={classes} onClick={this.props.triggerMenu}>
+      <button className={classes} onClick={this.props.onClick}>
         {this.props.viewName != 'trigger-menu' ? this.props.viewName : ''}
       </button>
     );

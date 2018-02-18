@@ -3,41 +3,64 @@
 body {
   font-family: 'Aileron', cursive; }
 
-.RegisterForm div {
-  font-family: 'Ubuntu', sans-sans-serif;
+.main-view .RegisterForm form {
+  animation: appear 1.5s;
+  margin: 100px auto 0 auto;
   color: #efefef;
-  font-size: 1.5em; }
-
-.RegisterForm div {
+  font-size: 1.5em;
+  width: 100%;
   text-align: center;
-  position: absolute;
-  left: 29%;
-  top: 10%;
-  width: 200px;
-  height: 100px;
-  border-radius: 40px;
-  background-color: #295b98;
+  transition: .3s;
+  width: 500px;
+  background-color: #232322;
+  padding: 30px 0;
+  border-radius: 4px;
+  box-shadow: 0px 8px 5px rgba(0, 0, 0, 0.12), 0 2px 3px rgba(0, 0, 0, 0.34);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+
+@media screen and (max-width: 700px) {
+  .main-view .RegisterForm form {
+    width: 300px; } }
+
+.main-view .RegisterForm form input {
+  display: block;
+  margin: 15px auto;
+  width: 80%;
+  font-size: 1em;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #bcbcbc;
   color: #efefef; }
 
-.RegisterForm .appear {
-  animation: pop-up .7s; }
+.main-view .RegisterForm form input:focus {
+  outline: none; }
 
-.RegisterForm .hidden {
-  opacity: 0;
-  transform: scale(0); }
+.main-view .RegisterForm button {
+  display: block;
+  border: none;
+  animation: appear 1.5s;
+  margin: 20px auto 0 auto;
+  color: #efefef;
+  transform: translateX(120px);
+  font-size: 1.5em;
+  text-align: center;
+  transition: .3s;
+  width: 140px;
+  background-color: #e01f4f;
+  padding: 10px 0;
+  border-radius: 4px;
+  box-shadow: 0px 8px 5px rgba(0, 0, 0, 0.12), 0 2px 3px rgba(0, 0, 0, 0.34);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
 
-@keyframes pop-up {
-  0% {
-    transform: scale(0);
-    opacity: 0; }
-  30% {
-    opacity: 1; }
-  68% {
-    transform: scale(1.2);
-    opacity: 1; }
-  90% {
-    transform: scale(0.9);
-    opacity: 1; }
-  100% {
-    transform: scale(1);
-    opacity: 1; } }
+.main-view .RegisterForm button:hover {
+  cursor: pointer; }
+
+@media screen and (max-width: 700px) {
+  .main-view .RegisterForm button {
+    width: 300px; } }
+
+@keyframes appear {}0% {
+  opacity: 0; }
+
+100% {
+  opacity: 1; }

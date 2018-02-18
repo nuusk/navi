@@ -49,6 +49,18 @@
   left: 50%;
   animation: starting-inner 1.5s infinite; }
 
+.main-view .register .navi-outer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+
+.main-view .register .navi-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+
 .main-view .idle .navi-outer {
   animation: emitting-power 4s infinite; }
 

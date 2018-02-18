@@ -21,6 +21,12 @@ class Main extends Component {
     this.populateVoiceList = this.populateVoiceList.bind(this);
     this.metamorphosis = this.metamorphosis.bind(this);
     this.triggerMenu = this.triggerMenu.bind(this);
+    this.register = this.register.bind(this);
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
+    this.registerForm = this.registerForm.bind(this);
+    this.loginForm = this.loginForm.bind(this);
+    this.mainView = this.mainView.bind(this);
 
     this.synth = window.speechSynthesis;
     this.speech = new SpeechSynthesisUtterance();
@@ -201,6 +207,34 @@ class Main extends Component {
     this.speech.pitch %= 2;
   }
 
+  register() {
+
+  }
+
+  login() {
+
+  }
+
+  logout() {
+
+  }
+
+  loginForm() {
+
+  }
+
+  mainView() {
+    this.setState({
+      view: 'query'
+    });
+  }
+
+  registerForm() {
+    this.setState({
+      view: 'register'
+    });
+  }
+
   render() {
     // this.populateVoiceList();
     //zmienna view zawiera główne komponenty
@@ -233,10 +267,10 @@ class Main extends Component {
       view = (
         <span>
         <Logo />
-        <Navi animation={this.state.animation}
-              view={this.state.view}
-              metamorphosis={this.metamorphosis}/>
-        <RegisterForm />
+        <Navi       animation={this.state.animation}
+                    view={this.state.view}
+                    metamorphosis={this.metamorphosis}/>
+        <RegisterForm onSubmit={this.register}/>
         </span>
       )
       break;
@@ -272,11 +306,16 @@ class Main extends Component {
     return (
       <div className="main-view">
         <div className="menu">
-          <ViewButton viewName="trigger-menu" triggerMenu={this.triggerMenu} mode={this.state.menu ? 'on' : 'off'}/>
+          <ViewButton viewName="trigger-menu" onClick={this.triggerMenu} mode={this.state.menu ? 'on' : 'off'}/>
           {this.state.menu &&
             <span>
-              <ViewButton viewName="register" />
-              <ViewButton viewName="login" />
+              {this.state.view != 'register' &&
+                <ViewButton viewName="register" onClick={this.registerForm} />
+              }
+              {this.state.view == 'register' &&
+                <ViewButton viewName="main" onClick={this.mainView} />
+              }
+              <ViewButton viewName="login" onClick={this.loginForm} />
             </span>
           }
         </div>
