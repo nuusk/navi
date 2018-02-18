@@ -7,7 +7,10 @@ import PlaceInfo from '../components/PlaceInfo/PlaceInfo';
 import QueryField from '../components/QueryField/QueryField';
 import Logo from '../components/Logo/Logo';
 import RegisterForm from '../components/RegisterForm/RegisterForm';
+import LoginForm from '../components/LoginForm/LoginForm';
 import ViewButton from '../components/ViewButton/ViewButton';
+
+import axios from 'axios';
 
 import './setting.css';
 
@@ -48,7 +51,9 @@ class Main extends Component {
       placeLng: '',
       placeRating: '',
       view: 'query',
-      menu: true
+      menu: true,
+      registerSuccess: false,
+      emailAlreadyUsed: false
     };
   }
 
@@ -208,19 +213,52 @@ class Main extends Component {
   }
 
   register() {
+    let newUser = {
+      name: document.getElementById('name').value,
+      email: document.getElementById('email').value,
+      password: document.getElementById('password').value
+    };
+    fetch('http://localhost:9004/api/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newUser)
+    }).then(result => {
+      if(result.status === 200) {
+        this.setState({
+          registerSuccess: true
+        });
+      } else if (result.status === 409){
+        this.setState({
+          emailAlreadyUsed: true
+        });
+      }
+    }).catch(error => console.log('error============:', error));
 
   }
 
   login() {
-
+    axios.post('http://localhost:9004/api/login', {
+      email: document.getElementById('email').value,
+      password: document.getElementById('password').value
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   }
 
   logout() {
-
+    axios.get('http://localhost:9004/api/logout')
+    .catch((error) => {
+      console.log(error);
+    });
   }
 
   loginForm() {
-
+    this.setState({
+      view: 'login'
+    });
   }
 
   mainView() {
@@ -271,6 +309,17 @@ class Main extends Component {
                     view={this.state.view}
                     metamorphosis={this.metamorphosis}/>
         <RegisterForm onSubmit={this.register}/>
+        </span>
+      )
+      break;
+    case 'login':
+      view = (
+        <span>
+        <Logo />
+        <Navi       animation={this.state.animation}
+                    view={this.state.view}
+                    metamorphosis={this.metamorphosis}/>
+        <LoginForm onSubmit={this.login}/>
         </span>
       )
       break;
