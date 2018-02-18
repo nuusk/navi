@@ -266,6 +266,7 @@ class Main extends Component {
   }
 
   logout() {
+    this.speech.text = naviQuotes.goodbye[Math.floor(Math.random() * (naviQuotes.goodbye.length + 1))];
     axios.get('http://localhost:9004/api/logout')
     .then((res) => {
       console.log(res);
@@ -281,7 +282,6 @@ class Main extends Component {
     this.setState({
       username: null
     });
-    this.speech.text = "Na razie";
     this.synth.speak(this.speech);
   }
 
