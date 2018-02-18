@@ -57,7 +57,8 @@ class Main extends Component {
       menu: true,
       registerSuccess: false,
       emailAlreadyUsed: false,
-      username: ''
+      username: '',
+      formAnimation: ''
     };
   }
 
@@ -257,16 +258,39 @@ class Main extends Component {
       email: document.getElementById('email').value,
       password: document.getElementById('password').value
     })
+    .then(res => {
+      return res.json();
+    })
     .then((res) => {
-      console.log(res);
-      this.setState({
-        view: 'query',
-        username: 'maciejogarnij',
-        animation: 'starting'
-      })
+      let user = JSON.parse(res.config.data);
+      console.log(res.config);
+      if (user.email) {
+        this.setState({
+          view: 'query',
+          username: user.email,
+          animation: 'starting'
+        });
+      } else {
+        this.setState({
+          formAnimation: 'wrong'
+        });
+        setTimeout(function() {
+          this.setState({
+            formAnimation: ''
+          });
+        }.bind(this), 1000);
+      }
     })
     .catch((error) => {
       console.log(error);
+      this.setState({
+        formAnimation: 'wrong'
+      });
+      setTimeout(function() {
+        this.setState({
+          formAnimation: ''
+        });
+      }.bind(this), 1000);
     });
   }
 
@@ -341,7 +365,8 @@ class Main extends Component {
         <Navi       animation={this.state.animation}
                     view={this.state.view}
                     metamorphosis={this.metamorphosis}/>
-        <RegisterForm onSubmit={this.register}/>
+        <RegisterForm onSubmit={this.register}
+                      animation={this.state.formAnimation}/>
         </span>
       )
       break;
@@ -352,7 +377,8 @@ class Main extends Component {
         <Navi       animation={this.state.animation}
                     view={this.state.view}
                     metamorphosis={this.metamorphosis}/>
-        <LoginForm onSubmit={this.login}/>
+        <LoginForm onSubmit={this.login}
+                    animation={this.state.formAnimation}/>
         </span>
       )
       break;

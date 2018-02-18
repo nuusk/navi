@@ -67,8 +67,19 @@ body {
   .main-view .RegisterForm button {
     width: 300px; } }
 
+.main-view .wrong form input {
+  animation: wrong .2s; }
+
 @keyframes fade {
   0% {
     opacity: 0; }
   100% {
     opacity: 1; } }
+
+@keyframes wrong {
+  0% {
+    transform: translateX(-5px); }
+  50% {
+    transform: translateX(5px); }
+  100% {
+    transform: translateX(-5px); } }

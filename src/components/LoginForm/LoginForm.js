@@ -7,8 +7,9 @@ class LoginForm extends Component {
   }
 
   render() {
+    let classes = "LoginForm " + this.props.animation;
     return (
-      <div className="LoginForm">
+      <div className={classes}>
         <form id="registerForm">
           <input id="email" name="email" type="text" placeholder="your@email.com" required />
           <input id="password" name="password" type="password" placeholder="yourpassword" required />
