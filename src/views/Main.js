@@ -17,6 +17,11 @@ class Main extends Component {
     this.setQuery = this.setQuery.bind(this);
     this.getData = this.getData.bind(this);
     this.animate = this.animate.bind(this);
+    this.populateVoiceList = this.populateVoiceList.bind(this);
+
+    this.synth = window.speechSynthesis;
+    this.speech = new SpeechSynthesisUtterance();
+    this.voices = [];
 
     //stan, który definiuje zachowanie
     //wszystkich komponentów w danym widoku
@@ -64,6 +69,10 @@ class Main extends Component {
     });
   }
 
+  populateVoiceList() {
+    this.voices = this.synth.getVoices();
+  }
+
   //funkcja ta jest wywoływana,
   //kiedy użytkownik wpisze zapytanie
   getData(query) {
@@ -106,6 +115,9 @@ class Main extends Component {
           placeLng: result.location.lng,
           placeRating: result.rating
         });
+        let text = "proponuję to";
+        this.speech.text = text;
+        this.synth.speak(this.speech);
       } else {
         this.setState({
           animation: 'dialogue',
@@ -152,7 +164,28 @@ class Main extends Component {
     navigator.geolocation.getCurrentPosition(success, error);
   }
 
+  componentDidUpdate() {
+    //jesli jeszce nie mamy listy glosow, wybieramy z nich Zosie i przypisujemy do Navi
+    if (this.voices.length == 0) {
+      this.populateVoiceList();
+      console.log(this.voices);
+      this.voices.forEach(voice => {
+        if(voice.name === "Zosia") {
+          console.log(voice);
+          this.speech.voice = voice;
+
+          //losowy pitch
+          this.speech.pitch = Math.random(1);
+
+          //0.8 sprawdza sie swietnie.
+          this.speech.rate = 0.8;
+        }
+      });
+    }
+  }
+
   render() {
+    // this.populateVoiceList();
     //zmienna view zawiera główne komponenty
     let view;
     //w zależności od stanu widoku Main.js,
@@ -209,6 +242,7 @@ class Main extends Component {
     }
     return (
       <div className="main-view">
+        <audio src="" ref="speech" hidden></audio>
         <Navi animation={this.state.animation}
               view={this.state.view} />
         { view }

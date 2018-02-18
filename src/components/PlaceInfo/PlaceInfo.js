@@ -16,7 +16,7 @@ class PlaceInfo extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(this.props);
+    // console.log(this.props);
   }
 
   handleExpanding() {
