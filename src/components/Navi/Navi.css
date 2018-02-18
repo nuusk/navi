@@ -69,14 +69,12 @@
   animation: glowing-body 1.5s infinite; }
 
 .main-view .loading .navi-outer {
-  width: 10px;
-  height: 10px;
-  animation: loader-outer .3s infinite; }
+  transform-origin: 0% 0%;
+  animation: loader-outer .5s infinite; }
 
 .main-view .loading .navi-inner {
-  width: 10px;
-  height: 10px;
-  animation: loader-inner .2s infinite; }
+  transform-origin: 0% 0%;
+  animation: loader-inner 1s infinite; }
 
 .main-view .recording .navi-outer {
   transition: .3s;
@@ -91,15 +89,15 @@
 
 @keyframes loader-inner {
   0% {
-    transform: translate(-50%, 0%) rotate(0deg); }
+    transform: rotate(0deg); }
   100% {
-    transform: translate(-50%, 0%) rotate(360deg); } }
+    transform: rotate(360deg); } }
 
 @keyframes loader-outer {
   0% {
-    transform: translate(50%, 0%) rotate(0deg); }
+    transform: rotate(0deg); }
   100% {
-    transform: translate(50%, 0%) rotate(360deg); } }
+    transform: rotate(360deg); } }
 
 @keyframes glowing-body {
   0% {

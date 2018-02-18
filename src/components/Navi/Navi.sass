@@ -24,6 +24,7 @@ $navi-size: 40px
       margin: 0 auto
       border-radius: 50%
     .navi-inner
+
       transition: 1s
       @extend %navi-center
       width: $navi-size
@@ -70,13 +71,11 @@ $navi-size: 40px
   //animacja loader jest załączana, kiedy użytkownik czeka na odpowiedź
   .loading
     .navi-outer
-      width: 10px
-      height: 10px
-      animation: loader-outer .3s infinite
+      transform-origin: 0% 0%
+      animation: loader-outer .5s infinite
     .navi-inner
-      width: 10px
-      height: 10px
-      animation: loader-inner .2s infinite
+      transform-origin: 0% 0%
+      animation: loader-inner 1s infinite
   .recording
     .navi-outer
       transition: .3s
@@ -92,15 +91,15 @@ $navi-size: 40px
 
 @keyframes loader-inner
   0%
-    transform: translate(-50%, 0%) rotate(0deg)
+    transform: rotate(0deg)
   100%
-    transform: translate(-50%, 0%) rotate(360deg)
+    transform: rotate(360deg)
 
 @keyframes loader-outer
   0%
-    transform: translate(50%, 0%) rotate(0deg)
+    transform: rotate(0deg)
   100%
-    transform: translate(50%, 0%) rotate(360deg)
+    transform: rotate(360deg)
 
 //definicja animacji na podstawie konkretnych stanów w określonych punktach w czasie
 @keyframes glowing-body
