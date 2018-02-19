@@ -162,6 +162,14 @@ class Main extends Component {
       } else if (result === "nod") {
         this.speech.text = naviQuotes.nod[Math.floor(Math.random() * (naviQuotes.nod.length))];
         this.synth.speak(this.speech);
+        this.setState({
+          alert: this.speech.text
+        });
+        setTimeout(function(){
+          this.setState({
+            alert: null
+          });
+        }.bind(this), 3000);
       } else {
         this.setState({
           animation: 'dialogue',
