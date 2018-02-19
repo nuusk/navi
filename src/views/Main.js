@@ -159,6 +159,9 @@ class Main extends Component {
         this.logout();
       } else if (result === "register") {
         this.registerForm();
+      } else if (result === "nod") {
+        this.speech.text = naviQuotes.nod[Math.floor(Math.random() * (naviQuotes.nod.length))];
+        this.synth.speak(this.speech);
       } else {
         this.setState({
           animation: 'dialogue',

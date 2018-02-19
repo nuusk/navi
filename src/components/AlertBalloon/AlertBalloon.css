@@ -4,7 +4,7 @@ body {
   font-family: 'Aileron', cursive; }
 
 .AlertBalloon .balloon-wrapper {
-  animation: alert 3s;
+  animation: alert 2.8s forwards;
   color: #efefef;
   font-size: 1.5em;
   text-align: center;
