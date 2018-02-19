@@ -7,9 +7,9 @@ const db = new Database();
 // oraz synonimy słowa kluczowego
 function insertEntity() {
   db.insertEntity(
-    'node',
+    'nod',
     [
-      'node']
+      'nod']
   );
 }
 

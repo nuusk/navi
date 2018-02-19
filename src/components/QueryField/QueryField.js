@@ -89,7 +89,7 @@ class QueryField extends Component {
         microphoneMode: false
       });
       this.stopRecording();
-     }.bind(this), 3000);
+    }.bind(this), 2000);
   }
 
   stopRecording() {
