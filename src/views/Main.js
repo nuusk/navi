@@ -331,6 +331,14 @@ class Main extends Component {
       console.log(res);
       this.setState({
         username: null,
+        placeName: '',
+        placeAddress: '',
+        placeLat: '',
+        placeLng: '',
+        placeRating: '',
+        response: '',
+        view: 'query',
+        animation: 'starting',
         alert: 'Pomyślnie wylogowano'
       });
       setTimeout(function() {
