@@ -281,26 +281,38 @@ class Main extends Component {
   }
 
   login() {
-    axios.post('http://localhost:9004/api/login', {
-      email: document.getElementById('email').value,
-      password: document.getElementById('password').value
-    })
-    .then((res) => {
-      let user = JSON.parse(res.config.data);
-      console.log(res.config);
-      if (user.email) {
-        this.setState({
-          view: 'query',
-          username: user.email,
-          animation: 'starting',
-          alert: 'Pomyślnie zalogowano.'
-        });
-        setTimeout(function() {
+      axios.post('http://localhost:9004/api/login', {
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value
+      })
+      .then((res) => {
+        let user = JSON.parse(res.config.data);
+        console.log(res.config);
+        if (user.email) {
           this.setState({
-            alert: null
+            view: 'query',
+            username: user.email,
+            animation: 'starting',
+            alert: 'Pomyślnie zalogowano.'
           });
-        }.bind(this), 3000);
-      } else {
+          setTimeout(function() {
+            this.setState({
+              alert: null
+            });
+          }.bind(this), 3000);
+        } else {
+          this.setState({
+            formAnimation: 'wrong'
+          });
+          setTimeout(function() {
+            this.setState({
+              formAnimation: ''
+            });
+          }.bind(this), 1000);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
         this.setState({
           formAnimation: 'wrong'
         });
@@ -309,60 +321,70 @@ class Main extends Component {
             formAnimation: ''
           });
         }.bind(this), 1000);
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-      this.setState({
-        formAnimation: 'wrong'
       });
-      setTimeout(function() {
-        this.setState({
-          formAnimation: ''
-        });
-      }.bind(this), 1000);
-    });
   }
 
   logout() {
-    this.speech.text = naviQuotes.goodbye[Math.floor(Math.random() * (naviQuotes.goodbye.length))];
-    axios.get('http://localhost:9004/api/logout')
-    .then((res) => {
-      console.log(res);
+    if (this.state.username) {
+      this.speech.text = naviQuotes.goodbye[Math.floor(Math.random() * (naviQuotes.goodbye.length))];
+      axios.get('http://localhost:9004/api/logout')
+      .then((res) => {
+        console.log(res);
+        this.setState({
+          username: null,
+          placeName: '',
+          placeAddress: '',
+          placeLat: '',
+          placeLng: '',
+          placeRating: '',
+          response: '',
+          view: 'query',
+          animation: 'starting',
+          alert: 'Pomyślnie wylogowano'
+        });
+        setTimeout(function() {
+          this.setState({
+            alert: null
+          });
+        }.bind(this), 3000);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+      console.log('asd');
+      console.log(this.state.username);
       this.setState({
-        username: null,
-        placeName: '',
-        placeAddress: '',
-        placeLat: '',
-        placeLng: '',
-        placeRating: '',
-        response: '',
-        view: 'query',
-        animation: 'starting',
-        alert: 'Pomyślnie wylogowano'
+        username: null
+      });
+      this.synth.speak(this.speech);
+    } else {
+      this.setState({
+        alert: "Nie jesteś zalogowany."
       });
       setTimeout(function() {
         this.setState({
           alert: null
         });
       }.bind(this), 3000);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-    console.log('asd');
-    console.log(this.state.username);
-    this.setState({
-      username: null
-    });
-    this.synth.speak(this.speech);
+    }
   }
 
   loginForm() {
-    this.setState({
-      view: 'login',
-      animation: 'login'
-    });
+    if (!this.state.username) {
+      this.setState({
+        view: 'login',
+        animation: 'login'
+      });
+    } else {
+      this.setState({
+        alert: "Już jesteś zalogowany."
+      });
+      setTimeout(function() {
+        this.setState({
+          alert: null
+        });
+      }.bind(this), 3000);
+    }
   }
 
   mainView() {
