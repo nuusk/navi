@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css?family=Fredoka+One");
+@import url("https://fonts.googleapis.com/css?family=Julius+Sans+One");
+body {
+  font-family: 'Aileron', cursive; }
+
+.AlertBalloon .balloon-wrapper {
+  animation: alert 2.8s forwards;
+  color: #efefef;
+  font-size: 1.5em;
+  text-align: center;
+  transition: .3s;
+  width: 500px;
+  margin: 50px auto 0 auto;
+  background-color: #26b754;
+  padding: 10px 0;
+  border-radius: 4px;
+  box-shadow: 0px 8px 5px rgba(0, 0, 0, 0.12), 0 2px 3px rgba(0, 0, 0, 0.34);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+  @media screen and (max-width: 700px) {
+    .AlertBalloon .balloon-wrapper {
+      width: 300px; } }
+
+@keyframes alert {
+  0% {
+    opacity: 0;
+    transform: scale(0.5); }
+  10% {
+    opacity: 1;
+    transform: scale(1); }
+  90% {
+    opacity: 1;
+    transform: scale(1); }
+  100% {
+    opacity: 0;
+    transform: scale(0.5); } }

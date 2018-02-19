@@ -3,6 +3,11 @@ import React, { Component } from 'react';
 //importowanie komponentów
 import Navi from '../components/Navi/Navi';
 import SpeechBalloon from '../components/SpeechBalloon/SpeechBalloon';
+
+//AlertBalloon to komponent ktory wyswietla taki alert jaki jest stan this.state.alert.
+//komponent ten zyje tylko 4 sekundy. zaorowno jego animacja trwa 3 sekundy,
+//jak i stan this.state.alert zostaje wyzerowany po 3 sekundach od momentu nadania mu wartosci
+import AlertBalloon from '../components/AlertBalloon/AlertBalloon';
 import PlaceInfo from '../components/PlaceInfo/PlaceInfo';
 import QueryField from '../components/QueryField/QueryField';
 import Logo from '../components/Logo/Logo';
@@ -58,7 +63,8 @@ class Main extends Component {
       registerSuccess: false,
       emailAlreadyUsed: false,
       username: '',
-      formAnimation: ''
+      formAnimation: '',
+      alert: null
     };
   }
 
@@ -124,7 +130,7 @@ class Main extends Component {
     })
     .then(res => {
       this.setState({
-        animation: 'idle',
+        animation: 'dialogue',
       });
       document.getElementById('balloon').classList.toggle('swap-a');
       document.getElementById('balloon').classList.toggle('swap-b');
@@ -153,6 +159,9 @@ class Main extends Component {
         this.logout();
       } else if (result === "register") {
         this.registerForm();
+      } else if (result === "nod") {
+        this.speech.text = naviQuotes.nod[Math.floor(Math.random() * (naviQuotes.nod.length))];
+        this.synth.speak(this.speech);
       } else {
         this.setState({
           animation: 'dialogue',
@@ -221,10 +230,22 @@ class Main extends Component {
 
   //change navi
   metamorphosis() {
-    this.speech.text = naviQuotes.metamorphosis[Math.floor(Math.random() * (naviQuotes.metamorphosis.length))];
-    this.speech.pitch += .1;
-    this.speech.pitch %= 2;
-    this.synth.speak(this.speech);
+    if (!this.state.alert) {
+      this.speech.text = naviQuotes.metamorphosis[Math.floor(Math.random() * (naviQuotes.metamorphosis.length))];
+      this.speech.pitch += Math.random();
+      this.speech.pitch %= 2;
+      this.synth.speak(this.speech);
+      if (!this.state.alert) {
+        this.setState({
+          alert: "Zmieniono głos Navi."
+        });
+        setTimeout(function(){
+          this.setState({
+            alert: null
+          });
+        }.bind(this), 3000);
+      }
+    }
   }
 
   register() {
@@ -243,8 +264,14 @@ class Main extends Component {
       if(result.status === 200) {
         this.setState({
           registerSuccess: true,
-          view: 'login'
+          view: 'login',
+          alert: 'Zarejestrowano.'
         });
+        setTimeout(function() {
+          this.setState({
+            alert: null
+          });
+        }.bind(this), 3000);
       } else if (result.status === 409){
         this.setState({
           emailAlreadyUsed: true
@@ -254,23 +281,38 @@ class Main extends Component {
   }
 
   login() {
-    axios.post('http://localhost:9004/api/login', {
-      email: document.getElementById('email').value,
-      password: document.getElementById('password').value
-    })
-    .then(res => {
-      return res.json();
-    })
-    .then((res) => {
-      let user = JSON.parse(res.config.data);
-      console.log(res.config);
-      if (user.email) {
-        this.setState({
-          view: 'query',
-          username: user.email,
-          animation: 'starting'
-        });
-      } else {
+      axios.post('http://localhost:9004/api/login', {
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value
+      })
+      .then((res) => {
+        let user = JSON.parse(res.config.data);
+        console.log(res.config);
+        if (user.email) {
+          this.setState({
+            view: 'query',
+            username: user.email,
+            animation: 'starting',
+            alert: 'Pomyślnie zalogowano.'
+          });
+          setTimeout(function() {
+            this.setState({
+              alert: null
+            });
+          }.bind(this), 3000);
+        } else {
+          this.setState({
+            formAnimation: 'wrong'
+          });
+          setTimeout(function() {
+            this.setState({
+              formAnimation: ''
+            });
+          }.bind(this), 1000);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
         this.setState({
           formAnimation: 'wrong'
         });
@@ -279,46 +321,70 @@ class Main extends Component {
             formAnimation: ''
           });
         }.bind(this), 1000);
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-      this.setState({
-        formAnimation: 'wrong'
       });
-      setTimeout(function() {
-        this.setState({
-          formAnimation: ''
-        });
-      }.bind(this), 1000);
-    });
   }
 
   logout() {
-    this.speech.text = naviQuotes.goodbye[Math.floor(Math.random() * (naviQuotes.goodbye.length))];
-    axios.get('http://localhost:9004/api/logout')
-    .then((res) => {
-      console.log(res);
+    if (this.state.username) {
+      this.speech.text = naviQuotes.goodbye[Math.floor(Math.random() * (naviQuotes.goodbye.length))];
+      axios.get('http://localhost:9004/api/logout')
+      .then((res) => {
+        console.log(res);
+        this.setState({
+          username: null,
+          placeName: '',
+          placeAddress: '',
+          placeLat: '',
+          placeLng: '',
+          placeRating: '',
+          response: '',
+          view: 'query',
+          animation: 'starting',
+          alert: 'Pomyślnie wylogowano'
+        });
+        setTimeout(function() {
+          this.setState({
+            alert: null
+          });
+        }.bind(this), 3000);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+      console.log('asd');
+      console.log(this.state.username);
       this.setState({
         username: null
       });
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-    console.log('asd');
-    console.log(this.state.username);
-    this.setState({
-      username: null
-    });
-    this.synth.speak(this.speech);
+      this.synth.speak(this.speech);
+    } else {
+      this.setState({
+        alert: "Nie jesteś zalogowany."
+      });
+      setTimeout(function() {
+        this.setState({
+          alert: null
+        });
+      }.bind(this), 3000);
+    }
   }
 
   loginForm() {
-    this.setState({
-      view: 'login',
-      animation: 'login'
-    });
+    if (!this.state.username) {
+      this.setState({
+        view: 'login',
+        animation: 'login'
+      });
+    } else {
+      this.setState({
+        alert: "Już jesteś zalogowany."
+      });
+      setTimeout(function() {
+        this.setState({
+          alert: null
+        });
+      }.bind(this), 3000);
+    }
   }
 
   mainView() {
@@ -434,6 +500,9 @@ class Main extends Component {
           <User username={this.state.username} />
         }
         { view }
+        {this.state.alert &&
+          <AlertBalloon alert={this.state.alert} />
+        }
       </div>
     );
   }

@@ -37,5 +37,11 @@
     "Czy ten głos jest OK?",
     "Dla Ciebie zmieniam głos.",
     "Czy ten głos bardziej Ci się podoba?"
+  ],
+  "nod": [
+    "Mhmm...",
+    "Bezsprzecznie...",
+    "Taaak...",
+    "OK"
   ]
 }
